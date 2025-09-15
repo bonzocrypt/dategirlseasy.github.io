@@ -1,0 +1,7 @@
+:root{--bg:#0f1223;--card:#171a31;--text:#e9ecf8;--muted:#b6bdd7;--brand:#7b5cff}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Inter,Arial}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1000px;margin:0 auto;padding:18px}
+h1{line-height:1.15}
+ul{padding-left:20px}
