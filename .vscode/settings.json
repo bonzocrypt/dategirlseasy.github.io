@@ -1,0 +1,18 @@
+{
+  // Format with Prettier on save
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // Enforce LF line endings for consistency (good for GitHub Pages)
+  "files.eol": "\n",
+
+  // Live Server settings
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+
+  // Improve HTML/CSS editing
+  "html.format.indentInnerHtml": true,
+  "css.validate": true,
+  "html.validate.scripts": true,
+  "html.validate.styles": true
+}
