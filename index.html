@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Date Girls Easy — Simple guides that get real results</title>
+    <title>Date Girls Easy | Simple guides that get real results</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -21,7 +21,7 @@
     <!-- Social previews -->
     <meta
       property="og:title"
-      content="Date Girls Easy — Simple guides that get real results"
+      content="Date Girls Easy | Simple guides that get real results"
     />
     <meta
       property="og:description"
@@ -36,7 +36,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Date Girls Easy — Simple guides that get real results"
+      content="Date Girls Easy | Simple guides that get real results"
     />
     <meta
       name="twitter:description"
@@ -62,6 +62,7 @@
       </div>
     </header>
 
+    <!-- Hero with controlled crop and mobile friendly size -->
     <section class="hero">
       <div class="container">
         <img
@@ -274,6 +275,18 @@
         text-decoration: none;
         color: var(--ink2);
       }
+
+      /* Hero image sizing */
+      .hero-photo {
+        display: block;
+        width: 100%;
+        height: clamp(220px, 40vh, 420px);
+        border-radius: 16px;
+        margin-bottom: 16px;
+        object-fit: cover;
+        object-position: 50% 30%;
+      }
+
       @media (prefers-color-scheme: dark) {
         :root {
           --bg: #0b0c10;
@@ -296,28 +309,14 @@
         .site-footer {
           border-color: #1e2130;
         }
-        .hero-photo {
-          display: block;
-          width: 100%;
-          height: auto;
-          border-radius: 16px;
-          margin-bottom: 16px;
-          object-fit: cover;
-          max-height: 480px;
-        }
-        @media (max-width: 640px) {
-          .hero-photo {
-            max-height: 360px;
-          }
-        }
+      }
 
-        .hero-media .image-row {
-          display: block;
-          width: 100%;
-          height: auto;
-          border-radius: 16px;
-          margin: 8px 0 0 0;
-          object-fit: cover;
+      @media (max-width: 640px) {
+        .hero {
+          padding: 16px 0;
+        }
+        h1 {
+          font-size: 44px;
         }
       }
     </style>
