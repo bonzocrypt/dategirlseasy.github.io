@@ -64,6 +64,12 @@
 
     <section class="hero">
       <div class="container">
+        <img
+          class="hero-photo"
+          src="/assets/here.jpg"
+          alt="Confident couple smiling on a city street"
+          loading="eager"
+        />
         <h1>Simple steps. Better matches.</h1>
         <p class="lede">
           Build a profile that attracts, open with confidence, and turn chats
@@ -78,6 +84,14 @@
           >
         </div>
       </div>
+    </section>
+    <section class="hero-media container">
+      <img
+        src="/assets/grid1.jpg"
+        alt="Lifestyle image grid collage"
+        loading="lazy"
+        class="image-row"
+      />
     </section>
 
     <main>
@@ -289,6 +303,23 @@
         .site-header,
         .site-footer {
           border-color: #1e2130;
+        }
+        .hero-photo {
+          display: block;
+          width: 100%;
+          height: auto;
+          border-radius: 16px;
+          margin-bottom: 16px;
+          object-fit: cover;
+          max-height: 520px;
+        }
+        .hero-media .image-row {
+          display: block;
+          width: 100%;
+          height: auto;
+          border-radius: 16px;
+          margin: 8px 0 0 0;
+          object-fit: cover;
         }
       }
     </style>

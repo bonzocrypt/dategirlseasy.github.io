@@ -66,7 +66,7 @@
       <div class="container">
         <img
           class="hero-photo"
-          src="/assets/here.jpg"
+          src="/assets/hero.jpg"
           alt="Confident couple smiling on a city street"
           loading="eager"
         />
@@ -84,14 +84,6 @@
           >
         </div>
       </div>
-    </section>
-    <section class="hero-media container">
-      <img
-        src="/assets/grid1.jpg"
-        alt="Lifestyle image grid collage"
-        loading="lazy"
-        class="image-row"
-      />
     </section>
 
     <main>
@@ -311,8 +303,14 @@
           border-radius: 16px;
           margin-bottom: 16px;
           object-fit: cover;
-          max-height: 520px;
+          max-height: 480px;
         }
+        @media (max-width: 640px) {
+          .hero-photo {
+            max-height: 360px;
+          }
+        }
+
         .hero-media .image-row {
           display: block;
           width: 100%;
