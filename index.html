@@ -10,15 +10,33 @@
     />
     <link rel="canonical" href="https://dategirlseasy.com/" />
 
-    <!-- Fonts and base styles -->
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+    <!-- Theme color for mobile UI -->
+    <meta name="theme-color" content="#6E4CFF" />
+
+    <!-- Fonts: preconnect and preload for faster paint -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Site styles -->
     <link rel="stylesheet" href="/styles.css" />
 
-    <!-- Social previews -->
+    <!-- Open Graph and Twitter -->
     <meta
       property="og:title"
       content="Date Girls Easy | Simple guides that get real results"
@@ -31,7 +49,7 @@
     <meta property="og:url" content="https://dategirlseasy.com/" />
     <meta
       property="og:image"
-      content="https://dategirlseasy.com/assets/og/openers.jpg"
+      content="https://dategirlseasy.com/assets/og/default.jpg"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -44,9 +62,32 @@
     />
     <meta
       name="twitter:image"
-      content="https://dategirlseasy.com/assets/og/openers.jpg"
+      content="https://dategirlseasy.com/assets/og/default.jpg"
     />
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Date Girls Easy",
+        "url": "https://dategirlseasy.com"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "DGE Inc.",
+        "url": "https://dategirlseasy.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dategirlseasy.com/assets/logo.png"
+        }
+      }
+    </script>
   </head>
+
   <body>
     <header class="site-header">
       <div class="container">
@@ -173,11 +214,11 @@
 
     <style>
       :root {
-        --ink: #161616;
-        --ink2: #3a3a3a;
-        --bg: #ffffff;
+        --bg: #0b0c10;
+        --ink: #f3f4f6;
+        --ink2: #c9cbd1;
         --brand: #6e4cff;
-        --muted: #f6f6f8;
+        --muted: #14151b;
       }
       body {
         margin: 0;
@@ -191,7 +232,7 @@
         padding: 20px;
       }
       .site-header {
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #1e2130;
       }
       .brand {
         font-family: "Bebas Neue", sans-serif;
@@ -245,8 +286,8 @@
         font-weight: 700;
       }
       .button.secondary {
-        background: #ddd;
-        color: #000;
+        background: #2a2d3b;
+        color: #fff;
       }
       .cards .card-grid {
         list-style: none;
@@ -257,8 +298,8 @@
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       }
       .card {
-        background: #fff;
-        border: 1px solid #eee;
+        background: #101219;
+        border: 1px solid #1e2130;
         border-radius: 12px;
         padding: 16px;
         transition: transform 0.1s ease;
@@ -267,7 +308,7 @@
         transform: translateY(-2px);
       }
       .site-footer {
-        border-top: 1px solid #eee;
+        border-top: 1px solid #1e2130;
         margin-top: 40px;
       }
       .footer-nav a {
@@ -275,8 +316,6 @@
         text-decoration: none;
         color: var(--ink2);
       }
-
-      /* Hero image sizing */
       .hero-photo {
         display: block;
         width: 100%;
@@ -286,31 +325,6 @@
         object-fit: cover;
         object-position: 50% 30%;
       }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0b0c10;
-          --ink: #f3f4f6;
-          --ink2: #c9cbd1;
-          --muted: #14151b;
-        }
-        .card {
-          background: #101219;
-          border-color: #1e2130;
-        }
-        .hero {
-          background: var(--muted);
-        }
-        .button.secondary {
-          background: #2a2d3b;
-          color: #fff;
-        }
-        .site-header,
-        .site-footer {
-          border-color: #1e2130;
-        }
-      }
-
       @media (max-width: 640px) {
         .hero {
           padding: 16px 0;
