@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Future private areas you might add
+Disallow: /archive/
+Disallow: /tmp/
+
+Sitemap: https://dategirlseasy.com/sitemap.xml

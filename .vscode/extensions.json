@@ -1,0 +1,27 @@
+{
+  "recommendations": [
+    "ritwickdey.LiveServer",
+    "esbenp.prettier-vscode",
+    "mkaufman.htmlhint",
+    "eamodio.gitlens",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "Zignd.html-css-class-completion",
+    "aaron-bond.better-comments",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "stkb.rewrap",
+    "mrmlnc.vscode-remark",
+    "grapecity.gc-excelviewer",
+    "streetsidesoftware.code-spell-checker",
+    "idleberg.seo-friendly",
+    "smelukov.vscode-html-css",
+    "davidanson.vscode-markdownlint",
+    "chrmarti.regex",
+    "pranaygp.vscode-css-peek",
+    "sidthesloth.html5-boilerplate",
+    "tamasfe.even-better-toml",
+    "madhaven.vscode-w3cvalidation",
+    "pnp.polacode",
+    "kisstkondoros.vscode-gutter-preview"
+  ]
+}
