@@ -275,3 +275,81 @@ h3 {
 .guide .meta a:hover {
   text-decoration: underline;
 }
+/* Pills */
+.pill {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink2);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.pill:hover {
+  text-decoration: none;
+  color: var(--ink);
+  border-color: rgba(110, 76, 255, 0.6);
+}
+
+/* Bio templates grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.bio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bio-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-content {
+  padding: 14px;
+}
+
+.tips {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--ink2);
+}
+
+.copy {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.copy:hover {
+  border-color: rgba(110, 76, 255, 0.6);
+}
+
+/* A11y helper */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

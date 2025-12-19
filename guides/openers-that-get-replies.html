@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Openers that get replies</title>
+    <title>Openers that get replies | Date Girls Easy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -214,6 +214,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Two options: coffee this week or taco taste test this weekend. Which sounds more fun?"
             >
               Copy
@@ -236,6 +237,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Your dog looks like the CEO. What is her policy on park dates?"
             >
               Copy
@@ -258,6 +260,7 @@
             <p class="line">Pick the playlist and I will pick dessert. Deal?</p>
             <button
               class="copy"
+              type="button"
               data-copy="Pick the playlist and I will pick dessert. Deal?"
             >
               Copy
@@ -280,6 +283,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Best quick dinner in our city is blank. Change my mind."
             >
               Copy
@@ -303,6 +307,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Your travel pics are elite. Which trip would you relive for one day?"
             >
               Copy
@@ -330,6 +335,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Coffee order? I am a cappuccino with a side of banana bread."
             >
               Copy
@@ -353,6 +359,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="You plus the hobby on your profile is my jam. Beginner lesson for me this weekend?"
             >
               Copy
@@ -373,6 +380,7 @@
             <p class="line">Spontaneous quiz. Pancakes or waffles?</p>
             <button
               class="copy"
+              type="button"
               data-copy="Spontaneous quiz. Pancakes or waffles?"
             >
               Copy
@@ -396,6 +404,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="Your smile says good stories. Pick a topic. Travel fail or best concert?"
             >
               Copy
@@ -421,6 +430,7 @@
             </p>
             <button
               class="copy"
+              type="button"
               data-copy="We would get along. Kitchen experiment night or movie with takeout?"
             >
               Copy
@@ -509,26 +519,25 @@
       function copyText(str) {
         if (navigator.clipboard && window.isSecureContext) {
           return navigator.clipboard.writeText(str);
-        } else {
-          const ta = document.createElement("textarea");
-          ta.value = str;
-          ta.style.position = "fixed";
-          ta.style.opacity = "0";
-          document.body.appendChild(ta);
-          ta.focus();
-          ta.select();
-          try {
-            document.execCommand("copy");
-          } catch (e) {}
-          document.body.removeChild(ta);
-          return Promise.resolve();
         }
+        const ta = document.createElement("textarea");
+        ta.value = str;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try {
+          document.execCommand("copy");
+        } catch (e) {}
+        document.body.removeChild(ta);
+        return Promise.resolve();
       }
 
       document.querySelectorAll(".copy").forEach((btn) => {
         btn.addEventListener("click", async () => {
           const text = btn.getAttribute("data-copy") || "";
-          await copyText(text);
+          await copyText(text.trim());
           const old = btn.textContent;
           btn.textContent = "Copied";
           setTimeout(() => {
