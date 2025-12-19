@@ -2,16 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Guides — Date Girls Easy</title>
+    <title>Guides | Date Girls Easy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
       content="All guides in one place. Start with photos and bio, then move to openers and first date planning."
     />
     <link rel="canonical" href="https://dategirlseasy.com/guides/" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#6E4CFF" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Site styles -->
     <link rel="stylesheet" href="/styles.css" />
 
-    <meta property="og:title" content="Guides" />
+    <!-- Open Graph and Twitter -->
+    <meta property="og:title" content="Guides | Date Girls Easy" />
     <meta
       property="og:description"
       content="All guides in one place. Start with photos and bio, then move to openers and first date planning."
@@ -22,9 +48,8 @@
       property="og:image"
       content="https://dategirlseasy.com/assets/og/openers.jpg"
     />
-
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Guides" />
+    <meta name="twitter:title" content="Guides | Date Girls Easy" />
     <meta
       name="twitter:description"
       content="All guides in one place. Start with photos and bio, then move to openers and first date planning."
@@ -34,6 +59,7 @@
       content="https://dategirlseasy.com/assets/og/openers.jpg"
     />
 
+    <!-- Structured data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -67,52 +93,80 @@
       }
     </script>
   </head>
+
   <body>
-    <header class="page-header">
-      <nav class="breadcrumbs"><a href="/">Home</a> › Guides</nav>
-      <h1>Guides</h1>
-      <p class="lede">
-        Start with photos and bio. Then move to messages and a simple first meet
-        plan.
-      </p>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/" aria-label="Date Girls Easy"
+          >Date Girls Easy</a
+        >
+        <nav class="top-nav" aria-label="Main">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html" class="button">Join</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="content">
-      <section>
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1>Guides</h1>
+          <p class="lede">
+            Start with photos and bio. Then move to messages and a simple first
+            meet plan.
+          </p>
+          <div class="cta-row">
+            <a class="button" href="/guides/profile-photo-checklist.html"
+              >Start with photos</a
+            >
+            <a class="button secondary" href="/guides/bio-templates.html"
+              >Write your bio</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="cards container">
         <h2>Start here</h2>
-        <ul class="card-list">
-          <li>
-            <a href="/guides/profile-photo-checklist.html"
-              >Profile Photo Checklist</a
-            >
+        <ul class="card-grid">
+          <li class="card">
+            <a href="/guides/profile-photo-checklist.html">
+              <h3>Profile Photo Checklist</h3>
+              <p>Clear steps to shoot photos that get more matches.</p>
+            </a>
           </li>
-          <li>
-            <a href="/guides/bio-templates.html"
-              >Bio Templates by Personality</a
-            >
+          <li class="card">
+            <a href="/guides/bio-templates.html">
+              <h3>Bio Templates</h3>
+              <p>Short bios by personality with copy and paste options.</p>
+            </a>
           </li>
         </ul>
       </section>
 
-      <section>
+      <section class="cards container">
         <h2>Next steps</h2>
-        <ul class="card-list">
-          <li>
-            <a href="/guides/openers-that-get-replies.html"
-              >Openers That Get Replies</a
-            >
+        <ul class="card-grid">
+          <li class="card">
+            <a href="/guides/openers-that-get-replies.html">
+              <h3>Openers That Get Replies</h3>
+              <p>Lines that feel natural and get fast responses.</p>
+            </a>
           </li>
-          <li>
-            <a href="/playbooks/first-date-playbook.html"
-              >First Date Playbook</a
-            >
+          <li class="card">
+            <a href="/playbooks/first-date-playbook.html">
+              <h3>First Date Playbook</h3>
+              <p>From first reply to a simple plan that feels easy.</p>
+            </a>
           </li>
         </ul>
       </section>
 
-      <section>
+      <section class="container">
         <h2>Coming soon</h2>
-        <ul class="card-list">
+        <ul>
           <li>Profile makeovers with examples</li>
           <li>Texting flow from first reply to quick plan</li>
           <li>Safety and etiquette</li>
@@ -121,8 +175,17 @@
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="yr"></span> Date Girls Easy</p>
+      <div class="container">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html">Join</a>
+        </nav>
+        <p>© <span id="yr"></span> Date Girls Easy</p>
+      </div>
     </footer>
+
     <script>
       document.getElementById("yr").textContent = new Date().getFullYear();
     </script>
