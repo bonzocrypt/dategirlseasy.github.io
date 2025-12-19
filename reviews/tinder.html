@@ -51,10 +51,7 @@
           "@type": "SoftwareApplication",
           "name": "Tinder"
         },
-        "author": {
-          "@type": "Organization",
-          "name": "DGE Inc."
-        },
+        "author": { "@type": "Organization", "name": "DGE Inc." },
         "reviewBody": "Tinder is still the largest dating app. Works for fast connections and casual dating, but competition is high. Photos matter most.",
         "mainEntityOfPage": {
           "@type": "WebPage",
@@ -93,69 +90,102 @@
   </head>
 
   <body>
-    <header class="page-header">
-      <nav class="breadcrumbs">
-        <a href="/">Home</a> › <a href="/reviews/">App reviews</a> › Tinder
-      </nav>
-      <h1>Tinder Review</h1>
-      <p class="lede">
-        Real talk review: who it works for, pros and cons, and quick tips to get
-        results fast.
-      </p>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/" aria-label="Date Girls Easy"
+          >Date Girls Easy</a
+        >
+        <nav class="top-nav" aria-label="Main">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html" class="button">Join</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="content">
-      <section>
-        <h2>Who Tinder works for</h2>
-        <p>
-          If you want the largest pool and don’t mind heavy competition, Tinder
-          is still #1 for matches. Best in large cities or for people 18–30.
-        </p>
-      </section>
+    <main>
+      <article class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a> › <a href="/reviews/">App reviews</a> › Tinder
+        </nav>
 
-      <section>
-        <h2>Pros</h2>
-        <ul>
-          <li>Largest user base of any app</li>
-          <li>Easy interface</li>
-          <li>Fast replies if your photos stand out</li>
-        </ul>
-      </section>
+        <header class="article-hero">
+          <h1>Tinder review</h1>
+          <p class="lede">
+            Who it works for, pros and cons, and quick tips to get results fast.
+          </p>
+        </header>
 
-      <section>
-        <h2>Cons</h2>
-        <ul>
-          <li>High competition — you need strong photos</li>
-          <li>Can feel casual or flaky</li>
-          <li>Algorithm favors recent, active users</li>
-        </ul>
-      </section>
+        <section>
+          <h2>Who Tinder works for</h2>
+          <p>
+            If you want the largest pool and you do not mind heavy competition,
+            Tinder is still strong for volume. It tends to work best in large
+            cities, and for people in the 18 to 30 range.
+          </p>
+        </section>
 
-      <section>
-        <h2>Quick tips</h2>
-        <ul>
-          <li>Use 3–4 crisp photos, first one with clear face + smile</li>
-          <li>Add one lifestyle or travel photo</li>
-          <li>Short playful bio works better than long text</li>
-        </ul>
-      </section>
+        <section>
+          <h2>Pros</h2>
+          <ul>
+            <li>Largest user base of any app</li>
+            <li>Easy interface</li>
+            <li>Fast replies if your photos stand out</li>
+          </ul>
+        </section>
 
-      <section class="next-steps">
-        <h2>Next step</h2>
-        <p>
-          Try our
-          <a href="/guides/openers-that-get-replies.html"
-            >Openers That Get Replies</a
-          >
-          once you match. Or if you are ready to plan, see the
-          <a href="/playbooks/first-date-playbook.html">First Date Playbook</a>.
-        </p>
-      </section>
+        <section>
+          <h2>Cons</h2>
+          <ul>
+            <li>High competition, you need strong photos</li>
+            <li>Can feel casual or flaky</li>
+            <li>Algorithm favors recent, active users</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Quick tips</h2>
+          <ul>
+            <li>
+              Use 3 to 4 crisp photos, first one with clear face and a smile
+            </li>
+            <li>Add 1 lifestyle or travel photo</li>
+            <li>Short playful bio usually beats long text</li>
+          </ul>
+        </section>
+
+        <section class="next-steps">
+          <h2>Next step</h2>
+          <p>
+            Use
+            <a href="/guides/openers-that-get-replies.html"
+              >Openers that get replies</a
+            >
+            once you match. If you want to lock in a simple plan, use the
+            <a href="/playbooks/first-date-playbook.html">First Date Playbook</a
+            >.
+          </p>
+        </section>
+
+        <section class="disclosure" aria-label="Disclosure">
+          <p>Some links may earn a commission. Your price does not change.</p>
+        </section>
+      </article>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="yr"></span> Date Girls Easy</p>
+      <div class="container">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html">Join</a>
+        </nav>
+        <p>© <span id="yr"></span> Date Girls Easy</p>
+      </div>
     </footer>
+
     <script>
       document.getElementById("yr").textContent = new Date().getFullYear();
     </script>

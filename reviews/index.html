@@ -9,7 +9,7 @@
       content="Honest reviews of Tinder, Hinge, Bumble and more, plus a simple quiz to match the right app to your goal and city."
     />
     <link rel="canonical" href="https://dategirlseasy.com/reviews/" />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Dating App Reviews and Matchmaker" />
@@ -74,49 +74,100 @@
   </head>
 
   <body>
-    <header class="page-header">
-      <nav class="breadcrumbs"><a href="/">Home</a> › App reviews</nav>
-      <h1>App reviews and matchmaker</h1>
-      <p class="lede">
-        Pick the right app for your goal and your city. Real talk reviews with
-        clear pros and cons.
-      </p>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/" aria-label="Date Girls Easy"
+          >Date Girls Easy</a
+        >
+        <nav class="top-nav" aria-label="Main">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html" class="button">Join</a>
+        </nav>
+      </div>
     </header>
 
-    <main class="content">
-      <section>
+    <main>
+      <section class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a> › App reviews
+        </nav>
+
+        <h1>App reviews and matchmaker</h1>
+        <p class="lede">
+          Pick the right app for your goal and your city. Real talk reviews with
+          clear pros and cons.
+        </p>
+      </section>
+
+      <section class="cards container">
         <h2>Start here</h2>
-        <p>
+        <p class="lede">
           We are building side by side reviews of the most used apps with
           example profiles and first message ideas that fit each platform.
         </p>
-        <ul class="card-list">
-          <li><strong>Tinder review</strong> coming soon</li>
-          <li><strong>Hinge review</strong> coming soon</li>
-          <li><strong>Bumble review</strong> coming soon</li>
+
+        <ul class="card-grid">
+          <li class="card">
+            <a href="/reviews/tinder.html">
+              <h3>Tinder review</h3>
+              <p>Who it works for, pros and cons, and quick tips.</p>
+            </a>
+          </li>
+
+          <li class="card">
+            <a href="/reviews/hinge.html" aria-disabled="true">
+              <h3>Hinge review</h3>
+              <p>Coming soon.</p>
+            </a>
+          </li>
+
+          <li class="card">
+            <a href="/reviews/bumble.html" aria-disabled="true">
+              <h3>Bumble review</h3>
+              <p>Coming soon.</p>
+            </a>
+          </li>
         </ul>
       </section>
 
-      <section>
+      <section class="container">
         <h2>Next step</h2>
         <p>
           If you are new, set up your profile photos and bio first, then come
           back to pick the best app for you.
         </p>
         <p>
-          <a href="/guides/profile-photo-checklist.html"
-            >Profile Photo Checklist</a
+          <a class="button" href="/guides/profile-photo-checklist.html"
+            >Start with photos</a
           >
-          · <a href="/guides/bio-templates.html">Bio Templates</a> ·
-          <a href="/guides/openers-that-get-replies.html">Openers</a> ·
+          <a class="button secondary" href="/guides/bio-templates.html"
+            >Write your bio</a
+          >
+        </p>
+        <p>
+          <a href="/guides/openers-that-get-replies.html"
+            >Openers that get replies</a
+          >
+          ·
           <a href="/playbooks/first-date-playbook.html">First Date Playbook</a>
         </p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="yr"></span> Date Girls Easy</p>
+      <div class="container">
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/guides/">Guides</a>
+          <a href="/reviews/">App reviews</a>
+          <a href="/join.html">Join</a>
+        </nav>
+        <p>© <span id="yr"></span> Date Girls Easy</p>
+      </div>
     </footer>
+
     <script>
       document.getElementById("yr").textContent = new Date().getFullYear();
     </script>
