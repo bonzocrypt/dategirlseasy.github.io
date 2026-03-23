@@ -1,0 +1,22 @@
+{
+  "name": "Date Girls Easy",
+  "short_name": "DGE",
+  "description": "Mobile-first dating site reviews, comparisons, guides, and curated ebooks for men.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08121d",
+  "theme_color": "#08121d",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

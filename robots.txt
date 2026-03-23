@@ -1,7 +1,10 @@
 User-agent: *
 Allow: /
 
-# Future private areas you might add
+# Keep private/source content out of indexing
+Disallow: /content/
+
+# Future private or utility areas
 Disallow: /archive/
 Disallow: /tmp/
 
