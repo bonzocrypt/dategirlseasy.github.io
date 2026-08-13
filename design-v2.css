@@ -440,18 +440,10 @@ body.design-v2::before {
 
 .hero-visual {
   position: relative;
+  width: 78%;
+  max-width: 340px;
   min-width: 0;
-}
-
-.hero-visual::before {
-  position: absolute;
-  z-index: 2;
-  inset: auto 18px 18px;
-  height: 52%;
-  border-radius: 18px;
-  background: linear-gradient(to top, rgba(3, 9, 16, 0.85), transparent);
-  content: "";
-  pointer-events: none;
+  justify-self: end;
 }
 
 .hero-visual img {
@@ -1234,6 +1226,7 @@ body.design-v2::before {
 
   .hero-visual {
     margin-top: 8px;
+    justify-self: center;
   }
 
   .hero-visual img {

@@ -10,6 +10,10 @@ Pre-release backups:
 - Full repository bundle: `C:\DGE\backups\dategirlseasy-2026-08-13-pre-release\repository-before-release.bundle`
 - Deployed-tree ZIP: `C:\DGE\backups\dategirlseasy-2026-08-13-pre-release\remote-main-36239ac.zip`
 
+Incremental enhancement rollback points:
+
+- Homepage hero balance and overlay correction: rollback point `4544875c9d0318d244c41b28425b46f518921cd3`.
+
 ## Release
 
 1. Confirm the working tree is clean and QA passes.
