@@ -25,13 +25,11 @@ REPRESENTATIVE = {
 
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
-    Path("ebooks/dates-and-escalation/index.html"),
-    Path("ebooks/kissing-and-intimacy/index.html"),
-    Path("ebooks/messaging-and-openers/index.html"),
     Path("ebooks/mindset-and-confidence/index.html"),
 }
 
 SITEMAP_REQUIRED = {
+    "/guides/dating-app-reset-checklist.html",
     "/ebooks/body-language/",
     "/ebooks/body-language/body-language-clues-that-show-interest.html",
     "/ebooks/body-language/reading-body-language-on-dates-and-app-meets.html",
@@ -39,13 +37,16 @@ SITEMAP_REQUIRED = {
     "/ebooks/body-language/using-body-language-to-look-more-confident.html",
     "/ebooks/profile-and-photos/",
     "/ebooks/profile-and-photos/internet-dating-guide-for-men.html",
+    "/ebooks/messaging-and-openers/",
+    "/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html",
+    "/ebooks/dates-and-escalation/",
+    "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html",
+    "/ebooks/kissing-and-intimacy/",
+    "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
 }
 
 SITEMAP_FORBIDDEN = {
     "/ebooks/attraction/",
-    "/ebooks/dates-and-escalation/",
-    "/ebooks/kissing-and-intimacy/",
-    "/ebooks/messaging-and-openers/",
     "/ebooks/mindset-and-confidence/",
 }
 

@@ -4,9 +4,9 @@ Archive baseline: 85 PDFs, about 3,418 readable pages, 13 exact duplicate pairs,
 
 ## Initial batch after design approval
 
-1. Conversation Skills That Build Attraction
-2. From Match to Date Without Pressure
-3. Kissing With Confidence: Timing, Consent, and Chemistry
+1. Conversation Skills That Build Attraction — complete as an original HTML guide
+2. From Match to Date Without Pressure — complete as an original HTML guide
+3. Kissing With Confidence: Timing, Consent, and Chemistry — complete as an original HTML guide
 
 All three will be independently structured and written. Archive files are research prompts only; no passage, illustration, proprietary title, or distinctive sequence will be reproduced.
 

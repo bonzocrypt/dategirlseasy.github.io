@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="utf-8" />
     <title>Playbooks | Date Girls Easy</title>
@@ -35,6 +35,8 @@
 
     <!-- Site styles -->
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/design-v2.css" />
+    <script>document.documentElement.className = "js";</script>
 
     <!-- Open Graph and Twitter -->
     <meta property="og:title" content="Playbooks | Date Girls Easy" />
@@ -95,22 +97,17 @@
     </script>
   </head>
 
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="/" aria-label="Date Girls Easy"
-          >Date Girls Easy</a
-        >
-        <nav class="top-nav" aria-label="Main">
-          <a href="/how-it-works.html">How it works</a>
-          <a href="/guides/">Guides</a>
-          <a href="/reviews/">App reviews</a>
-          <a href="/join.html" class="button">Join</a>
-        </nav>
+  <body class="legacy-layout">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="publisher-header">
+      <div class="site-shell header-bar">
+        <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
+        <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false"><a href="/join.html">Start Here</a><a href="/reviews/">Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/" aria-current="page">Guides</a><a href="/ebooks/">Library</a></nav>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="hero">
         <div class="container">
           <h1>Playbooks</h1>
@@ -157,20 +154,7 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <nav class="footer-nav" aria-label="Footer">
-          <a href="/how-it-works.html">How it works</a>
-          <a href="/guides/">Guides</a>
-          <a href="/reviews/">App reviews</a>
-          <a href="/join.html">Join</a>
-        </nav>
-        <p>© <span id="yr"></span> Date Girls Easy</p>
-      </div>
-    </footer>
-
-    <script>
-      document.getElementById("yr").textContent = new Date().getFullYear();
-    </script>
+    <footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">© <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/reviews/">Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guides</a><a href="/ebooks/">Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>
+    <script src="/assets/site.js" defer></script>
   </body>
 </html>

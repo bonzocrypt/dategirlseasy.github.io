@@ -78,6 +78,80 @@ body.design-v2::before {
   outline-offset: 4px;
 }
 
+/* Approved shared chrome on legacy content templates. Content remains protected
+   while navigation, footer, focus, and mobile behavior are unified. */
+.legacy-layout {
+  overflow-x: clip;
+}
+
+.legacy-layout .publisher-header,
+.legacy-layout .publisher-footer {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.legacy-layout .publisher-brand,
+.legacy-layout .primary-nav a,
+.legacy-layout .footer-nav-v2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.legacy-layout .site-shell.header-bar,
+.legacy-layout .publisher-footer .site-shell {
+  width: var(--shell);
+  max-width: none;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.legacy-layout .publisher-header + main {
+  min-width: 0;
+}
+
+.legacy-layout .publisher-footer {
+  margin-top: 38px;
+}
+
+.legacy-layout .publisher-footer .publisher-brand {
+  display: inline-flex;
+}
+
+.legacy-layout .publisher-footer .brand-words {
+  display: grid;
+}
+
+.legacy-layout .publisher-footer .footer-copy {
+  margin: 18px 0;
+}
+
+.legacy-layout .publisher-footer .footer-meta-v2 {
+  margin: 0;
+}
+
+.legacy-layout .publisher-footer .footer-nav-v2 {
+  align-content: start;
+}
+
+.legacy-layout .publisher-footer .footer-nav-v2 a {
+  min-height: 38px;
+}
+
+/* Legacy pages use `main section { padding: ... }`, which otherwise outranks
+   their card padding once a panel is also a section. Preserve the approved
+   card treatment while those protected pages keep their existing content. */
+.legacy-layout main section.panel,
+.legacy-layout main section.card,
+.legacy-layout main section.route,
+.legacy-layout main section.template,
+.legacy-layout main section.cta-box,
+.legacy-layout main section.faq-item,
+.legacy-layout main section.disclosure,
+.legacy-layout main section.disclosure-block,
+.legacy-layout main section.trust-block,
+.legacy-layout main section.ebook-callout {
+  padding: 22px;
+}
+
 .skip-link {
   position: fixed;
   z-index: 1000;
@@ -987,6 +1061,98 @@ body.design-v2::before {
   font-size: 0.78rem;
 }
 
+.checklist-progress {
+  display: grid;
+  grid-template-columns: minmax(180px, auto) minmax(160px, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin: 0 0 28px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.checklist-progress div:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.checklist-progress span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.checklist-meter {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.checklist-meter span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--purple), var(--teal));
+  transition: width 180ms ease;
+}
+
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.checklist-section {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.check-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 15px 0;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.check-row + .check-row {
+  border-top: 1px solid var(--line);
+}
+
+.check-row input {
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  accent-color: var(--teal);
+}
+
+.check-row strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+}
+
+.check-row:has(input:checked) span {
+  color: var(--faint);
+}
+
+.check-row:has(input:checked) strong {
+  color: var(--teal);
+}
+
+.checklist-email-note {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
 @media (max-width: 960px) {
   .path-grid,
   .feature-grid {
@@ -1083,6 +1249,11 @@ body.design-v2::before {
   .footer-nav-v2 {
     justify-content: flex-start;
   }
+
+  .checklist-progress,
+  .checklist-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (max-width: 560px) {
@@ -1129,5 +1300,61 @@ body.design-v2::before {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  body.design-v2 {
+    color: #111827;
+    background: #fff;
+    font-size: 10pt;
+  }
+
+  .publisher-header,
+  .publisher-footer,
+  .breadcrumbs,
+  .no-print,
+  .toc {
+    display: none !important;
+  }
+
+  .article-main,
+  .article-hero,
+  .checklist-section,
+  .source-note {
+    padding: 0;
+    border: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .article-title,
+  .panel-title,
+  .check-row strong {
+    color: #111827;
+  }
+
+  .lede,
+  .check-row,
+  .source-note p {
+    color: #374151;
+  }
+
+  .checklist-grid {
+    display: block;
+  }
+
+  .checklist-section,
+  .source-note {
+    break-inside: avoid;
+    margin: 0 0 18pt;
+  }
+
+  .check-row {
+    padding: 6pt 0;
   }
 }

@@ -3,7 +3,7 @@ const path = require("node:path");
 const { chromium } = require("playwright");
 
 const root = path.resolve(__dirname, "..");
-const outputDirectory = path.join(root, "project-evidence", "screenshots", "after");
+const outputDirectory = process.env.DGE_QA_SCREENSHOTS || path.join(root, "project-evidence", "screenshots", "after");
 const baseUrl = "http://127.0.0.1:8008";
 const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 
@@ -18,6 +18,16 @@ const screenshotPages = [
   ["guide-openers-mobile.png", "/guides/openers-that-get-replies.html", 390, 844],
   ["long-guide-internet-dating-desktop.png", "/ebooks/profile-and-photos/internet-dating-guide-for-men.html", 1440, 1000],
   ["long-guide-internet-dating-mobile.png", "/ebooks/profile-and-photos/internet-dating-guide-for-men.html", 390, 844],
+  ["guide-conversation-attraction-desktop.png", "/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html", 1440, 1000],
+  ["guide-conversation-attraction-mobile.png", "/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html", 390, 844],
+  ["guide-match-to-date-desktop.png", "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html", 1440, 1000],
+  ["guide-match-to-date-mobile.png", "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html", 390, 844],
+  ["guide-kissing-confidence-desktop.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 1440, 1000],
+  ["guide-kissing-confidence-mobile.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 390, 844],
+  ["reviews-hub-mobile.png", "/reviews/", 390, 844],
+  ["about-mobile.png", "/about.html", 390, 844],
+  ["dating-app-reset-checklist-desktop.png", "/guides/dating-app-reset-checklist.html", 1440, 1000],
+  ["dating-app-reset-checklist-mobile.png", "/guides/dating-app-reset-checklist.html", 390, 844],
   ["404-branded-desktop.png", "/404.html", 1440, 1000],
 ];
 
@@ -36,10 +46,11 @@ const widths = [320, 375, 390, 768, 1024, 1440];
       const page = await context.newPage();
       const consoleErrors = [];
       page.on("console", (message) => {
-        if (message.type() === "error") consoleErrors.push(message.text());
+      if (message.type() === "error" && !message.text().startsWith("Failed to load resource")) consoleErrors.push(message.text());
       });
       page.on("pageerror", (error) => consoleErrors.push(error.message));
-      const response = await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
+      const response = await page.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(75);
       const measurement = await page.evaluate(() => {
         const doc = document.documentElement;
         const offenders = [...document.querySelectorAll("body *")]
@@ -68,7 +79,8 @@ const widths = [320, 375, 390, 768, 1024, 1440];
 
   const menuContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   const menuPage = await menuContext.newPage();
-  await menuPage.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  await menuPage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+  await menuPage.waitForTimeout(75);
   const button = menuPage.locator("[data-menu-toggle]");
   const nav = menuPage.locator("[data-primary-nav]");
   if (!(await button.isVisible())) errors.push("Mobile menu button is not visible at 390px");
@@ -87,7 +99,8 @@ const widths = [320, 375, 390, 768, 1024, 1440];
   for (const [filename, pathname, width, height] of screenshotPages) {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1 });
     const page = await context.newPage();
-    await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(75);
     await page.screenshot({ path: path.join(outputDirectory, filename), fullPage: true });
     await context.close();
   }

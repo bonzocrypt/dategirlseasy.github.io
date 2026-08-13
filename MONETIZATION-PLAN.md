@@ -2,7 +2,7 @@
 
 Priority order:
 
-1. Dating App Reset Checklist email resource
+1. Dating App Reset Checklist: complete as a free, printable/save-as-PDF resource. Email delivery remains inactive until the owner supplies the platform, sender identity, domain authentication, and privacy preferences.
 2. Owner-created Modern Dating Playbook for Men
 3. Relevant verified affiliate programs
 4. Adjacent date, photography, grooming, clothing, and tool recommendations
