@@ -12,3 +12,9 @@ Status: representative design approved by the owner on 2026-08-13. Shared-system
 No production deployment, merge, or GitHub Pages configuration change is authorized by this roadmap.
 
 Search Console exports are still absent. Existing indexable pages remain protected: shared design and technical fixes may proceed, but broad search-intent, title, description, H1, canonical, or substantive copy rewrites stay gated until the exports are supplied.
+
+Owner confirmations recorded August 13, 2026:
+
+- `DGE Inc.` is the correct legal publisher name.
+- `hello@dategirlseasy.com` is not valid and must not be published.
+- `info@dategirlseasy.com` is the intended contact address, pending mailbox creation and successful send/receive testing.
