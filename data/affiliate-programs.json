@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "lastEditorialReview": "2026-08-12",
+  "linksEnabled": false,
+  "programs": [
+    {
+      "id": "eharmony",
+      "name": "eHarmony",
+      "status": "application-target",
+      "officialDestination": "https://www.eharmony.com/about/affiliate-program/",
+      "trackingIdentifier": null,
+      "allowedPlacements": ["relationship-intent reviews", "relationship comparisons"],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Clear affiliate disclosure near the recommendation and in the site disclosure."
+    },
+    {
+      "id": "viator",
+      "name": "Viator",
+      "status": "application-target",
+      "officialDestination": "https://partnerresources.viator.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": ["date-idea guides", "city guides"],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Clear affiliate disclosure near monetized date recommendations."
+    },
+    {
+      "id": "amazon-associates",
+      "name": "Amazon Associates",
+      "status": "application-target",
+      "officialDestination": "https://affiliate-program.amazon.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": ["restrained grooming recommendations", "clothing guides", "photography tools"],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Use the program's prescribed Associate disclosure plus a proximate affiliate disclosure."
+    },
+    {
+      "id": "getyourguide",
+      "name": "GetYourGuide",
+      "status": "terms-review-required",
+      "officialDestination": "https://www.getyourguide.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": ["date-idea guides", "city guides"],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Review current partner terms before any recommendation placement."
+    },
+    {
+      "id": "match",
+      "name": "Match",
+      "status": "private-outreach-candidate",
+      "officialDestination": "https://www.match.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": ["relationship-intent reviews", "relationship comparisons"],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "No monetized placement until written partnership terms are approved."
+    },
+    {
+      "id": "tinder",
+      "name": "Tinder",
+      "status": "editorial-only",
+      "officialDestination": "https://tinder.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": [],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Do not monetize without a verified official cash affiliate program or written partnership."
+    },
+    {
+      "id": "bumble",
+      "name": "Bumble",
+      "status": "editorial-only",
+      "officialDestination": "https://bumble.com/",
+      "trackingIdentifier": null,
+      "allowedPlacements": [],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Do not monetize without a verified official cash affiliate program or written partnership."
+    },
+    {
+      "id": "hinge",
+      "name": "Hinge",
+      "status": "editorial-only",
+      "officialDestination": "https://hinge.co/",
+      "trackingIdentifier": null,
+      "allowedPlacements": [],
+      "verificationDate": "2026-08-12",
+      "disclosureRequirement": "Do not monetize without a verified official cash affiliate program or written partnership."
+    }
+  ]
+}
