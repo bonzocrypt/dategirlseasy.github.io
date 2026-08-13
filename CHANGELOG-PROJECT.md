@@ -29,3 +29,5 @@
 - Imported and analyzed the untouched private Search Console export. The homepage is now classified Tier 1 preserve; the Tinder review is Tier 2 improve; the review hub is Tier 2 support; low-volume hubs are Tier 3 monitor.
 - Rebuilt the protected Tinder review in place around visible query demand and current official Tinder sources: clearer search snippet, direct worth-it verdict, goal fit, free-versus-paid tiers, profile strategy, limitations, safety, and consent. The URL, canonical, and H1 topic remain stable; no numeric rating, firsthand-testing claim, affiliate link, or guaranteed outcome was added.
 - Activated the owner-confirmed `info@dategirlseasy.com` public contact link.
+- Owner approved the expanded Tinder review and confirmed DGE Inc. owns or has commercial publication rights for all supplied imagery.
+- Verified GitHub Pages deploys from `main` at repository root through the legacy `pages-build-deployment` workflow. Preserved deployed commit `36239ac` as a local tag, full Git bundle, and deployed-tree ZIP before release integration.

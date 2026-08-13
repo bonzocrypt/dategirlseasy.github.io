@@ -27,3 +27,6 @@ Owner confirmations recorded August 13, 2026:
 - `DGE Inc.` is the correct legal publisher name.
 - `hello@dategirlseasy.com` is not valid and must not be published.
 - `info@dategirlseasy.com` has been created and confirmed by the owner; it is now the public contact address.
+- The updated Tinder review is approved.
+- DGE Inc. owns or has commercial publication rights for every supplied image.
+- Deployment is authorized only after the complete final QA passes without material errors.

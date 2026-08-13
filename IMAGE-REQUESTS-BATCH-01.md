@@ -1,10 +1,10 @@
 # Image Requests — Batch 01
 
-No image in this batch may be published until the owner confirms provenance and legal usability. Sensual and suggestive is welcome; nudity, pornography, fake testimonials, and implied endorsements are excluded.
+Owner confirmed on August 13, 2026 that DGE Inc. owns or has commercial publication rights for every supplied image in this batch. Sensual and suggestive is welcome; nudity, pornography, fake testimonials, and implied endorsements are excluded.
 
 ## IMAGE REQUEST 001 — Homepage hero
 
-Status: owner-selected source supplied at `assets/hero.jpg` (1536 × 2048). Responsive crops are implemented under `assets/images/homepage/`; publication-rights documentation remains required before production approval.
+Status: owner-selected source supplied at `assets/hero.jpg` (1536 × 2048). Responsive crops are implemented under `assets/images/homepage/`; owner confirmed commercial publication rights on August 13, 2026.
 
 - Target: homepage, first viewport; embody the attractive dating life the male reader wants without implying a testimonial, availability, or endorsement.
 - Subject: clearly adult, alluring woman dressed for an upscale evening out; confident, warm, sensual, and approachable without looking submissive or overtly sexualized.

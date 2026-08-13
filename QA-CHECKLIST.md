@@ -12,7 +12,7 @@
 - [x] No critical issues found in the available automated structural/accessibility checks; a full axe/WCAG audit remains a release recommendation
 - [x] No console errors on representative pages; all local checkpoint requests use one origin
 - [ ] Custom 404 retains an HTTP 404 response
-- [ ] Images have dimensions, responsive sources, and useful alt text; owner must document publication rights/provenance before deployment
+- [x] Images have dimensions, responsive sources, useful alt text, and owner-confirmed commercial publication rights
 - [x] No active affiliate links exist; the registry is globally disabled and commercial pages carry disclosure language
 - [ ] Mobile LCP target under 2.5 seconds and CLS under 0.1
 - [x] Required before/after screenshots captured and technically reviewed
