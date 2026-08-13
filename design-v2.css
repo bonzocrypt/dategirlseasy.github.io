@@ -939,6 +939,11 @@ body.design-v2::before {
   overflow-x: auto;
 }
 
+.comparison-table-wrap:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 4px;
+}
+
 .comparison-table {
   width: 100%;
   min-width: 620px;

@@ -31,3 +31,5 @@
 - Activated the owner-confirmed `info@dategirlseasy.com` public contact link.
 - Owner approved the expanded Tinder review and confirmed DGE Inc. owns or has commercial publication rights for all supplied imagery.
 - Verified GitHub Pages deploys from `main` at repository root through the legacy `pages-build-deployment` workflow. Preserved deployed commit `36239ac` as a local tag, full Git bundle, and deployed-tree ZIP before release integration.
+- Fixed all horizontally scrollable comparison tables with keyboard focus, heading-based accessible names, and a visible focus ring; added structural and browser regressions covering every affected page.
+- Optimized the oversized shared logo into correctly sized favicon and manifest assets. Final mobile Lighthouse results across six page types are 99–100 performance, 100 accessibility, 100 best practices, 100 SEO, LCP 1.50–2.25 seconds, and CLS 0–0.0002.

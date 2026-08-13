@@ -67,6 +67,7 @@ class PageParser(HTMLParser):
         self.in_json_ld = False
         self.json_ld_parts: list[str] = []
         self.body_classes: set[str] = set()
+        self.comparison_table_wraps: list[dict[str, str]] = []
 
     def handle_starttag(self, tag: str, attrs_raw: list[tuple[str, str | None]]) -> None:
         attrs = dict(attrs_raw)
@@ -78,6 +79,8 @@ class PageParser(HTMLParser):
             self.ids.add(attrs["id"] or "")
         if tag == "body":
             self.body_classes.update((attrs.get("class") or "").split())
+        if tag == "div" and "comparison-table-wrap" in (attrs.get("class") or "").split():
+            self.comparison_table_wraps.append({k: v or "" for k, v in attrs.items()})
         if tag == "meta":
             self.metas.append({k: v or "" for k, v in attrs.items()})
         if tag == "link":
@@ -204,6 +207,15 @@ def main() -> int:
 
         if "assets/og/default.jpg" in page.read_text(encoding="utf-8"):
             errors.append(f"{rel}: references nonexistent assets/og/default.jpg")
+
+        for region_number, region in enumerate(parser.comparison_table_wraps, 1):
+            if region.get("tabindex") != "0":
+                errors.append(f"{rel}: comparison table region {region_number} must use tabindex=0")
+            label_id = region.get("aria-labelledby", "")
+            if not label_id:
+                errors.append(f"{rel}: comparison table region {region_number} lacks aria-labelledby")
+            elif label_id not in parser.ids:
+                errors.append(f"{rel}: comparison table region {region_number} references missing label #{label_id}")
 
     title_counts = Counter(p.title for p in pages.values() if p.title)
     description_counts = Counter(

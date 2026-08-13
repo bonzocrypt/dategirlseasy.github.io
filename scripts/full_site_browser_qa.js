@@ -69,11 +69,28 @@ function collectHtml(directory) {
             innerWidth: window.innerWidth,
             menuButtonVisible: button ? getComputedStyle(button).display !== "none" : false,
             menuCollapsed: button?.getAttribute("aria-expanded") === "false" && nav?.getAttribute("data-open") === "false",
+            tableRegions: [...document.querySelectorAll(".comparison-table-wrap")].map((region) => {
+              region.focus();
+              const style = getComputedStyle(region);
+              return {
+                focusable: region.tabIndex === 0,
+                label: region.getAttribute("aria-labelledby"),
+                labelExists: Boolean(document.getElementById(region.getAttribute("aria-labelledby") || "")),
+                containsTable: Boolean(region.querySelector("table")),
+                receivesFocus: document.activeElement === region,
+                visibleFocus: style.outlineStyle !== "none" && Number.parseFloat(style.outlineWidth) >= 3,
+              };
+            }),
           };
         });
         if (!response || !response.ok()) errors.push(`${pathname} @ ${width}: HTTP ${response ? response.status() : "none"}`);
         if (result.overflow) errors.push(`${pathname} @ ${width}: overflow ${result.scrollWidth}/${result.innerWidth}`);
         if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${pathname} @ ${width}: mobile menu initial state failed`);
+        for (const [regionIndex, region] of result.tableRegions.entries()) {
+          if (!region.focusable || !region.label || !region.labelExists || !region.containsTable || !region.receivesFocus || !region.visibleFocus) {
+            errors.push(`${pathname} @ ${width}: comparison table region ${regionIndex + 1} accessibility contract failed`);
+          }
+        }
         if (consoleErrors.length) errors.push(`${pathname} @ ${width}: console ${consoleErrors.join(" | ")}`);
         if (localFailures.length) errors.push(`${pathname} @ ${width}: local requests ${localFailures.join(" | ")}`);
         page.off("console", onConsole);
