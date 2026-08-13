@@ -4,16 +4,18 @@ No image in this batch may be published until the owner confirms provenance and 
 
 ## IMAGE REQUEST 001 — Homepage hero
 
-- Target: homepage, first viewport; establish confident adult-dating energy without implying a testimonial.
-- Subject: stylish adult man preparing for a night out in a modern apartment or hotel mirror area; composed, socially confident, not posed as a model endorsement.
-- Composition: waist-up environmental portrait, subject on right third, useful negative space on left; eye-level camera.
-- Style: cinematic editorial photography, deep navy shadows, warm skin tones, restrained purple/teal practical light.
+- Target: homepage, first viewport; embody the attractive dating life the male reader wants without implying a testimonial, availability, or endorsement.
+- Subject: clearly adult, alluring woman dressed for an upscale evening out; confident, warm, sensual, and approachable without looking submissive or overtly sexualized.
+- Composition: waist-up environmental portrait, subject on right third, useful negative space on left; direct or near-camera eye contact that creates energy without suggesting a personal promise.
+- Style: sophisticated nightlife editorial photography, deep navy shadows, warm skin tones, restrained purple/teal practical light, and a warmer sensual accent.
 - Orientation: landscape 4:3; 1600 × 1200 master.
-- Include: clearly adult subject, modern grooming details, subtle nightlife context.
-- Exclude: logos, alcohol emphasis, shirtlessness, bedroom implication, text, fake app UI.
-- Filename: `homepage-confident-night-out-hero.jpg`
-- Draft alt: “Adult man adjusting his jacket before going out.”
-- Mobile crop: preserve face and both shoulders in a centered 4:3 crop.
+- Include: unambiguously adult subject, elegant fitted evening clothing, polished styling, subtle nightlife context, and an aspirational but credible mood.
+- Exclude: nudity, lingerie, transparent clothing, pornographic posing, bedroom setting, exaggerated body emphasis, alcohol emphasis, logos, text, fake app UI, or any visual suggestion that she endorses the site or is available to the reader.
+- Filename: `homepage-alluring-woman-night-out-hero.jpg`
+- Draft alt: “Stylish adult woman dressed for an evening out.”
+- Mobile crop: preserve her face, eye contact, and upper-body silhouette in a centered 4:3 crop; never crop primarily to breasts or other sexualized body areas.
+
+Editorial rationale: the homepage hero should visualize the reader's desired social and romantic outcome. A male model can create unhelpful status comparison—especially if he appears unusually handsome—while an attractive adult woman more directly supports the site's audience promise. The treatment should remain tasteful enough for mainstream advertising, affiliate, email, and payment platforms.
 
 ## IMAGE REQUEST 002 — Tinder review decision visual
 

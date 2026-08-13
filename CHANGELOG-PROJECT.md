@@ -12,3 +12,4 @@
 - Added a centralized inactive affiliate registry and the first five-item image-request batch. No affiliate links or unapproved images were activated.
 - Added repeatable structural and browser QA. All 34 HTML files and 27 sitemap URLs pass; all five representative pages pass overflow and console checks at 320, 375, 390, 768, 1024, and 1440 pixels.
 - Captured permanent desktop and phone-width before/after screenshots. No production deployment or push occurred.
+- Revised Homepage IMAGE REQUEST 001 after owner feedback: the intended hero subject is now an alluring adult woman rather than a male model, with mainstream-safe sensuality and no implied endorsement or availability.
