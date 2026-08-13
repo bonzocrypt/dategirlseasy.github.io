@@ -3,7 +3,7 @@
 Captured: 2026-08-12  
 Production commit: `19ae1d643b780e463b4b559c72fc72992bf2402b`  
 Live origin: `https://dategirlseasy.com`  
-Search Console classification: exports not yet supplied; every indexable URL is treated as protected.
+Search Console classification: completed August 13, 2026 from the private unmodified export. Detailed metrics and query evidence remain in the private analysis directory; the repository roadmap records only the resulting URL tiers and safeguards.
 
 `index,follow` below means no page-level robots directive was present. Internal links count crawlable links in the page HTML. All listed live statuses were verified directly before implementation.
 

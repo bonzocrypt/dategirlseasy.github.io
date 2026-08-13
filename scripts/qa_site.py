@@ -254,8 +254,11 @@ def main() -> int:
         if target is not None and not target.exists():
             errors.append(f"sitemap URL has no local file: {url}")
 
-    if not (ROOT / "private" / "search-console").exists():
+    search_console_root = ROOT.parent / "private" / "search-console"
+    if not search_console_root.exists():
         warnings.append("Search Console exports are absent; broad protected-page propagation remains gated.")
+    elif not any(search_console_root.glob("*.zip")):
+        warnings.append("Search Console directory exists but contains no source ZIP export.")
 
     print(f"Checked {len(pages)} HTML files and {len(sitemap_urls)} sitemap URLs.")
     for warning in warnings:

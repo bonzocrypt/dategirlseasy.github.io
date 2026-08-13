@@ -1,7 +1,7 @@
 # QA Checklist
 
 - [x] No broken internal links or missing assets
-- [x] External links reviewed; public HTML currently contains no external HTTP links
+- [x] External links reviewed; the only public external HTTP links are four current official Tinder sources on the Tinder review
 - [x] Unique titles and descriptions
 - [x] Exactly one H1 per page
 - [x] Correct self-referencing canonical and robots policy

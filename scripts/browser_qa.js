@@ -10,8 +10,8 @@ const chromePath = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const screenshotPages = [
   ["homepage-desktop.png", "/", 1440, 1000],
   ["homepage-mobile.png", "/", 390, 844],
-  ["review-tinder-desktop.png", "/reviews/tinder.html", 1440, 1000],
-  ["review-tinder-mobile.png", "/reviews/tinder.html", 390, 844],
+  ["review-tinder-search-console-desktop.png", "/reviews/tinder.html", 1440, 1000],
+  ["review-tinder-search-console-mobile.png", "/reviews/tinder.html", 390, 844],
   ["comparison-tinder-bumble-desktop.png", "/comparisons/tinder-vs-bumble.html", 1440, 1000],
   ["comparison-tinder-bumble-mobile.png", "/comparisons/tinder-vs-bumble.html", 390, 844],
   ["guide-openers-desktop.png", "/guides/openers-that-get-replies.html", 1440, 1000],
@@ -24,7 +24,6 @@ const screenshotPages = [
   ["guide-match-to-date-mobile.png", "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html", 390, 844],
   ["guide-kissing-confidence-desktop.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 1440, 1000],
   ["guide-kissing-confidence-mobile.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 390, 844],
-  ["reviews-hub-mobile.png", "/reviews/", 390, 844],
   ["about-mobile.png", "/about.html", 390, 844],
   ["dating-app-reset-checklist-desktop.png", "/guides/dating-app-reset-checklist.html", 1440, 1000],
   ["dating-app-reset-checklist-mobile.png", "/guides/dating-app-reset-checklist.html", 390, 844],
