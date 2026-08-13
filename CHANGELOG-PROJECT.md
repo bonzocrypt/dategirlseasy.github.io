@@ -13,3 +13,4 @@
 - Added repeatable structural and browser QA. All 34 HTML files and 27 sitemap URLs pass; all five representative pages pass overflow and console checks at 320, 375, 390, 768, 1024, and 1440 pixels.
 - Captured permanent desktop and phone-width before/after screenshots. No production deployment or push occurred.
 - Revised Homepage IMAGE REQUEST 001 after owner feedback: the intended hero subject is now an alluring adult woman rather than a male model, with mainstream-safe sensuality and no implied endorsement or availability.
+- Integrated the owner-selected `assets/hero.jpg` without generative alteration. Added art-directed 4:5 desktop and 4:3 phone/tablet WebP derivatives, responsive source selection, corrected intrinsic sizing, and removed the internal provenance warning from the visible image overlay while retaining the approval gate in project documentation.

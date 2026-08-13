@@ -20,7 +20,8 @@
     <meta name="twitter:title" content="Date Girls Easy" />
     <meta name="twitter:description" content="Dating site reviews, comparisons, tactical guides, and long-form education for adult men." />
     <meta name="twitter:image" content="https://dategirlseasy.com/assets/og/default.png" />
-    <link rel="preload" as="image" href="/assets/hero.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/images/homepage/homepage-alluring-woman-night-out-hero-portrait-960.webp" type="image/webp" media="(min-width: 801px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/assets/images/homepage/homepage-alluring-woman-night-out-hero-landscape-960.webp" type="image/webp" media="(max-width: 800px)" fetchpriority="high" />
     <link rel="stylesheet" href="/design-v2.css" />
     <script>document.documentElement.className = "js";</script>
     <script type="application/ld+json">
@@ -90,8 +91,11 @@
             </div>
           </div>
           <figure class="hero-visual">
-            <img src="/assets/hero.jpg" width="1536" height="2048" alt="Adult woman in an evening portrait against a dark background" loading="eager" fetchpriority="high" />
-            <figcaption class="hero-caption">Existing DGE artwork retained for the design checkpoint. Provenance must be confirmed before production approval.</figcaption>
+            <picture>
+              <source media="(max-width: 800px)" type="image/webp" srcset="/assets/images/homepage/homepage-alluring-woman-night-out-hero-landscape-640.webp 640w, /assets/images/homepage/homepage-alluring-woman-night-out-hero-landscape-960.webp 960w" sizes="calc(100vw - 76px)" />
+              <source type="image/webp" srcset="/assets/images/homepage/homepage-alluring-woman-night-out-hero-portrait-640.webp 640w, /assets/images/homepage/homepage-alluring-woman-night-out-hero-portrait-960.webp 960w" sizes="(max-width: 1160px) 40vw, 430px" />
+              <img src="/assets/hero.jpg" width="960" height="1200" alt="Adult woman in an evening portrait against a dark background" loading="eager" fetchpriority="high" />
+            </picture>
           </figure>
         </div>
       </section>

@@ -99,6 +99,11 @@ class PageParser(HTMLParser):
             self.images.append(clean_img)
             if attrs.get("src"):
                 self.refs.append(("img", attrs["src"] or ""))
+        if tag in {"img", "source"} and attrs.get("srcset"):
+            for candidate in (attrs["srcset"] or "").split(","):
+                reference = candidate.strip().split()[0] if candidate.strip() else ""
+                if reference:
+                    self.refs.append(("responsive image", reference))
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "title":
