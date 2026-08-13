@@ -1,61 +1,50 @@
-# Date Girls Easy repo instructions
+# Date Girls Easy repository instructions
 
-This project is a mobile first review and education website for men focused on dating site reviews, comparisons, educational guides, and ebooks.
+Date Girls Easy is a fast static publisher for adult men. It is not a dating platform and must not gain a join flow, matchmaking feature, member area, or large runtime framework.
 
-Business goals:
+## Permanent safety and release rules
 
-1. Maximize affiliate monetization from review and comparison pages
-2. Support ebook sales and email capture
-3. Improve AI answer visibility and organic search visibility
-4. Keep the site fast, clean, and mobile first
-5. Prepare the site for PWA style installability and future app wrapping
+- Preserve every existing public URL unless the owner explicitly approves different treatment after Search Console review.
+- Do not merge to `main`, push to production, change GitHub Pages settings, deploy, force-push, or rewrite history without final owner approval.
+- The pre-project production checkpoint is `checkpoint/pre-dge-roadmap-2026-08-12` at `19ae1d6`.
+- Search Console data belongs only in `private/search-console/`; keep all of `private/` uncommitted.
+- Treat pages as search-protected until Search Console exports are available. Avoid broad metadata, heading, or intent changes without a data-backed rationale.
+- Keep production plain HTML/CSS/JavaScript. Build helpers are allowed only when they commit fully rendered HTML and add no production runtime.
 
-Critical rules:
+## Editorial contract
 
-1. Do not build any join flow, signup flow, member area, or matchmaking feature
-2. This is a publisher, not a dating platform
-3. Every page should support trust, clarity, and monetization
-4. Prefer reusable components and templates
-5. Keep navigation simple and mobile friendly
-6. Add strong internal linking between reviews, comparisons, guides, and ebooks
-7. Add disclosure and trust language where relevant
-8. Keep copy direct and high intent
-9. Prioritize conversion pages first
-10. Do not remove existing working SEO metadata unless replacing it with something better
+- Serve adults 18+ seeking casual dating, one-night stands, FWB arrangements, sexual confidence, more dates, or long-term relationships.
+- Keep the voice direct, masculine, exciting, and aspirational. Attraction, flirting, sexual tension, kissing, physical escalation, intimacy, and casual encounters may be discussed when useful.
+- Every recommendation must remain honest, respectful, consent-aware, and non-coercive. Never recommend deception, pressure, harassment, intoxication tactics, dominance theater, or guaranteed outcomes.
+- Casual-dating content must address boundaries, informed expectations, safer sex where relevant, privacy, and aftercare.
+- Archive PDFs with uncertain rights are concept-only research prompts. Write independently; do not closely adapt, substantially quote, reuse illustrations, or republish protected titles.
+- Never execute archive executables. Quarantine coercive persuasion, intoxication-oriented, fetishizing, guaranteed-outcome, married-partner-targeting, and unsupported enlargement or medical material.
+- Sensual or suggestive adult imagery may be proposed, but do not publish nudity, pornography, fake testimonials, or implied endorsements. Record provenance and owner approval before publishing an image.
 
-UX rules:
+## Page and SEO contracts
 
-1. Mobile first layout
-2. Large tap targets
-3. Fast first paint
-4. Strong readability
-5. Avoid clutter
-6. Keep sections scannable
-7. Use cards and clear hierarchy
+- Primary navigation: Start Here, Reviews, Comparisons, Guides, Library.
+- Each indexable page needs a unique title and description, one H1, self-referencing canonical, appropriate robots directive, useful internal links, and accurate Open Graph metadata.
+- Use Article, CollectionPage, BreadcrumbList, Organization, and WebSite structured data conservatively. Do not invent ratings, testing, credentials, expertise, or personal experience.
+- Date and cite time-sensitive claims. Prefer current official product sources for platform features, prices, policies, and safety tools.
+- Review pages must state who the app fits and who should avoid it. Comparison pages need a quick verdict. Guide pages must be practical and example-driven.
+- Empty library shelves stay `noindex,follow` and out of the sitemap until they provide substantive value.
+- Images require useful alt text when informative, empty alt text when decorative, explicit dimensions where applicable, responsive delivery, and approved provenance.
+- Affiliate links remain inactive until the owner supplies approved accounts and identifiers. Editorial recommendations must remain independent and correctly disclosed.
 
-Editorial rules:
+## UX and quality gates
 
-1. Review pages must include who the app is for and who should avoid it
-2. Comparison pages must include a quick verdict near the top
-3. Guide pages must be practical and example driven
-4. Ebook pages must connect to related guides and reviews
-5. Homepage must clearly position the site as a review and education publisher
+- Design mobile first with large touch targets, visible keyboard focus, a compact accessible mobile menu, strong readability, and no horizontal overflow.
+- Preserve the dark navy DGE identity with restrained purple, teal, and warm accent colors.
+- Before handoff, run `python scripts/qa_site.py` and inspect representative pages at 320, 375, 390, 768, 1024, and 1440 pixels.
+- Required release checks: no broken internal links or assets; parseable structured data; valid sitemap/indexing policy; no critical automated accessibility violations; no console errors; correct custom 404 behavior; and no material performance regression.
+- Keep before/after evidence in `project-evidence/screenshots/`. Do not replace the permanent before set.
 
-Build priority:
+## Project workflow
 
-1. Homepage
-2. Global nav and footer
-3. Reviews hub
-4. Comparisons hub
-5. Ebooks hub
-6. Core legal pages
-7. Reusable templates
-8. PWA preparation
+1. Finish the representative design checkpoint only: homepage, Tinder review, Tinder vs Bumble, openers guide, internet dating guide, and mobile navigation.
+2. Pause for owner design approval.
+3. After approval and Search Console classification, propagate the shared system and improve protected content in priority order.
+4. Keep documentation, the SEO manifest, image-request batches, affiliate registry, QA results, and rollback notes current.
 
-Content handling rules:
-
-1. content/ebooks is a raw private source library for research, summaries, categorization, metadata extraction, and planning
-2. content/ebooks-live contains ebooks approved to be surfaced on the public site
-3. Do not automatically publish, link, or create public listing pages from every file in content/ebooks
-4. Only build public ebook listings, ebook detail pages, download links, or storefront sections from content/ebooks-live
-5. It is allowed to use content/ebooks as source material for summaries, categorization, metadata, and internal planning
+Raw archive material stays private research. Only `content/ebooks-live` may be surfaced directly, and only after rights and editorial approval.

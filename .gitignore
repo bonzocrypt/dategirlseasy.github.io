@@ -1,0 +1,6 @@
+# Private owner data and local research inputs
+private/
+
+# Local test caches
+__pycache__/
+*.pyc
