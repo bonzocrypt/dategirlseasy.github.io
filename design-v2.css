@@ -727,6 +727,55 @@ body.design-v2::before {
     var(--panel-strong);
 }
 
+.editorial-image-frame {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #07101a;
+}
+
+.editorial-image-frame picture,
+.editorial-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.editorial-image-frame img {
+  object-fit: cover;
+}
+
+.editorial-image-frame.ratio-3-2 {
+  aspect-ratio: 3 / 2;
+}
+
+.editorial-image-frame.ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.editorial-figure {
+  margin: 34px 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel-strong);
+  box-shadow: var(--shadow);
+}
+
+.editorial-figure picture,
+.editorial-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.infographic-figure {
+  width: min(100%, 720px);
+  margin-inline: auto;
+}
+
 .decision-phone {
   width: min(250px, 82%);
   margin: 22px auto 0;

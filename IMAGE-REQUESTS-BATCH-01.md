@@ -22,6 +22,8 @@ Editorial rationale: the homepage hero should visualize the reader's desired soc
 
 ## IMAGE REQUEST 002 — Tinder review decision visual
 
+Status: master supplied and integrated. Responsive 640px and 960px WebP delivery files were generated beside the untouched JPG master.
+
 - Target: Tinder review, verdict section; communicate platform choice rather than endorsement.
 - Subject: adult man comparing two abstract phone screens with profile-card shapes; no real app trademarks or copied interface.
 - Composition: over-the-shoulder, phone and decision moment prominent.
@@ -34,6 +36,8 @@ Editorial rationale: the homepage hero should visualize the reader's desired soc
 - Mobile crop: keep phone and face within center 65%.
 
 ## IMAGE REQUEST 003 — Tinder vs Bumble comparison
+
+Status: master supplied and integrated. Responsive 640px and 960px WebP delivery files were generated beside the untouched JPG master.
 
 - Target: comparison page, side-by-side decision section.
 - Subject: editorial still life with two phones represented by contrasting warm and cool abstract interfaces.
@@ -48,6 +52,8 @@ Editorial rationale: the homepage hero should visualize the reader's desired soc
 
 ## IMAGE REQUEST 004 — Openers guide message-flow illustration
 
+Status: master supplied and integrated. Responsive 640px and 960px WebP delivery files were generated beside the untouched PNG master.
+
 - Target: openers guide, example section; make the conversation framework visual.
 - Subject: original message-flow graphic showing observation, playful hook, easy question, and a respectful exit.
 - Composition: four connected message cards with generous spacing; no actual platform UI.
@@ -60,6 +66,8 @@ Editorial rationale: the homepage hero should visualize the reader's desired soc
 - Mobile crop: full graphic should scale without cropping.
 
 ## IMAGE REQUEST 005 — Long-form guide chapter opener
+
+Status: master supplied and integrated. Responsive 640px and 960px WebP delivery files were generated beside the untouched JPG master.
 
 - Target: Internet Dating Guide, opening and social card.
 - Subject: adult man in an urban evening setting checking his phone before meeting a date; calm anticipation rather than staged romance.
