@@ -11,7 +11,7 @@
 - [x] Keyboard, focus, touch, and mobile menu behavior passes at the checkpoint
 - [x] Full axe/WCAG audit passes all 38 pages at 390 and 1440 pixels with zero violations
 - [x] No console errors on representative pages; all local checkpoint requests use one origin
-- [ ] Custom 404 retains an HTTP 404 response
+- [x] Custom branded 404 retains a real HTTP 404 response on GitHub Pages
 - [x] Images have dimensions, responsive sources, useful alt text, and owner-confirmed commercial publication rights
 - [x] No active affiliate links exist; the registry is globally disabled and commercial pages carry disclosure language
 - [x] Mobile Lighthouse on six representative page types: LCP 1.50–2.25 seconds, CLS 0–0.0002, accessibility 100, SEO 100

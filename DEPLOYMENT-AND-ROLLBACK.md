@@ -1,6 +1,6 @@
 # Deployment and Rollback
 
-Production deployment is not authorized until final owner approval.
+Production was authorized conditionally by the owner and completed on August 13, 2026 after all material release gates passed. The publisher rebuild content merge was `168bbc6817a567c41144a5ebd6487c42f1e82baf`; GitHub Pages workflow run `31751391763` completed successfully.
 
 Verified August 13, 2026: GitHub Pages uses the legacy branch build from `main` at repository root. The custom domain is `dategirlseasy.com`, HTTPS is enforced, and the latest deployed pre-release commit was `36239aca6ccc3e2bc7b661648dfc4bf34f00c667`.
 
