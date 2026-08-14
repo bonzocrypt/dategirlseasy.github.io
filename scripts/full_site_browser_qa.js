@@ -1,6 +1,12 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { chromium } = require("playwright");
+let playwright;
+try {
+  playwright = require("playwright");
+} catch {
+  playwright = require("playwright-core");
+}
+const { chromium } = playwright;
 
 const root = path.resolve(__dirname, "..");
 const baseUrl = "http://127.0.0.1:8008";

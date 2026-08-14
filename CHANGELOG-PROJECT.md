@@ -35,3 +35,11 @@
 - Optimized the oversized shared logo into correctly sized favicon and manifest assets. Final mobile Lighthouse results across six page types are 99–100 performance, 100 accessibility, 100 best practices, 100 SEO, LCP 1.50–2.25 seconds, and CLS 0–0.0002.
 - Deployed the approved publisher rebuild through the verified `main`-branch GitHub Pages workflow. Production verification passed for HTTPS and `www` redirects, all 34 sitemap URLs, robots directives, the public contact email, zero analytics requests or cookies, and the branded HTTP 404 response.
 - Homepage enhancement: removed the lower-right hero shading at its CSS pseudo-element source and reduced the displayed woman image to 78% width (capped at 340 px). The master and responsive image files remain unchanged; five-width browser verification and mobile Lighthouse passed before deployment.
+
+## 2026-08-14 — First incremental ebook release
+
+- Recorded the owner's commercial-rights confirmation and free-publication decisions for the first ten archive treatments in the private inventory. Source files remain private and are not linked from the public site.
+- Rewrote the first approved source into an original 11-chapter edition, **Dating Confidence for Shy Men**, covering social momentum, conversation, attraction, direct invitations, date pacing, consent-aware physical chemistry, casual and relationship goals, rejection, and a 14-day field plan.
+- Activated the Mindset and Confidence shelf and added a horizontally browsable library directory to the library hub, category shelf, and ebook. The category links use ordinary navigation semantics, remain keyboard accessible, and collapse cleanly on small screens.
+- Added the new shelf and ebook to the sitemap and expanded structural and browser regressions to protect their metadata, indexability, responsive layout, and internal links.
+- Pre-deployment QA passed across 39 HTML pages and 36 sitemap URLs, 156 full-site responsive combinations, 78 axe accessibility combinations, HTML and schema validation, external-link review, and seven mobile Lighthouse page types. The new ebook scored 100 in performance, accessibility, best practices, and SEO, with 1.65-second LCP and zero CLS.

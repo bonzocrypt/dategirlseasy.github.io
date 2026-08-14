@@ -13,6 +13,7 @@ Pre-release backups:
 Incremental enhancement rollback points:
 
 - Homepage hero balance and overlay correction: rollback point `4544875c9d0318d244c41b28425b46f518921cd3`.
+- First free ebook and confidence-shelf release: rollback point `9a8a0e1da1fb9af11b871f3060209038015510e5`.
 
 ## Release
 

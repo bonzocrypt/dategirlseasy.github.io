@@ -21,11 +21,11 @@ REPRESENTATIVE = {
     Path("comparisons/tinder-vs-bumble.html"),
     Path("guides/openers-that-get-replies.html"),
     Path("ebooks/profile-and-photos/internet-dating-guide-for-men.html"),
+    Path("ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"),
 }
 
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
-    Path("ebooks/mindset-and-confidence/index.html"),
 }
 
 SITEMAP_REQUIRED = {
@@ -43,11 +43,12 @@ SITEMAP_REQUIRED = {
     "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html",
     "/ebooks/kissing-and-intimacy/",
     "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+    "/ebooks/mindset-and-confidence/",
+    "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html",
 }
 
 SITEMAP_FORBIDDEN = {
     "/ebooks/attraction/",
-    "/ebooks/mindset-and-confidence/",
 }
 
 

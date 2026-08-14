@@ -1,6 +1,12 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { chromium } = require("playwright");
+let playwright;
+try {
+  playwright = require("playwright");
+} catch {
+  playwright = require("playwright-core");
+}
+const { chromium } = playwright;
 
 const root = path.resolve(__dirname, "..");
 const outputDirectory = process.env.DGE_QA_SCREENSHOTS || path.join(root, "project-evidence", "screenshots", "after");
@@ -24,6 +30,9 @@ const screenshotPages = [
   ["guide-match-to-date-mobile.png", "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html", 390, 844],
   ["guide-kissing-confidence-desktop.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 1440, 1000],
   ["guide-kissing-confidence-mobile.png", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", 390, 844],
+  ["ebook-dating-confidence-desktop.png", "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html", 1440, 1000],
+  ["ebook-dating-confidence-mobile.png", "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html", 390, 844],
+  ["library-confidence-shelf-mobile.png", "/ebooks/mindset-and-confidence/", 390, 844],
   ["about-mobile.png", "/about.html", 390, 844],
   ["dating-app-reset-checklist-desktop.png", "/guides/dating-app-reset-checklist.html", 1440, 1000],
   ["dating-app-reset-checklist-mobile.png", "/guides/dating-app-reset-checklist.html", 390, 844],
