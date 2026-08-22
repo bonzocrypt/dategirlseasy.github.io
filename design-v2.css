@@ -19,6 +19,10 @@
   --radius-lg: 32px;
   --shell: min(1160px, calc(100% - 40px));
   --reading: min(780px, calc(100% - 40px));
+  /* Display font loads via a per-page <link> (see index.html); pages that
+     have not added the link yet fall back to Inter, so this is safe to
+     roll out incrementally page by page. */
+  --display-font: "Bricolage Grotesque", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -336,7 +340,7 @@ body.design-v2::before {
 .card-title,
 .panel-title {
   margin: 0;
-  font-family: "Arial Black", Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--display-font);
   letter-spacing: -0.045em;
   line-height: 0.98;
 }
@@ -415,6 +419,40 @@ body.design-v2::before {
   transform: translateY(-1px);
 }
 
+/* Outbound/affiliate link pattern: distinct from internal navigation
+   buttons above, and paired with a visible disclosure line, per the
+   "disclosures must be present" rule in MONETIZATION.md. Not wired to
+   any live link yet — affiliate programs are still inactive per
+   MONETIZATION-PLAN.md — this just makes the pattern ready to use. */
+.button-outbound {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(246, 204, 120, 0.08);
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.button-outbound:hover {
+  background: rgba(246, 204, 120, 0.16);
+}
+
+.affiliate-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--faint);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .homepage-hero {
   padding: 54px 0 28px;
 }
@@ -422,7 +460,8 @@ body.design-v2::before {
 .hero-frame {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(330px, 0.9fr);
-  gap: clamp(28px, 6vw, 70px);
+  grid-template-areas: "headline visual" "copy visual";
+  gap: 0 clamp(28px, 6vw, 70px);
   align-items: center;
   padding: clamp(28px, 5vw, 64px);
   overflow: hidden;
@@ -438,7 +477,16 @@ body.design-v2::before {
   min-width: 0;
 }
 
+.hero-headline {
+  grid-area: headline;
+}
+
+.hero-copy {
+  grid-area: copy;
+}
+
 .hero-visual {
+  grid-area: visual;
   position: relative;
   width: 78%;
   max-width: 340px;
@@ -618,6 +666,35 @@ body.design-v2::before {
   font-weight: 1000;
 }
 
+/* Decision-path cards: solid badge + topical icon instead of the blurred
+   gradient circle, so the four cards read as distinct steps rather than
+   four identical panels. Scoped to .path-card so other .editorial-card
+   uses (feature-grid, article pages) are unaffected. */
+.path-card::after {
+  content: none;
+}
+
+.path-card .card-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.path-card .card-number {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0;
+  border-radius: 10px;
+  color: #06231f;
+  background: var(--teal);
+}
+
+.path-card .card-icon {
+  flex: 0 0 auto;
+  color: var(--teal);
+}
+
 .editorial-card p {
   color: var(--muted);
 }
@@ -736,7 +813,7 @@ body.design-v2::before {
 
 .article-content h2:not(.panel-title) {
   margin: 58px 0 14px;
-  font-family: "Arial Black", Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--display-font);
   font-size: clamp(1.8rem, 3.5vw, 2.75rem);
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -1220,7 +1297,7 @@ body.design-v2::before {
 }
 
 .ebook-cover strong {
-  font-family: "Arial Black", Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--display-font);
   font-size: clamp(2.3rem, 4.8vw, 4.2rem);
   letter-spacing: -0.055em;
   line-height: 0.92;
@@ -1484,18 +1561,62 @@ body.design-v2::before {
   }
 
   .hero-frame {
-    padding: 24px;
+    padding: 0;
     border-radius: 24px;
   }
 
+  /* Image leads on mobile: it's the first thing in the card, full-bleed
+     to the card edges, with the eyebrow and headline layered on top of
+     its bottom edge (same grid cell, stacked by z-index) instead of
+     sitting in a separate block below it. */
+  .hero-frame {
+    grid-template-areas: "visual" "copy";
+    grid-template-rows: auto auto;
+    gap: 0;
+  }
+
+  .hero-visual,
+  .hero-headline {
+    grid-area: visual;
+  }
+
   .hero-visual {
-    margin-top: 8px;
-    justify-self: center;
+    width: auto;
+    max-width: none;
+    justify-self: stretch;
   }
 
   .hero-visual img {
-    aspect-ratio: 4 / 3;
-    object-position: 50% 17%;
+    aspect-ratio: 5 / 4;
+    object-position: 50% 15%;
+    border: 0;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .hero-headline {
+    position: relative;
+    z-index: 2;
+    align-self: end;
+    padding: 60px 24px 20px;
+    background: linear-gradient(180deg, transparent, rgba(4, 8, 14, 0.82) 55%, rgba(4, 8, 14, 0.96) 88%);
+  }
+
+  .hero-headline .eyebrow {
+    color: var(--coral);
+  }
+
+  .hero-headline .display-title {
+    font-size: clamp(2.1rem, 8vw, 2.9rem);
+    color: #fff;
+  }
+
+  .hero-copy {
+    grid-area: copy;
+    padding: 20px 24px 24px;
+  }
+
+  .hero-copy .lede {
+    margin-top: 0;
   }
 
   .hero-proof,
