@@ -15,11 +15,7 @@ Date Girls Easy is a fast static publisher for adult men. It is not a dating pla
 
 - Serve adults 18+ seeking casual dating, one-night stands, FWB arrangements, sexual confidence, more dates, or long-term relationships.
 - Keep the voice direct, masculine, exciting, and aspirational. Attraction, flirting, sexual tension, kissing, physical escalation, intimacy, and casual encounters may be discussed when useful.
-- Every recommendation must remain honest, respectful, consent-aware, and non-coercive. Never recommend deception, pressure, harassment, intoxication tactics, dominance theater, or guaranteed outcomes.
-- Casual-dating content must address boundaries, informed expectations, safer sex where relevant, privacy, and aftercare.
-- Archive PDFs with uncertain rights are concept-only research prompts. Write independently; do not closely adapt, substantially quote, reuse illustrations, or republish protected titles.
-- Never execute archive executables. Quarantine coercive persuasion, intoxication-oriented, fetishizing, guaranteed-outcome, married-partner-targeting, and unsupported enlargement or medical material.
-- Sensual or suggestive adult imagery may be proposed, but do not publish nudity, pornography, fake testimonials, or implied endorsements. Record provenance and owner approval before publishing an image.
+
 
 ## Page and SEO contracts
 
