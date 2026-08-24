@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import xml.etree.ElementTree as ET
 from collections import Counter
@@ -209,6 +210,19 @@ def main() -> int:
         if "assets/og/default.jpg" in page.read_text(encoding="utf-8"):
             errors.append(f"{rel}: references nonexistent assets/og/default.jpg")
 
+        raw = page.read_text(encoding="utf-8")
+        if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
+            errors.append(f"{rel}: contains a placeholder href")
+        if raw.count("data-nav-trigger") != 2:
+            errors.append(f"{rel}: expected two shared navigation dropdown triggers")
+        for control_id in ("nav-dating-apps", "nav-guides"):
+            if f'aria-controls="{control_id}"' not in raw or f'id="{control_id}"' not in raw:
+                errors.append(f"{rel}: navigation control contract is incomplete for #{control_id}")
+        if "fonts.googleapis.com" in raw or "fonts.gstatic.com" in raw or "Bricolage" in raw:
+            errors.append(f"{rel}: external or retired typography dependency remains")
+        if re.search(r'<(?:article|div|li)[^>]*class="[^"]*goal-card', raw, flags=re.IGNORECASE):
+            errors.append(f"{rel}: goal-card must be the anchor, not a non-link wrapper")
+
         for region_number, region in enumerate(parser.comparison_table_wraps, 1):
             if region.get("tabindex") != "0":
                 errors.append(f"{rel}: comparison table region {region_number} must use tabindex=0")
@@ -241,6 +255,19 @@ def main() -> int:
         raw = (ROOT / rel).read_text(encoding="utf-8")
         if "data-menu-toggle" not in raw or "data-primary-nav" not in raw:
             errors.append(f"{rel}: missing accessible mobile-menu contract")
+
+    entry_page_contracts = {
+        Path("index.html"): ("Help me choose where to start", 6),
+        Path("join.html"): ("What do you want help with?", 6),
+        Path("guides/index.html"): ("Choose the category that matches your bottleneck", 6),
+        Path("ebooks/index.html"): ("Choose the subject you want to improve", 6),
+    }
+    for rel, (required_text, goal_count) in entry_page_contracts.items():
+        raw = (ROOT / rel).read_text(encoding="utf-8")
+        if required_text not in raw:
+            errors.append(f"{rel}: missing required visitor-routing copy")
+        if raw.count('class="goal-card"') != goal_count:
+            errors.append(f"{rel}: expected {goal_count} whole-link goal cards")
 
     template = pages.get(Path("template-page.html"))
     if not template or "noindex" not in template.meta_content("name", "robots").lower():

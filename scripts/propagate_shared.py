@@ -14,34 +14,93 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def current_section(relative: Path) -> str | None:
     parts = relative.as_posix().split("/")
-    if parts[0] == "reviews":
-        return "reviews"
-    if parts[0] == "comparisons":
-        return "comparisons"
-    if parts[0] in {"guides", "playbooks"}:
+    if parts[0] in {"reviews", "comparisons"}:
+        return "apps"
+    if parts[0] in {"guides", "playbooks", "ebooks"}:
         return "guides"
-    if parts[0] == "ebooks":
-        return "ebooks"
     if relative.name in {"join.html", "how-it-works.html"}:
         return "start"
     return None
 
 
-def header_markup(active: str | None) -> str:
-    def nav_link(key: str, href: str, label: str) -> str:
-        current = ' aria-current="page"' if key == active else ""
-        return f'<a href="{href}"{current}>{label}</a>'
+def header_markup(relative: Path) -> str:
+    active = current_section(relative)
+    current_path = relative.as_posix()
+    if current_path == "index.html":
+        current_path = ""
 
+    exact_paths = {
+        "/join.html": "join.html",
+        "/reviews/": "reviews/index.html",
+        "/comparisons/": "comparisons/index.html",
+        "/reviews/tinder.html": "reviews/tinder.html",
+        "/comparisons/tinder-vs-bumble.html": "comparisons/tinder-vs-bumble.html",
+        "/guides/": "guides/index.html",
+        "/ebooks/": "ebooks/index.html",
+        "/ebooks/profile-and-photos/": "ebooks/profile-and-photos/index.html",
+        "/ebooks/messaging-and-openers/": "ebooks/messaging-and-openers/index.html",
+        "/ebooks/dates-and-escalation/": "ebooks/dates-and-escalation/index.html",
+        "/ebooks/mindset-and-confidence/": "ebooks/mindset-and-confidence/index.html",
+        "/ebooks/body-language/": "ebooks/body-language/index.html",
+        "/ebooks/kissing-and-intimacy/": "ebooks/kissing-and-intimacy/index.html",
+    }
+
+    def current_for(href: str) -> str:
+        return ' aria-current="page"' if exact_paths.get(href) == current_path else ""
+
+    start_current = ' aria-current="page"' if active == "start" else ""
+    apps_active = " is-active" if active == "apps" else ""
+    guides_active = " is-active" if active == "guides" else ""
     return f'''<header class="publisher-header">
       <div class="site-shell header-bar">
         <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
         <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
-        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">{nav_link("start", "/join.html", "Start Here")}{nav_link("reviews", "/reviews/", "Reviews")}{nav_link("comparisons", "/comparisons/", "Comparisons")}{nav_link("guides", "/guides/", "Guides")}{nav_link("ebooks", "/ebooks/", "Library")}</nav>
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">
+          <a class="nav-direct" href="/join.html"{start_current}>Start Here</a>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-trigger{apps_active}" type="button" aria-expanded="false" aria-controls="nav-dating-apps" data-nav-trigger>Dating Apps<span class="nav-chevron" aria-hidden="true"></span></button>
+            <div class="nav-submenu" id="nav-dating-apps" data-nav-submenu data-open="false">
+              <a href="/reviews/"{current_for("/reviews/")}>Dating App Reviews</a>
+              <a href="/comparisons/"{current_for("/comparisons/")}>Dating App Comparisons</a>
+              <a href="/reviews/tinder.html"{current_for("/reviews/tinder.html")}>Tinder Review</a>
+              <a href="/comparisons/tinder-vs-bumble.html"{current_for("/comparisons/tinder-vs-bumble.html")}>Tinder vs Bumble</a>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-trigger{guides_active}" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
+            <div class="nav-submenu nav-submenu-wide" id="nav-guides" data-nav-submenu data-open="false">
+              <a href="/guides/"{current_for("/guides/")}>All Dating Guides</a>
+              <a href="/ebooks/"{current_for("/ebooks/")}>Guide Library</a>
+              <a href="/ebooks/profile-and-photos/"{current_for("/ebooks/profile-and-photos/")}>Profile and Photos</a>
+              <a href="/ebooks/messaging-and-openers/"{current_for("/ebooks/messaging-and-openers/")}>Messaging and Texting</a>
+              <a href="/ebooks/dates-and-escalation/"{current_for("/ebooks/dates-and-escalation/")}>Getting the Date</a>
+              <a href="/ebooks/mindset-and-confidence/"{current_for("/ebooks/mindset-and-confidence/")}>Confidence and Attraction</a>
+              <a href="/ebooks/body-language/"{current_for("/ebooks/body-language/")}>Body Language</a>
+              <a href="/ebooks/kissing-and-intimacy/"{current_for("/ebooks/kissing-and-intimacy/")}>Kissing and Intimacy</a>
+            </div>
+          </div>
+        </nav>
       </div>
     </header>'''
 
 
-FOOTER = '''<footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/reviews/">Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guides</a><a href="/ebooks/">Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>'''
+FOOTER = '''<footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">All Guides</a><a href="/ebooks/">Guide Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>'''
+
+
+def remove_external_fonts(source: str) -> str:
+    updated = re.sub(
+        r'\s*<link\b(?=[^>]*href="https://fonts\.(?:googleapis|gstatic)\.com)[^>]*>\s*',
+        "\n",
+        source,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    updated = re.sub(
+        r'(<iframe\s+)(?=src="https://www\.googletagmanager\.com/ns\.html)(?![^>]*\btitle=)',
+        r'\1title="Google Tag Manager" ',
+        updated,
+        flags=re.IGNORECASE,
+    )
+    return re.sub(r'\s*<noscript>\s*</noscript>\s*', "\n", updated, flags=re.IGNORECASE)
 
 
 def first_match(pattern: str, source: str) -> str:
@@ -92,11 +151,30 @@ def schema_markup(source: str, relative: Path) -> str:
 
 def transform(page: Path) -> bool:
     source = page.read_text(encoding="utf-8")
-    if "/design-v2.css" in source:
-        return False
-
     relative = page.relative_to(ROOT)
-    updated = source
+    updated = remove_external_fonts(source)
+    updated = re.sub(
+        r'<header class="publisher-header">.*?</header>',
+        header_markup(relative),
+        updated,
+        count=1,
+        flags=re.DOTALL,
+    )
+    updated = re.sub(
+        r'<footer class="publisher-footer">.*?</footer>',
+        FOOTER,
+        updated,
+        count=1,
+        flags=re.DOTALL,
+    )
+
+    if "/design-v2.css" in source:
+        if updated == source:
+            return False
+        page.write_text(updated, encoding="utf-8", newline="\n")
+        return True
+
+    source = updated
     updated = re.sub(r'<html lang="en">', '<html lang="en" class="no-js">', updated, count=1)
     updated = re.sub(r'<body([^>]*)>', r'<body\1 class="legacy-layout">' if "class=" not in first_match(r"(<body[^>]*>)", updated) else r'<body\1>', updated, count=1)
     if 'class="legacy-layout"' not in updated:
@@ -108,7 +186,7 @@ def transform(page: Path) -> bool:
         updated = updated.replace("  </head>", schema_markup(updated, relative) + "  </head>", 1)
 
     updated = updated.replace('    <link rel="stylesheet" href="/styles.css" />', '    <link rel="stylesheet" href="/styles.css" />\n    <link rel="stylesheet" href="/design-v2.css" />\n    <script>document.documentElement.className = "js";</script>', 1)
-    updated = re.sub(r'<header class="site-header">.*?</header>', header_markup(current_section(relative)), updated, count=1, flags=re.DOTALL)
+    updated = re.sub(r'<header class="site-header">.*?</header>', header_markup(relative), updated, count=1, flags=re.DOTALL)
     updated = re.sub(r'<footer class="site-footer">.*?</footer>', FOOTER, updated, count=1, flags=re.DOTALL)
     updated = re.sub(r'\s*<script>\s*document\.getElementById\(["\']yr["\']\)\.textContent\s*=\s*new Date\(\)\.getFullYear\(\);\s*</script>', "", updated, flags=re.DOTALL)
 

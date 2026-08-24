@@ -75,6 +75,12 @@ function collectHtml(directory) {
             innerWidth: window.innerWidth,
             menuButtonVisible: button ? getComputedStyle(button).display !== "none" : false,
             menuCollapsed: button?.getAttribute("aria-expanded") === "false" && nav?.getAttribute("data-open") === "false",
+            navTriggers: [...document.querySelectorAll("[data-nav-trigger]")].map((trigger) => ({
+              expanded: trigger.getAttribute("aria-expanded"),
+              controls: trigger.getAttribute("aria-controls"),
+              targetExists: Boolean(document.getElementById(trigger.getAttribute("aria-controls") || "")),
+              isButton: trigger.tagName === "BUTTON",
+            })),
             tableRegions: [...document.querySelectorAll(".comparison-table-wrap")].map((region) => {
               region.focus();
               const style = getComputedStyle(region);
@@ -92,6 +98,9 @@ function collectHtml(directory) {
         if (!response || !response.ok()) errors.push(`${pathname} @ ${width}: HTTP ${response ? response.status() : "none"}`);
         if (result.overflow) errors.push(`${pathname} @ ${width}: overflow ${result.scrollWidth}/${result.innerWidth}`);
         if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${pathname} @ ${width}: mobile menu initial state failed`);
+        if (result.navTriggers.length !== 2 || result.navTriggers.some((item) => item.expanded !== "false" || !item.controls || !item.targetExists || !item.isButton)) {
+          errors.push(`${pathname} @ ${width}: shared dropdown navigation contract failed`);
+        }
         for (const [regionIndex, region] of result.tableRegions.entries()) {
           if (!region.focusable || !region.label || !region.labelExists || !region.containsTable || !region.receivesFocus || !region.visibleFocus) {
             errors.push(`${pathname} @ ${width}: comparison table region ${regionIndex + 1} accessibility contract failed`);

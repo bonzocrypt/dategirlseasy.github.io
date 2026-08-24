@@ -36,8 +36,10 @@ html {
 body {
   min-height: 100vh;
   font-family:
-    "DM Sans",
+    Inter,
     "Segoe UI",
+    ui-sans-serif,
+    system-ui,
     sans-serif;
   color: var(--ink);
   background:
@@ -106,8 +108,10 @@ button:focus-visible {
   align-items: center;
   gap: 10px;
   font-family:
-    "Space Grotesk",
-    "DM Sans",
+    Inter,
+    "Segoe UI",
+    ui-sans-serif,
+    system-ui,
     sans-serif;
   font-size: 1.14rem;
   font-weight: 700;
@@ -260,8 +264,10 @@ h4 {
 
 h1 {
   font-family:
-    "Space Grotesk",
-    "DM Sans",
+    Inter,
+    "Segoe UI",
+    ui-sans-serif,
+    system-ui,
     sans-serif;
   font-size: clamp(2.45rem, 8vw, 4.8rem);
   letter-spacing: -0.05em;
@@ -269,8 +275,10 @@ h1 {
 
 h2 {
   font-family:
-    "Space Grotesk",
-    "DM Sans",
+    Inter,
+    "Segoe UI",
+    ui-sans-serif,
+    system-ui,
     sans-serif;
   font-size: clamp(1.55rem, 5vw, 2.35rem);
   letter-spacing: -0.04em;

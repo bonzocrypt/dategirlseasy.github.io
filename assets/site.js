@@ -2,11 +2,42 @@
   document.documentElement.classList.add("js");
   const menuButton = document.querySelector("[data-menu-toggle]");
   const nav = document.querySelector("[data-primary-nav]");
+  const navGroups = Array.from(document.querySelectorAll("[data-nav-group]"));
+
+  function closeNavGroup(group, returnFocus) {
+    if (!group) return;
+    const trigger = group.querySelector("[data-nav-trigger]");
+    const submenu = group.querySelector("[data-nav-submenu]");
+    if (!trigger || !submenu) return;
+    trigger.setAttribute("aria-expanded", "false");
+    submenu.dataset.open = "false";
+    if (returnFocus) trigger.focus();
+  }
+
+  function closeNavGroups(exceptGroup) {
+    navGroups.forEach(function (group) {
+      if (group !== exceptGroup) closeNavGroup(group, false);
+    });
+  }
+
+  function openNavGroup(group, focusFirstLink) {
+    const trigger = group.querySelector("[data-nav-trigger]");
+    const submenu = group.querySelector("[data-nav-submenu]");
+    if (!trigger || !submenu) return;
+    closeNavGroups(group);
+    trigger.setAttribute("aria-expanded", "true");
+    submenu.dataset.open = "true";
+    if (focusFirstLink) {
+      const firstLink = submenu.querySelector("a");
+      if (firstLink) firstLink.focus();
+    }
+  }
 
   function closeMenu(returnFocus) {
     if (!menuButton || !nav) return;
     menuButton.setAttribute("aria-expanded", "false");
     nav.dataset.open = "false";
+    closeNavGroups();
     if (returnFocus) menuButton.focus();
   }
 
@@ -15,14 +46,54 @@
       const isOpen = menuButton.getAttribute("aria-expanded") === "true";
       menuButton.setAttribute("aria-expanded", String(!isOpen));
       nav.dataset.open = String(!isOpen);
+      if (isOpen) closeNavGroups();
     });
 
     nav.addEventListener("click", function (event) {
       if (event.target.closest("a")) closeMenu(false);
     });
 
+    navGroups.forEach(function (group) {
+      const trigger = group.querySelector("[data-nav-trigger]");
+      const submenu = group.querySelector("[data-nav-submenu]");
+      if (!trigger || !submenu) return;
+
+      trigger.addEventListener("click", function () {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        if (isOpen) closeNavGroup(group, false);
+        else openNavGroup(group, false);
+      });
+
+      trigger.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          openNavGroup(group, true);
+        }
+      });
+
+      submenu.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeNavGroup(group, true);
+        }
+      });
+    });
+
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && nav.dataset.open === "true") closeMenu(true);
+      if (event.key !== "Escape") return;
+      const openGroup = navGroups.find(function (group) {
+        return group.querySelector("[data-nav-trigger]")?.getAttribute("aria-expanded") === "true";
+      });
+      if (openGroup) {
+        event.preventDefault();
+        closeNavGroup(openGroup, true);
+      } else if (nav.dataset.open === "true") {
+        closeMenu(true);
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".publisher-header")) closeNavGroups();
     });
 
     window.addEventListener("resize", function () {

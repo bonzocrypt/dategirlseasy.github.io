@@ -29,23 +29,7 @@
     <link rel="icon" href="/assets/logo.png" />
     <link rel="apple-touch-icon" href="/assets/logo.png" />
     <meta name="theme-color" content="#08121d" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&family=Space+Grotesk:wght@500;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&family=Space+Grotesk:wght@500;700&display=swap"
-      />
-    </noscript>
-
-    <link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/design-v2.css" />
     <script>document.documentElement.className = "js";</script>
 
@@ -78,7 +62,7 @@
   </head>
   <body class="legacy-layout">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KLM9MDV3"
+    <noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-KLM9MDV3"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -86,216 +70,76 @@
       <div class="site-shell header-bar">
         <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
         <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
-        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false"><a href="/join.html">Start Here</a><a href="/reviews/">Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/" aria-current="page">Guides</a><a href="/ebooks/">Library</a></nav>
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">
+          <a class="nav-direct" href="/join.html">Start Here</a>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-trigger" type="button" aria-expanded="false" aria-controls="nav-dating-apps" data-nav-trigger>Dating Apps<span class="nav-chevron" aria-hidden="true"></span></button>
+            <div class="nav-submenu" id="nav-dating-apps" data-nav-submenu data-open="false">
+              <a href="/reviews/">Dating App Reviews</a>
+              <a href="/comparisons/">Dating App Comparisons</a>
+              <a href="/reviews/tinder.html">Tinder Review</a>
+              <a href="/comparisons/tinder-vs-bumble.html">Tinder vs Bumble</a>
+            </div>
+          </div>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-trigger is-active" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
+            <div class="nav-submenu nav-submenu-wide" id="nav-guides" data-nav-submenu data-open="false">
+              <a href="/guides/" aria-current="page">All Dating Guides</a>
+              <a href="/ebooks/">Guide Library</a>
+              <a href="/ebooks/profile-and-photos/">Profile and Photos</a>
+              <a href="/ebooks/messaging-and-openers/">Messaging and Texting</a>
+              <a href="/ebooks/dates-and-escalation/">Getting the Date</a>
+              <a href="/ebooks/mindset-and-confidence/">Confidence and Attraction</a>
+              <a href="/ebooks/body-language/">Body Language</a>
+              <a href="/ebooks/kissing-and-intimacy/">Kissing and Intimacy</a>
+            </div>
+          </div>
+        </nav>
       </div>
     </header>
 
     <main id="main-content">
       <section class="hero">
-        <div class="container">
-          <div class="hero-panel">
-            <div class="hero-grid">
-              <div>
-                <p class="eyebrow">Guide hub</p>
-                <h1>Practical dating guides for men who want better outcomes, not fluff.</h1>
-                <p class="lede">
-                  The guide library is built to support the review and comparison
-                  sections. Start with profile quality, then move to messaging, then
-                  use a simple first-date plan once you have traction.
-                </p>
-                <div class="cta-row">
-                  <a class="button" href="/guides/profile-photo-checklist.html">
-                    Start with photos
-                  </a>
-                  <a class="button secondary" href="/guides/bio-templates.html">
-                    Improve your bio
-                  </a>
-                  <a class="button ghost" href="/join.html">Need the best route?</a>
-                </div>
-              </div>
-              <div class="panel">
-                <p class="eyebrow page-kicker">Quick answer</p>
-                <h2>If your app results are weak on every platform, start here first.</h2>
-                <p>
-                  Men often switch apps when the real issue is profile quality or
-                  message quality. These guides are designed to solve that layer
-                  before you chase more reviews.
-                </p>
-                <div class="cluster-links">
-                  <a href="/reviews/">Review hub</a>
-                  <a href="/comparisons/">Comparison hub</a>
-                  <a href="/playbooks/first-date-playbook.html">First date guide</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="container"><div class="hero-panel"><p class="eyebrow">All dating guides</p><h1>Practical dating guides for men who want better outcomes, not fluff.</h1><p class="lede">Choose the skill that is holding you back. Start with the strongest guide in that category, then go deeper only when you need it.</p><div class="cta-row"><a class="button" href="/join.html">Help me choose where to start</a><a class="button secondary" href="/ebooks/">Open the Guide Library</a></div></div></div>
+      </section>
+
+      <section class="cards container" aria-labelledby="guide-categories">
+        <div class="section-head"><p class="eyebrow page-kicker">Browse by skill</p><h2 id="guide-categories">Choose the category that matches your bottleneck</h2><p class="lede">Each category starts with the most useful guide for that goal.</p></div>
+        <div class="goal-grid">
+          <a class="goal-card" href="/guides/profile-photo-checklist.html"><span class="goal-label">Profile and photos</span><h3>Build a stronger first impression</h3><p>Use the profile photo checklist before changing apps or buying visibility.</p><span class="card-link">Start with the photo checklist →</span></a>
+          <a class="goal-card" href="/guides/openers-that-get-replies.html"><span class="goal-label">Messaging and texting</span><h3>Start conversations that move</h3><p>Write specific openers that feel natural, confident, and easy to answer.</p><span class="card-link">Start with better openers →</span></a>
+          <a class="goal-card" href="/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html"><span class="goal-label">Getting the date</span><h3>Move from match to real plans</h3><p>Make a clear invitation, handle timing, and reduce planning friction.</p><span class="card-link">Start with match to date →</span></a>
+          <a class="goal-card" href="/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"><span class="goal-label">Confidence and attraction</span><h3>Build confidence through action</h3><p>Manage nerves, flirt honestly, and become more socially decisive.</p><span class="card-link">Start with confidence →</span></a>
+          <a class="goal-card" href="/ebooks/body-language/"><span class="goal-label">Body language</span><h3>Read interest and comfort better</h3><p>Notice reciprocal signals without treating any single cue as a guarantee.</p><span class="card-link">Start with body language →</span></a>
+          <a class="goal-card" href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html"><span class="goal-label">Kissing and intimacy</span><h3>Handle physical chemistry well</h3><p>Learn timing, clear consent, responsive pacing, and kissing fundamentals.</p><span class="card-link">Start with kissing confidence →</span></a>
         </div>
       </section>
 
-      <section class="cards container">
-        <div class="section-head">
-          <p class="eyebrow page-kicker">Core guide cluster</p>
-          <h2>Fix the profile layer, then the messaging layer</h2>
-          <p class="lede">
-            Each guide is practical, example-driven, and connected to the next page
-            a reader should use.
-          </p>
-        </div>
+      <section class="cards container" aria-labelledby="popular-guide-heading">
+        <div class="section-head"><p class="eyebrow page-kicker">Popular guides</p><h2 id="popular-guide-heading">Three practical starting points</h2></div>
         <ul class="card-grid">
-          <li class="card">
-            <a href="/guides/dating-app-reset-checklist.html">
-              <span class="card-kicker">Free checklist</span>
-              <h3>Dating App Reset Checklist</h3>
-              <p>
-                Reset your intent, photos, bio, messaging, invitations, consent,
-                and weekly app habits in one focused session.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/profile-photo-checklist.html">
-              <span class="card-kicker">Guide</span>
-              <h3>Profile photo checklist</h3>
-              <p>
-                Improve first impressions before changing apps or paying for more
-                visibility.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/bio-templates.html">
-              <span class="card-kicker">Guide</span>
-              <h3>Bio templates</h3>
-              <p>
-                Short, adaptable bio frameworks that feel direct instead of try-hard.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/openers-that-get-replies.html">
-              <span class="card-kicker">Guide</span>
-              <h3>Openers that get replies</h3>
-              <p>
-                Move from match to conversation with cleaner first-message examples.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/texting-that-keeps-momentum.html">
-              <span class="card-kicker">New for 2026</span>
-              <h3>Texting that keeps momentum</h3>
-              <p>
-                Pacing, response timing, and how to move a thread toward a real date
-                now that almost nobody calls first.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/dms-and-social-media.html">
-              <span class="card-kicker">New for 2026</span>
-              <h3>DMs and social media openers</h3>
-              <p>
-                Meeting and flirting on Instagram and TikTok, separate from
-                dating-app matching.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/video-calls-before-meeting.html">
-              <span class="card-kicker">New for 2026</span>
-              <h3>Video calls before meeting</h3>
-              <p>
-                Why the pre-date video call became normal, and how to run one well.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/guides/voice-notes-and-dm-etiquette.html">
-              <span class="card-kicker">New for 2026</span>
-              <h3>Voice notes and DM etiquette</h3>
-              <p>
-                When a voice note helps, when it's too much, and the unwritten
-                rules of modern DM conversations.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/playbooks/first-date-playbook.html">
-              <span class="card-kicker">Guide</span>
-              <h3>First date playbook</h3>
-              <p>
-                Turn momentum into a simple plan without overcomplicating the ask.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/reviews/tinder.html">
-              <span class="card-kicker">Related review</span>
-              <h3>Tinder review</h3>
-              <p>
-                Use this after the profile guides if you want a live example of how
-                review and guide content connect.
-              </p>
-            </a>
-          </li>
-          <li class="card">
-            <a href="/comparisons/tinder-vs-bumble.html">
-              <span class="card-kicker">Related comparison</span>
-              <h3>Tinder vs Bumble</h3>
-              <p>
-                Compare platforms once your photos and bio are no longer holding you
-                back.
-              </p>
-            </a>
-          </li>
+          <li class="card"><a href="/guides/dating-app-reset-checklist.html"><span class="card-kicker">Free checklist</span><h3>Dating App Reset Checklist</h3><p>Reset your intent, photos, bio, messaging, invitations, consent, and weekly habits.</p></a></li>
+          <li class="card"><a href="/guides/profile-photo-checklist.html"><span class="card-kicker">Profile guide</span><h3>Profile photo checklist</h3><p>Improve first impressions before changing apps or paying for more visibility.</p></a></li>
+          <li class="card"><a href="/guides/openers-that-get-replies.html"><span class="card-kicker">Messaging guide</span><h3>Openers that get replies</h3><p>Move from match to conversation with cleaner first-message examples.</p></a></li>
         </ul>
       </section>
 
-      <section class="container">
-        <div class="publisher-strip">
-          <div>
-            <strong>Best next click</strong>
-            Start with photos if your match quality is weak. Move to bios if you get
-            views but poor traction. Use opener and first-date help once the profile
-            is no longer the bottleneck.
-          </div>
-          <div class="cluster-links">
-            <a href="/guides/profile-photo-checklist.html">Start with photos</a>
-            <a href="/guides/bio-templates.html">Fix your bio</a>
-            <a href="/guides/openers-that-get-replies.html">Improve openers</a>
-            <a href="/join.html">Use Start Here</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="container">
-        <div class="split-panel">
-          <div class="trust-block">
-            <p class="eyebrow page-kicker">Guide standard</p>
-            <h2>Practical and example-driven by design</h2>
-            <p>
-              Guide pages are meant to be scannable on mobile, useful fast, and easy
-              to apply without needing an account, member area, or app-like join flow.
-            </p>
-          </div>
-          <div class="ebook-callout">
-            <p class="eyebrow page-kicker">Related ebooks</p>
-            <h2>The ebook hub follows these guide clusters.</h2>
-            <p>
-              Future public ebook releases will be tied directly to photo, bio,
-              messaging, and first-date topics rather than appearing as disconnected
-              products.
-            </p>
-            <div class="cluster-links">
-              <a href="/ebooks/">Ebook hub</a>
-              <a href="/reviews/">Review hub</a>
-            </div>
-          </div>
-        </div>
+      <section class="container" aria-labelledby="more-guides-heading">
+        <div class="section-head"><p class="eyebrow page-kicker">More practical guides</p><h2 id="more-guides-heading">Keep going when you need a narrower answer</h2><p class="lede">Every existing guide remains available without forcing you through repeated category panels.</p></div>
+        <ul class="compact-link-list">
+          <li><a href="/guides/bio-templates.html">Bio templates</a></li>
+          <li><a href="/guides/texting-that-keeps-momentum.html">Texting that keeps momentum</a></li>
+          <li><a href="/guides/dms-and-social-media.html">DMs and social media openers</a></li>
+          <li><a href="/guides/video-calls-before-meeting.html">Video calls before meeting</a></li>
+          <li><a href="/guides/voice-notes-and-dm-etiquette.html">Voice notes and DM etiquette</a></li>
+          <li><a href="/playbooks/first-date-playbook.html">First date playbook</a></li>
+          <li><a href="/reviews/tinder.html">Tinder review for men</a></li>
+          <li><a href="/comparisons/tinder-vs-bumble.html">Tinder vs Bumble</a></li>
+        </ul>
       </section>
     </main>
 
-    <footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">© <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/reviews/">Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guides</a><a href="/ebooks/">Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>
+    <footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">All Guides</a><a href="/ebooks/">Guide Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>
     <script src="/assets/site.js" defer></script>
   </body>
 </html>
