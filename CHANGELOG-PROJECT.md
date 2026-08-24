@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-24 — Navigation and guide-discovery enhancement
+
+- Preserved deployed commit `abbeb051380c2a1374f5306824683e6e131c8235` with annotated rollback tag `backup/pre-navigation-2026-08-24` and the verified local backup at `C:\DGE\backups\dategirlseasy-2026-08-24-pre-navigation`.
+- Replaced the five flat primary links with Start Here plus accessible Dating Apps and Guides dropdowns across all 43 HTML pages. Desktop and mobile behavior now covers click, touch, Tab order, Arrow Down, Escape, focus return, and outside-click dismissal.
+- Rebuilt the homepage, Start Here page, practical guide hub, and in-depth Guide Library around six whole-card goal routes while retaining public URLs, titles, canonicals, robots directives, schema, analytics, and protected editorial topics.
+- Standardized the shared typography on the native Inter/Segoe UI/system stack and reduced oversized headings and repetitive hub sections.
+- Added navigation and whole-card regression checks. Pre-release gates passed across 43 pages, 172 responsive browser combinations, 86 axe combinations with zero violations, HTML/schema validation, internal and external link review, and ten Lighthouse page types.
+- Navigation implementation commit: `ad6c6c153b047fc3cf1619419bcab29c6c7ca096`.
+
 ## 2026-08-12 — Representative design checkpoint
 
 - Preserved production commit `19ae1d6` as `checkpoint/pre-dge-roadmap-2026-08-12`.
