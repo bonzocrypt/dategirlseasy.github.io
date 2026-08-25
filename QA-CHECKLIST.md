@@ -57,3 +57,14 @@
 - [x] All 122 detected public HTTP references pass external-link review; three use ordinary automated-client protection and none returns a material 404, 5xx, DNS, or connection failure
 - [x] Changed legacy guide Lighthouse: 99–100 performance, 100 accessibility, 100 SEO, 1.50–2.10-second LCP, zero CLS
 - [x] Broader Lighthouse results match the prior release baseline; the two unchanged pages above the local preview threshold reproduce their known uncompressed-server readings rather than a new regression
+
+## Focused Dating App Reviews hub
+
+- [x] The hero gives no individual app unexplained priority and leads with Compare Dating Apps
+- [x] Browse All Reviews lands on the visible review directory
+- [x] The directory begins with “Start with intent, age range, and budget” and repeats the comparison route beside it on desktop and below it on mobile
+- [x] Exactly ten review cards appear in alphabetical order with equal visual treatment
+- [x] Retired mixed-purpose cards and repetitive instructional panels are absent
+- [x] Protected review-hub metadata, H1, URL, canonical, and robots directives remain unchanged
+- [x] Valid HTML/JSON-LD, 312 responsive combinations, 108 representative combinations, and 104 axe combinations pass with zero material errors
+- [x] Review hub Lighthouse: 100 performance, 100 accessibility, 100 SEO, 1.50-second LCP, zero CLS

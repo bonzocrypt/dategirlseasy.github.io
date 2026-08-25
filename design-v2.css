@@ -1282,6 +1282,57 @@ a.goal-card:hover {
   line-height: 1.25;
 }
 
+.review-hub-intro {
+  max-width: 930px;
+}
+
+.review-hub-intro .lede {
+  max-width: 760px;
+}
+
+.review-directory-head {
+  display: flex;
+  gap: 28px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.review-directory-head > div {
+  max-width: 820px;
+}
+
+.review-directory-head h2 {
+  margin-bottom: 14px;
+}
+
+.review-directory-head .lede {
+  margin: 0;
+}
+
+.review-directory-head > .button {
+  flex: 0 0 auto;
+  margin-bottom: 4px;
+}
+
+.review-directory-note {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.review-directory-note strong {
+  color: var(--ink);
+}
+
+.review-directory-note a {
+  color: var(--teal);
+  font-weight: 800;
+}
+
 .decision-visual {
   min-height: 360px;
   padding: 24px;
@@ -2792,6 +2843,18 @@ a.goal-card:hover {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .review-directory-head {
+    display: grid;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .review-directory-head > .button {
+    width: 100%;
   }
 }
 

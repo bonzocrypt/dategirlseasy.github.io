@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-08-25 — Focused Dating App Reviews hub
+
+- Removed the unexplained Tinder-first treatment and the oversized instructional panel from `/reviews/` while preserving the protected URL, title, description, H1, canonical, robots directive, and review content.
+- Made **Compare Dating Apps** the primary decision route, added a direct **Browse All Reviews** anchor, and placed the approved **Start with intent, age range, and budget** heading directly above the directory.
+- Reduced the page to ten equal-priority review cards in alphabetical order plus one concise independent-review disclosure. Retired five mixed-purpose comparison/support cards and two repetitive explanatory sections.
+- Final QA passes across 52 HTML pages, 45 sitemap URLs, 312 full-site responsive combinations, 108 representative combinations, valid HTML/JSON-LD, and 104 axe/WCAG combinations with zero violations. The redesigned hub scores 100 performance, accessibility, and SEO, with 1.50-second LCP and zero CLS.
+- Rollback tag `backup/pre-focused-review-hub-2026-08-25` preserves deployed commit `1ac7e28773f2390bf746cc87845de31503565fc2` before this enhancement.
+
 ## 2026-08-25 — Shared guide reading system
 
 - Standardized all 18 public guide pages around one reading contract without changing their approved advice, URLs, titles, descriptions, H1 topics, canonicals, robots directives, or sitemap policy.

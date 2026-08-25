@@ -414,6 +414,23 @@ def main() -> int:
         if raw.count('class="reader-next-grid"') != 1 or raw.count("Complete Guide Library") != 1:
             errors.append(f"{rel}: missing one shared continuation panel")
 
+    review_hub_raw = (ROOT / "reviews" / "index.html").read_text(encoding="utf-8")
+    review_grid_match = re.search(r'<ul class="card-grid review-card-grid">(.*?)</ul>', review_hub_raw, flags=re.DOTALL)
+    if not review_grid_match:
+        errors.append("reviews/index.html: missing focused review directory")
+    else:
+        review_hrefs = re.findall(r'<a href="([^"]+)">', review_grid_match.group(1))
+        expected_review_hrefs = [href for href, _label in NAV_REVIEW_LINKS]
+        if review_hrefs != expected_review_hrefs:
+            errors.append("reviews/index.html: review cards must contain all ten apps in alphabetical order")
+    for retired_text in ("Read the Tinder review", "Best use of this page", "Best next click"):
+        if retired_text in review_hub_raw:
+            errors.append(f"reviews/index.html: retired review-hub priority copy remains: {retired_text}")
+    if review_hub_raw.count('href="/comparisons/"') < 2 or 'id="review-directory"' not in review_hub_raw:
+        errors.append("reviews/index.html: missing comparison-first and browse-all review routes")
+    if "Start with intent, age range, and budget" not in review_hub_raw:
+        errors.append("reviews/index.html: missing approved directory decision heading")
+
     comparison_raw = (ROOT / "comparisons" / "index.html").read_text(encoding="utf-8")
     if comparison_raw.count("data-compare-app") != 10:
         errors.append("comparisons/index.html: expected exactly 10 selectable apps")

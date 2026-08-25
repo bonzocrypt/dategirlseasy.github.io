@@ -22,6 +22,8 @@ const screenshotPages = [
   ["guides-hub-mobile.png", "/guides/", 390, 844],
   ["guide-library-desktop.png", "/ebooks/", 1440, 1000],
   ["guide-library-mobile.png", "/ebooks/", 390, 844],
+  ["reviews-hub-desktop.png", "/reviews/", 1440, 1000],
+  ["reviews-hub-mobile.png", "/reviews/", 390, 844],
   ["getting-dates-category-desktop.png", "/ebooks/dates-and-escalation/", 1440, 1000],
   ["getting-dates-category-mobile.png", "/ebooks/dates-and-escalation/", 390, 844],
   ["bio-guide-reader-desktop.png", "/guides/bio-templates.html", 1440, 1000],
@@ -284,6 +286,22 @@ const guideReaderPaths = [
       }
     }
     await readerContext.close();
+  }
+
+  for (const width of [390, 1440]) {
+    const reviewContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const reviewPage = await reviewContext.newPage();
+    await reviewPage.goto(`${baseUrl}/reviews/`, { waitUntil: "domcontentloaded" });
+    const reviewState = await reviewPage.evaluate(() => ({
+      reviewHrefs: [...document.querySelectorAll(".review-card-grid > .card > a")].map((link) => link.getAttribute("href")),
+      heroHasTinderPriority: document.querySelector(".review-hub-hero")?.textContent.includes("Tinder") || false,
+      comparisonRoutes: document.querySelectorAll('main a[href="/comparisons/"]').length,
+      directoryTarget: Boolean(document.getElementById("review-directory")),
+    }));
+    const expectedReviewHrefs = expectedDatingAppLinks.slice(2);
+    if (JSON.stringify(reviewState.reviewHrefs) !== JSON.stringify(expectedReviewHrefs)) errors.push(`Review hub cards are missing or out of order at ${width}px: ${JSON.stringify(reviewState.reviewHrefs)}`);
+    if (reviewState.heroHasTinderPriority || reviewState.comparisonRoutes < 2 || !reviewState.directoryTarget) errors.push(`Review hub decision hierarchy failed at ${width}px: ${JSON.stringify(reviewState)}`);
+    await reviewContext.close();
   }
 
   for (const width of [390, 1440]) {
