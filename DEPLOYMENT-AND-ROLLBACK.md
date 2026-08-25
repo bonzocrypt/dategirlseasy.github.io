@@ -18,6 +18,7 @@ Incremental enhancement rollback points:
 - Unified Guide Library enhancement: rollback point `a248850b52120578da219a452ccf897d8813cb46`, preserved as `backup/pre-unified-guide-library-2026-08-25`; implementation commit `5864b47f8f1cb0682f37c2a1d44afb8849f1260a`.
 - Shared guide reading-system enhancement: rollback point `5864b47f8f1cb0682f37c2a1d44afb8849f1260a`, preserved as `backup/pre-guide-reading-system-2026-08-25`.
 - Focused Dating App Reviews hub: rollback point `1ac7e28773f2390bf746cc87845de31503565fc2`, preserved as `backup/pre-focused-review-hub-2026-08-25`.
+- Adult-only intimacy guide cluster: rollback point `c759cf28a9e60e75853a1ef5dc0745d392e2dde7`, preserved as `backup/pre-intimacy-guide-cluster-2026-08-25`.
 
 ## Release
 

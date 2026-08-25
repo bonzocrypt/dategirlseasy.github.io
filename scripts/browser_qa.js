@@ -30,6 +30,10 @@ const screenshotPages = [
   ["bio-guide-reader-mobile.png", "/guides/bio-templates.html", 390, 844],
   ["body-language-reader-desktop.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 1440, 1000],
   ["body-language-reader-mobile.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 390, 844],
+  ["first-move-guide-desktop.png", "/guides/when-to-make-the-first-move.html", 1440, 1000],
+  ["first-move-guide-mobile.png", "/guides/when-to-make-the-first-move.html", 390, 844],
+  ["pleasure-guide-desktop.png", "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", 1440, 1000],
+  ["pleasure-guide-mobile.png", "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", 390, 844],
   ["comparisons-desktop.png", "/comparisons/", 1440, 1000],
   ["comparisons-mobile.png", "/comparisons/", 390, 844],
   ["hinge-review-desktop.png", "/reviews/hinge.html", 1440, 1000],
@@ -97,6 +101,8 @@ const guideReaderPaths = [
   "/ebooks/body-language/body-language-clues-that-show-interest.html",
   "/ebooks/body-language/signals-and-subtext-in-dating.html",
   "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+  "/guides/when-to-make-the-first-move.html",
+  "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
 ];
 
 (async () => {
@@ -246,14 +252,17 @@ const guideReaderPaths = [
     const guidePage = await guideContext.newPage();
     await guidePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
     const items = guidePage.locator("[data-guide-item]");
-    if ((await items.count()) !== 18) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 18`);
+    if ((await items.count()) !== 20) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 20`);
     await guidePage.locator('[data-guide-filter="topic"][data-guide-value="messaging"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 5) errors.push(`Messaging filter failed at ${width}px`);
     await guidePage.locator('[data-guide-filter="format"][data-guide-value="in-depth"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 1) errors.push(`Combined Guide filters failed at ${width}px`);
     await guidePage.locator("[data-guide-clear]").click();
-    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 18) errors.push(`Clearing Guide filters failed at ${width}px`);
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 20) errors.push(`Clearing Guide filters failed at ${width}px`);
     if (new URL(guidePage.url()).search) errors.push(`Clearing Guide filters left query parameters at ${width}px`);
+    await guidePage.locator('[data-guide-filter="topic"][data-guide-value="intimacy"]').click();
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 3) errors.push(`Kissing & Intimacy filter failed at ${width}px`);
+    await guidePage.locator("[data-guide-clear]").click();
     await guidePage.goto(`${baseUrl}/guides/?format=checklist`, { waitUntil: "domcontentloaded" });
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 2) errors.push(`Bookmarkable checklist filter failed at ${width}px`);
     await guideContext.close();

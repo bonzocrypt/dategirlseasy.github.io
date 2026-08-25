@@ -78,6 +78,8 @@ GUIDE_READER_PAGES = [
     Path("ebooks/body-language/body-language-clues-that-show-interest.html"),
     Path("ebooks/body-language/signals-and-subtext-in-dating.html"),
     Path("ebooks/kissing-and-intimacy/kissing-with-confidence.html"),
+    Path("guides/when-to-make-the-first-move.html"),
+    Path("ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html"),
 ]
 
 NOINDEX_SHELVES = {
@@ -108,6 +110,8 @@ SITEMAP_REQUIRED = {
     "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html",
     "/ebooks/kissing-and-intimacy/",
     "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+    "/guides/when-to-make-the-first-move.html",
+    "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
     "/ebooks/mindset-and-confidence/",
     "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html",
 }
@@ -373,16 +377,16 @@ def main() -> int:
     for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):
         if contract not in guide_hub_raw:
             errors.append(f"guides/index.html: missing unified library contract {contract}")
-    if guide_hub_raw.count("data-guide-item") != 18:
-        errors.append("guides/index.html: expected exactly 18 searchable public guide entries")
+    if guide_hub_raw.count("data-guide-item") != 20:
+        errors.append("guides/index.html: expected exactly 20 searchable public guide entries")
     if "All Dating Guides" in guide_hub_raw:
         errors.append("guides/index.html: retired split-library wording remains")
 
     in_depth_raw = (ROOT / "ebooks" / "index.html").read_text(encoding="utf-8")
     if "This is not a separate library" not in in_depth_raw or 'href="/guides/"' not in in_depth_raw:
         errors.append("ebooks/index.html: in-depth collection does not explain its place in the unified library")
-    if in_depth_raw.count('class="guide-list-item"') != 5:
-        errors.append("ebooks/index.html: expected five current in-depth guide entries")
+    if in_depth_raw.count('class="guide-list-item"') != 6:
+        errors.append("ebooks/index.html: expected six current in-depth guide entries")
 
     topic_shelves = {
         Path("ebooks/profile-and-photos/index.html"): 3,
@@ -390,7 +394,7 @@ def main() -> int:
         Path("ebooks/dates-and-escalation/index.html"): 2,
         Path("ebooks/mindset-and-confidence/index.html"): 1,
         Path("ebooks/body-language/index.html"): 2,
-        Path("ebooks/kissing-and-intimacy/index.html"): 0,
+        Path("ebooks/kissing-and-intimacy/index.html"): 2,
     }
     for rel, expected_more in topic_shelves.items():
         raw = (ROOT / rel).read_text(encoding="utf-8")

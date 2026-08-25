@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-25 — Adult-only intimacy guide cluster
+
+- Published two original, consent-aware additions requested by the owner: **When to Make the First Move** as a focused quick guide and **How to Pleasure a Woman** as a premium-style, free in-depth guide.
+- Built both around the shared ebook reading system with anchored contents, examples, practical checklists, clear continuation paths, current medical/sexual-health sources, and direct adult language without coercion, guarantees, or one-size-fits-all claims.
+- Expanded the unified Guide Library from 18 to 20 entries, the in-depth collection from five to six entries, and the Kissing & Intimacy shelf from one to three useful destinations.
+- Final QA passes across 54 HTML pages, 47 sitemap URLs, 324 full-site responsive combinations, 120 representative combinations, valid HTML/JSON-LD, and 108 axe/WCAG combinations with zero violations. The two new guides score 99–100 performance, 100 accessibility, and 100 SEO, with 1.50–2.10-second LCP and zero CLS.
+- External-link review found no material failure among the 126 already-live references. The only pre-deployment 404 responses are the two new canonical URLs, as expected before publication.
+- Rollback tag `backup/pre-intimacy-guide-cluster-2026-08-25` preserves deployed commit `c759cf28a9e60e75853a1ef5dc0745d392e2dde7` before this enhancement.
+
 ## 2026-08-25 — Focused Dating App Reviews hub
 
 - Removed the unexplained Tinder-first treatment and the oversized instructional panel from `/reviews/` while preserving the protected URL, title, description, H1, canonical, robots directive, and review content.

@@ -1,5 +1,16 @@
 # QA Checklist
 
+## Adult-only intimacy guide cluster
+
+- [x] Both new pages are original DGE Inc. content for adults and use the shared guide-reader contract
+- [x] Clear consent, safer-sex, pain, feedback, and no-guarantee framing is present where relevant
+- [x] Guide Library exposes 20 entries; Kissing & Intimacy exposes three; In-Depth Guides exposes six
+- [x] Structural QA passes across 54 HTML pages and 47 sitemap URLs with valid metadata, canonicals, JSON-LD, internal links, and anchors
+- [x] Responsive/browser QA passes 324 full-site and 120 representative combinations at 320, 375, 390, 768, 1024, and 1440 pixels
+- [x] Axe/WCAG 2.2 AA audit passes 108 combinations with zero violations; HTML validation passes
+- [x] New-guide Lighthouse scores are 99–100 performance, 100 accessibility, 100 SEO, 1.50–2.10-second LCP, and zero CLS
+- [x] All 126 already-live external references pass or use ordinary automated-client protection; only the two unpublished canonical URLs return the expected pre-deployment 404
+
 - [x] No broken internal links or missing assets
 - [x] External links reviewed; all 71 unique external references return HTTP 200 or ordinary automated-client HTTP 403 protection, with no 404, 5xx, DNS, or unreachable failures
 - [x] Unique titles and descriptions

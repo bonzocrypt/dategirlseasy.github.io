@@ -44,6 +44,8 @@ GUIDES = [
     Guide("Body Language Clues That Show Interest", "/ebooks/body-language/body-language-clues-that-show-interest.html", "body-language", "Body Language", "quick", "Quick Guide", 3, "Read clusters of possible interest while avoiding projection and overconfidence.", "body language clues attraction interest flirting signals"),
     Guide("Signals and Subtext in Dating", "/ebooks/body-language/signals-and-subtext-in-dating.html", "body-language", "Body Language", "quick", "Quick Guide", 2, "Understand tone, subtext, and mixed signals without drifting into mind reading.", "signals subtext mixed signals tone interest"),
     Guide("Kissing With Confidence", "/ebooks/kissing-and-intimacy/kissing-with-confidence.html", "intimacy", "Kissing & Intimacy", "in-depth", "In-Depth Guide", 4, "Build the moment, ask attractively, approach slowly, kiss responsively, and handle hesitation well.", "kissing intimacy chemistry consent physical confidence sexual confidence"),
+    Guide("When to Make the First Move", "/guides/when-to-make-the-first-move.html", "intimacy", "Kissing & Intimacy", "quick", "Quick Guide", 6, "Know when the energy is mutual, express attraction clearly, and handle hesitation or rejection with confidence.", "first move kiss timing attraction escalation consent date chemistry"),
+    Guide("How to Pleasure a Woman", "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", "intimacy", "Kissing & Intimacy", "in-depth", "In-Depth Guide", 12, "Build better intimacy through communication, arousal, responsive technique, safer sex, and aftercare.", "pleasure woman female sexual confidence intimacy clitoris oral sex manual sex penetration orgasm aftercare safer sex"),
 ]
 
 TOPICS = {
