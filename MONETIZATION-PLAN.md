@@ -19,7 +19,7 @@ Do not activate links without approved accounts, IDs, restrictions, tax details,
 - Keep names, email addresses, and other directly identifying visitor information out of CJ link parameters and attribution data.
 - Place a short, conspicuous affiliate disclosure before or beside the first affiliate link on each monetized page in addition to the sitewide disclosure.
 - Keep CJ tracking disabled where prior consent is legally required until operational consent controls can record acceptance, rejection, and withdrawal without blocking public editorial content.
-- Use the exact legal and tax identity that matches the applicable W-9. The owner previously identified DGE Inc. as the legal publisher; the CJ application must still be checked against the actual incorporation and tax records before submission.
+- Use the exact legal and tax identity that matches the applicable W-9. The legal publisher is Vaulted Holdings LLC; the CJ application must still be checked against its actual formation and tax records before submission.
 - Review the account regularly. CJ may deactivate inactive accounts; dormant-account fees may reduce an existing balance after the applicable inactivity period, and commissions may be reversed for refunds, invalid transactions, or violations.
 
 The machine-readable registry remains globally disabled until every activation requirement is satisfied.

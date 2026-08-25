@@ -227,6 +227,22 @@ def local_target(page: Path, reference: str) -> Path | None:
     return candidate.resolve()
 
 
+def collect_entity_names(value: object, key: str) -> list[str]:
+    names: list[str] = []
+    if isinstance(value, dict):
+        entity = value.get(key)
+        entities = entity if isinstance(entity, list) else [entity]
+        for item in entities:
+            if isinstance(item, dict) and isinstance(item.get("name"), str):
+                names.append(item["name"])
+        for child in value.values():
+            names.extend(collect_entity_names(child, key))
+    elif isinstance(value, list):
+        for child in value:
+            names.extend(collect_entity_names(child, key))
+    return names
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -273,9 +289,13 @@ def main() -> int:
 
         for block_number, block in enumerate(parser.json_ld_blocks, 1):
             try:
-                json.loads(block)
+                schema = json.loads(block)
             except json.JSONDecodeError as exc:
                 errors.append(f"{rel}: JSON-LD block {block_number} is invalid: {exc.msg}")
+                continue
+            for publisher_name in collect_entity_names(schema, "publisher"):
+                if publisher_name != "Vaulted Holdings LLC":
+                    errors.append(f"{rel}: JSON-LD publisher must identify Vaulted Holdings LLC, found {publisher_name}")
 
         for kind, reference in parser.refs:
             if reference.startswith("#"):
@@ -297,6 +317,14 @@ def main() -> int:
             errors.append(f"{rel}: references nonexistent assets/og/default.jpg")
 
         raw = page.read_text(encoding="utf-8")
+        expected_footer_line = "&copy; 2026 Date Girls Easy. A Vaulted Holdings LLC publication."
+        if raw.count(expected_footer_line) != 1:
+            errors.append(f"{rel}: expected the approved legal publication line exactly once")
+        if re.search(r"DGE\s*(?:Inc\.?|Incorporated)", raw, flags=re.IGNORECASE):
+            errors.append(f"{rel}: public page still references the former legal entity name")
+        footer_match = re.search(r'<footer class="publisher-footer">.*?</footer>', raw, flags=re.DOTALL)
+        if footer_match and "data-current-year" in footer_match.group(0):
+            errors.append(f"{rel}: footer must use the approved fixed 2026 copyright line")
         if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
             errors.append(f"{rel}: contains a placeholder href")
         if raw.count("data-nav-trigger") != 2:

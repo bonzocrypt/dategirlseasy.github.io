@@ -1,6 +1,6 @@
 # Image Requests — Batch 01
 
-Owner confirmed on August 13, 2026 that DGE Inc. owns or has commercial publication rights for every supplied image in this batch. Sensual and suggestive is welcome; nudity, pornography, fake testimonials, and implied endorsements are excluded.
+Owner confirmed on August 13, 2026, and corrected the legal publisher identity on August 25, 2026: Vaulted Holdings LLC owns or has commercial publication rights for every supplied image in this batch. Sensual and suggestive is welcome; nudity, pornography, fake testimonials, and implied endorsements are excluded.
 
 ## IMAGE REQUEST 001 — Homepage hero
 

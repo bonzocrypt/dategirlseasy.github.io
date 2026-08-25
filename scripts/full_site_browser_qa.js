@@ -69,12 +69,19 @@ function collectHtml(directory) {
           const doc = document.documentElement;
           const button = document.querySelector("[data-menu-toggle]");
           const nav = document.querySelector("[data-primary-nav]");
+          const footerMeta = document.querySelector(".footer-meta-v2");
+          const footerRect = footerMeta?.getBoundingClientRect();
+          const footerStyle = footerMeta ? getComputedStyle(footerMeta) : null;
+          const footerLineHeight = footerStyle ? Number.parseFloat(footerStyle.lineHeight) : 0;
           return {
             overflow: doc.scrollWidth > window.innerWidth + 1,
             scrollWidth: doc.scrollWidth,
             innerWidth: window.innerWidth,
             menuButtonVisible: button ? getComputedStyle(button).display !== "none" : false,
             menuCollapsed: button?.getAttribute("aria-expanded") === "false" && nav?.getAttribute("data-open") === "false",
+            footerText: footerMeta?.textContent.trim() || "",
+            footerWithinViewport: Boolean(footerRect && footerRect.left >= -1 && footerRect.right <= window.innerWidth + 1 && footerMeta.scrollWidth <= footerMeta.clientWidth + 1),
+            footerWrappedOnMobile: window.innerWidth > 320 || Boolean(footerRect && footerLineHeight && footerRect.height > footerLineHeight * 1.5),
             navTriggers: [...document.querySelectorAll("[data-nav-trigger]")].map((trigger) => ({
               expanded: trigger.getAttribute("aria-expanded"),
               controls: trigger.getAttribute("aria-controls"),
@@ -104,6 +111,8 @@ function collectHtml(directory) {
         if (result.overflow) errors.push(`${pathname} @ ${width}: overflow ${result.scrollWidth}/${result.innerWidth}`);
         if (result.comparisonClipping) errors.push(`${pathname} @ ${width}: comparison dashboard content is clipped by the viewport`);
         if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${pathname} @ ${width}: mobile menu initial state failed`);
+        if (result.footerText !== "© 2026 Date Girls Easy. A Vaulted Holdings LLC publication.") errors.push(`${pathname} @ ${width}: footer legal line is incorrect`);
+        if (!result.footerWithinViewport || !result.footerWrappedOnMobile) errors.push(`${pathname} @ ${width}: footer legal line does not wrap cleanly`);
         if (result.navTriggers.length !== 2 || result.navTriggers.some((item) => item.expanded !== "false" || !item.controls || !item.targetExists || !item.isButton)) {
           errors.push(`${pathname} @ ${width}: shared dropdown navigation contract failed`);
         }

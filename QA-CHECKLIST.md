@@ -1,5 +1,16 @@
 # QA Checklist
 
+## Legal publisher identity correction
+
+- [x] Every one of the 54 public HTML pages contains the exact approved footer once
+- [x] No public HTML or public structured data identifies the former legal entity
+- [x] Date Girls Easy remains the publication and brand; named JSON-LD publishers identify Vaulted Holdings LLC
+- [x] Shared footer and schema-generation sources persist the correction through future builds
+- [x] Footer remains within the viewport at 320, 375, 390, 768, 1024, and 1440 pixels and wraps cleanly at 320 pixels
+- [x] Structural QA, valid HTML/JSON-LD, 324 full-site responsive, 126 representative, and 108 axe/WCAG combinations pass with no material errors
+- [x] Homepage, privacy, first-move, and pleasure-guide Lighthouse checks score 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.25-second LCP, and zero CLS
+- [x] All 131 public HTTP references pass external review with no material failures
+
 ## CJ privacy and affiliate-compliance readiness
 
 - [x] Privacy policy names CJ and discloses cookies, identifiers, click/referrer/device/browser/IP data, order and transaction attribution, later-visit attribution, and cross-device reporting
@@ -22,7 +33,7 @@
 
 ## Adult-only intimacy guide cluster
 
-- [x] Both new pages are original DGE Inc. content for adults and use the shared guide-reader contract
+- [x] Both new pages are original Date Girls Easy content for adults and use the shared guide-reader contract
 - [x] Clear consent, safer-sex, pain, feedback, and no-guarantee framing is present where relevant
 - [x] Guide Library exposes 20 entries; Kissing & Intimacy exposes three; In-Depth Guides exposes six
 - [x] Structural QA passes across 54 HTML pages and 47 sitemap URLs with valid metadata, canonicals, JSON-LD, internal links, and anchors

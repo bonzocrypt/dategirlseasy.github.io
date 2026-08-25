@@ -1,7 +1,8 @@
 # Brand
 
 Brand name: Date Girls Easy
-Publisher: DGE Inc.
+Publication: Date Girls Easy
+Legal publisher: Vaulted Holdings LLC
 Primary color: #6E4CFF
 Theme: dark
 Voice: direct, practical, useful, confident

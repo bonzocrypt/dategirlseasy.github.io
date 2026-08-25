@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — Legal publisher identity correction
+
+- Corrected the legal publisher from the previously recorded name to **Vaulted Holdings LLC** while retaining **Date Girls Easy** as the public-facing publication and brand.
+- Updated the shared footer source and all 54 rendered public HTML pages to display `© 2026 Date Girls Easy. A Vaulted Holdings LLC publication.` exactly once.
+- Corrected public structured-data publisher fields and the current privacy, brand, rights, roadmap, and monetization records. Two dated changelog statements remain unchanged as historical records; this entry supersedes their former legal-entity identification.
+- Added structural and browser regressions for the exact footer, removal of the former entity from public HTML, legal-publisher metadata, viewport containment at six responsive widths, and clean wrapping at 320 pixels.
+- Final QA passes across 54 HTML pages, 47 sitemap URLs, 324 full-site responsive combinations, 126 representative combinations, valid HTML/JSON-LD, and 108 axe/WCAG combinations with zero violations. Homepage and privacy Lighthouse scores remain 98–99 performance, 100 accessibility, and 100 SEO, with 2.10–2.25-second LCP and zero CLS.
+- All 131 public HTTP references pass external review with no material failures; six use ordinary automated-client protection.
+- Rollback tag `backup/pre-vaulted-publisher-2026-08-25` preserves deployed commit `cad930faac5b35ec2ca5f49a1cdd9c466d36cc51` before this correction.
+
 ## 2026-08-25 — CJ privacy and affiliate-compliance readiness
 
 - Replaced the three-paragraph privacy placeholder with a substantive policy covering site data, analytics, CJ cookies and reporting technologies, click/referrer/device/browser/IP data, transaction and order attribution, later-visit and cross-device attribution, retention, privacy choices, and contact details.

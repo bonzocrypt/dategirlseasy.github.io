@@ -24,9 +24,9 @@ The export dimensions are not additive because Google omits or aggregates data d
 
 Owner confirmations recorded August 13, 2026:
 
-- `DGE Inc.` is the correct legal publisher name.
+- `Vaulted Holdings LLC` is the correct legal publisher; `Date Girls Easy` remains the publication and brand name.
 - `hello@dategirlseasy.com` is not valid and must not be published.
 - `info@dategirlseasy.com` has been created and confirmed by the owner; it is now the public contact address.
 - The updated Tinder review is approved.
-- DGE Inc. owns or has commercial publication rights for every supplied image.
+- Vaulted Holdings LLC owns or has commercial publication rights for every supplied image.
 - Deployment is authorized only after the complete final QA passes without material errors.

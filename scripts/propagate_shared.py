@@ -114,7 +114,7 @@ def header_markup(relative: Path) -> str:
     </header>'''
 
 
-FOOTER = '''<footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guide Library</a><a href="/ebooks/">In-Depth Guides</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>'''
+FOOTER = '''<footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; 2026 Date Girls Easy. A Vaulted Holdings LLC publication.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guide Library</a><a href="/ebooks/">In-Depth Guides</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>'''
 
 
 def remove_external_fonts(source: str) -> str:
@@ -174,7 +174,7 @@ def schema_markup(source: str, relative: Path) -> str:
             "name": "Date Girls Easy",
             "url": "https://dategirlseasy.com/",
         },
-        "publisher": {"@type": "Organization", "name": "DGE Inc."},
+        "publisher": {"@type": "Organization", "name": "Vaulted Holdings LLC"},
     }
     return f'    <script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>\n'
 
