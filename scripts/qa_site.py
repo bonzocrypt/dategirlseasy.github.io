@@ -232,6 +232,24 @@ def main() -> int:
     warnings: list[str] = []
     pages: dict[Path, PageParser] = {}
 
+    try:
+        affiliate_registry = json.loads((ROOT / "data" / "affiliate-programs.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"data/affiliate-programs.json: invalid registry: {exc}")
+        affiliate_registry = {}
+    if affiliate_registry.get("linksEnabled") is not False:
+        errors.append("data/affiliate-programs.json: affiliate links must remain globally disabled")
+    cj_program = next((item for item in affiliate_registry.get("programs", []) if item.get("id") == "cj-affiliate"), None)
+    if not cj_program:
+        errors.append("data/affiliate-programs.json: missing CJ compliance entry")
+    else:
+        if cj_program.get("trackingIdentifier") is not None:
+            errors.append("data/affiliate-programs.json: CJ tracking identifier must remain unset before activation")
+        if cj_program.get("approvedPromotionalMethods") != ["website/editorial content"]:
+            errors.append("data/affiliate-programs.json: CJ promotional method must remain website/editorial content only")
+        if len(cj_program.get("activationRequirements", [])) < 6:
+            errors.append("data/affiliate-programs.json: CJ activation requirements are incomplete")
+
     for page in sorted(ROOT.rglob("*.html")):
         if any(part.startswith(".") for part in page.relative_to(ROOT).parts):
             continue
@@ -387,6 +405,27 @@ def main() -> int:
         errors.append("index.html: expected three measurable Featured this month links")
     if "Popular now" in homepage_raw or "Tinder vs Bumble" in homepage_raw:
         errors.append("index.html: retired or unsupported homepage popularity treatment remains")
+
+    privacy_raw = (ROOT / "privacy.html").read_text(encoding="utf-8")
+    privacy_contract = (
+        "CJ affiliate tracking, cookies, and attribution",
+        "referring-page URL",
+        "order ID",
+        "transaction status",
+        "cross-device reporting",
+        "IP address",
+        "browser type and version",
+        "https://www.cj.com/legal/privacy-policy-services",
+        "https://www.cj.com/dsr",
+        "https://www.cj.com/legal/privacy-uk",
+        "withhold or withdraw consent",
+        "directly identifying visitor information",
+    )
+    for required_text in privacy_contract:
+        if required_text not in privacy_raw:
+            errors.append(f"privacy.html: missing CJ privacy contract text: {required_text}")
+    if "utm_source=" in privacy_raw:
+        errors.append("privacy.html: tracking parameters must not appear in policy links")
 
     guide_hub_raw = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):

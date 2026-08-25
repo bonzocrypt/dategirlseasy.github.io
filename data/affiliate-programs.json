@@ -1,8 +1,36 @@
 {
   "schemaVersion": 1,
-  "lastEditorialReview": "2026-08-12",
+  "lastEditorialReview": "2026-08-25",
   "linksEnabled": false,
   "programs": [
+    {
+      "id": "cj-affiliate",
+      "name": "CJ Affiliate / Commission Junction LLC",
+      "status": "privacy-ready-consent-gate-pending",
+      "officialDestination": "https://www.cj.com/",
+      "servicesPrivacyNotice": "https://www.cj.com/legal/privacy-policy-services",
+      "privacyChoices": "https://www.cj.com/dsr",
+      "trackingIdentifier": null,
+      "approvedPromotionalMethods": ["website/editorial content"],
+      "unapprovedPromotionalMethods": ["email", "social media", "software", "messaging", "forums", "chatrooms", "third-party comments"],
+      "allowedPlacements": ["truthful editorial reviews", "truthful editorial comparisons", "relevant on-site guides"],
+      "verificationDate": "2026-08-25",
+      "activationRequirements": [
+        "owner-approved CJ account and advertiser relationship",
+        "exact legal name and tax identity matched to the applicable W-9",
+        "unmodified CJ-generated tracking link",
+        "proximate disclosure before or beside the first affiliate link on each monetized page",
+        "operational consent handling where required for UK, EEA, EU, or other regulated visitors",
+        "no directly identifying visitor information in tracking parameters"
+      ],
+      "operationalRules": [
+        "do not self-click for commissions",
+        "do not distribute through spam, unsolicited email, forums, chatrooms, or third-party comments",
+        "check the CJ account regularly for inactivity, reversals, and program notices",
+        "expect reversals for refunds, invalid transactions, or rule violations"
+      ],
+      "disclosureRequirement": "Use the sitewide disclosure and a short, conspicuous disclosure before or beside the first CJ affiliate link on every monetized page."
+    },
     {
       "id": "eharmony",
       "name": "eHarmony",

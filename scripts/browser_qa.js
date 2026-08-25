@@ -34,6 +34,8 @@ const screenshotPages = [
   ["first-move-guide-mobile.png", "/guides/when-to-make-the-first-move.html", 390, 844],
   ["pleasure-guide-desktop.png", "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", 1440, 1000],
   ["pleasure-guide-mobile.png", "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", 390, 844],
+  ["privacy-cj-desktop.png", "/privacy.html", 1440, 1000],
+  ["privacy-cj-mobile.png", "/privacy.html", 390, 844],
   ["comparisons-desktop.png", "/comparisons/", 1440, 1000],
   ["comparisons-mobile.png", "/comparisons/", 390, 844],
   ["hinge-review-desktop.png", "/reviews/hinge.html", 1440, 1000],
@@ -387,6 +389,24 @@ const guideReaderPaths = [
       errors.push(`Homepage featured click event failed at ${width}px: ${JSON.stringify(trackedEvent)}`);
     }
     await homepageContext.close();
+  }
+
+  for (const width of [390, 1440]) {
+    const privacyContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const privacyPage = await privacyContext.newPage();
+    await privacyPage.goto(`${baseUrl}/privacy.html`, { waitUntil: "domcontentloaded" });
+    const privacyState = await privacyPage.evaluate(() => ({
+      cjSection: Boolean(document.getElementById("cj-affiliate-tracking")),
+      choicesSection: Boolean(document.getElementById("privacy-choices")),
+      consentSection: Boolean(document.getElementById("uk-eu-consent")),
+      servicesNotice: document.querySelectorAll('a[href="https://www.cj.com/legal/privacy-policy-services"]').length,
+      privacyChoices: document.querySelectorAll('a[href="https://www.cj.com/dsr"]').length,
+      headings: document.querySelectorAll("main h2").length,
+    }));
+    if (!privacyState.cjSection || !privacyState.choicesSection || !privacyState.consentSection || privacyState.servicesNotice !== 1 || privacyState.privacyChoices !== 1 || privacyState.headings < 8) {
+      errors.push(`CJ privacy-page contract failed at ${width}px: ${JSON.stringify(privacyState)}`);
+    }
+    await privacyContext.close();
   }
 
   for (const [filename, pathname, width, height] of screenshotPages) {

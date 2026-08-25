@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — CJ privacy and affiliate-compliance readiness
+
+- Replaced the three-paragraph privacy placeholder with a substantive policy covering site data, analytics, CJ cookies and reporting technologies, click/referrer/device/browser/IP data, transaction and order attribution, later-visit and cross-device attribution, retention, privacy choices, and contact details.
+- Linked directly to the official CJ Services Privacy Notice, Data Subject Request and Privacy Choices page, and UK/EU privacy information without campaign parameters.
+- Established a clear activation gate: non-essential CJ tracking remains disabled where prior consent is required until visitors can accept, reject, and withdraw consent without losing public editorial access.
+- Added a disabled CJ entry to the affiliate registry and recorded website/editorial-only promotion, exact W-9 identity verification, unmodified CJ links, proximate page disclosures, no self-clicking or spam distribution, no directly identifying tracking data, account monitoring, dormant-account risk, and commission reversals.
+- Final QA passes across 54 HTML pages, 47 sitemap URLs, 324 full-site responsive combinations, 126 representative combinations, valid HTML/JSON-LD, and 108 axe/WCAG combinations with zero violations. The privacy page scores 98 performance, 100 accessibility, and 100 SEO, with 2.25-second LCP and zero CLS; the unchanged homepage recheck scores 99/100/100 with 2.10-second LCP and zero CLS.
+- All 131 public HTTP references pass external review with no material failures; six use ordinary automated-client protection.
+- Rollback tag `backup/pre-cj-privacy-2026-08-25` preserves deployed commit `a90decce0a3485db82fb56ab8aa60cca3b47cd5b` before this enhancement.
+
 ## 2026-08-25 — Homepage discovery and featured-content polish
 
 - Removed the three noninteractive publishing-principle boxes from the hero; the editorial promise remains in the clearly noninteractive trust band below it.

@@ -1,5 +1,16 @@
 # QA Checklist
 
+## CJ privacy and affiliate-compliance readiness
+
+- [x] Privacy policy names CJ and discloses cookies, identifiers, click/referrer/device/browser/IP data, order and transaction attribution, later-visit attribution, and cross-device reporting
+- [x] Official CJ Services Privacy Notice, data-subject-request/privacy-choices, and UK/EU privacy links are present without campaign parameters
+- [x] UK/EEA/EU section requires operational consent handling before non-essential CJ tracking is enabled where prior consent applies
+- [x] Affiliate registry remains globally disabled with no tracking identifier and website/editorial content as the only approved promotional method
+- [x] Registry records W-9 identity verification, unmodified links, proximate disclosure, no directly identifying data, no self-clicking or spam, account monitoring, and reversals
+- [x] Structural QA, valid HTML/JSON-LD, 324 full-site responsive, 126 representative, and 108 axe/WCAG combinations pass with no material errors
+- [x] Privacy Lighthouse scores 98 performance, 100 accessibility, 100 SEO, 2.25-second LCP, and zero CLS; independent unchanged-homepage recheck remains under the 2.5-second gate
+- [x] All 131 public HTTP references pass external review with no material failures
+
 ## Homepage discovery and featured content
 
 - [x] Noninteractive hero boxes removed; hero retains its protected H1, metadata, image, and primary routes

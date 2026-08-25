@@ -20,6 +20,7 @@ Incremental enhancement rollback points:
 - Focused Dating App Reviews hub: rollback point `1ac7e28773f2390bf746cc87845de31503565fc2`, preserved as `backup/pre-focused-review-hub-2026-08-25`.
 - Adult-only intimacy guide cluster: rollback point `c759cf28a9e60e75853a1ef5dc0745d392e2dde7`, preserved as `backup/pre-intimacy-guide-cluster-2026-08-25`.
 - Homepage discovery and featured-content polish: rollback point `ade7ae7fb12481bd5676965ecfe74b7356b4d548`, preserved as `backup/pre-homepage-discovery-2026-08-25`.
+- CJ privacy and affiliate-compliance readiness: rollback point `a90decce0a3485db82fb56ab8aa60cca3b47cd5b`, preserved as `backup/pre-cj-privacy-2026-08-25`.
 
 ## Release
 
