@@ -151,4 +151,109 @@
     if (printButton) printButton.addEventListener("click", function () { window.print(); });
     renderChecklist();
   }
+
+  const compareInputs = Array.from(document.querySelectorAll("[data-compare-app]"));
+  if (compareInputs.length) {
+    const maximumApps = 3;
+    const compareButton = document.querySelector("[data-compare-run]");
+    const clearButton = document.querySelector("[data-compare-clear]");
+    const statusNode = document.querySelector("[data-compare-status]");
+    const resultsSection = document.querySelector("[data-compare-results]");
+    const resultsHeading = document.querySelector("[data-compare-heading]");
+    const comparisonCells = Array.from(document.querySelectorAll("[data-compare-column]"));
+    const validApps = new Set(compareInputs.map(function (input) { return input.value; }));
+
+    function selectedInputs() {
+      return compareInputs.filter(function (input) { return input.checked; });
+    }
+
+    function selectedNames() {
+      return selectedInputs().map(function (input) { return input.dataset.compareName || input.value; });
+    }
+
+    function selectedValues() {
+      return selectedInputs().map(function (input) { return input.value; });
+    }
+
+    function joinNames(names) {
+      if (names.length < 2) return names.join("");
+      if (names.length === 2) return names.join(" vs ");
+      return names.slice(0, -1).join(", ") + " and " + names[names.length - 1];
+    }
+
+    function updateControls(message) {
+      const selected = selectedInputs();
+      const atMaximum = selected.length >= maximumApps;
+      compareInputs.forEach(function (input) {
+        input.disabled = atMaximum && !input.checked;
+      });
+      if (compareButton) compareButton.disabled = selected.length < 2;
+      if (!statusNode) return;
+      if (message) {
+        statusNode.textContent = message;
+      } else if (selected.length === 0) {
+        statusNode.textContent = "Select two or three apps to build a focused comparison.";
+      } else if (selected.length === 1) {
+        statusNode.textContent = "One app selected. Choose at least one more.";
+      } else if (selected.length === 2) {
+        statusNode.textContent = "Two apps selected. Compare now or add one more.";
+      } else {
+        statusNode.textContent = "Three apps selected. This is the maximum.";
+      }
+    }
+
+    function updateAddress(values) {
+      const url = new URL(window.location.href);
+      if (values.length) url.searchParams.set("apps", values.join(","));
+      else url.searchParams.delete("apps");
+      window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    }
+
+    function renderComparison(shouldFocus) {
+      const values = selectedValues();
+      const names = selectedNames();
+      if (values.length < 2 || values.length > maximumApps || !resultsSection) {
+        updateControls("Choose two or three apps before comparing.");
+        return;
+      }
+      comparisonCells.forEach(function (cell) {
+        cell.hidden = !values.includes(cell.dataset.compareColumn);
+      });
+      if (resultsHeading) resultsHeading.textContent = joinNames(names) + ": focused comparison";
+      resultsSection.hidden = false;
+      updateAddress(values);
+      updateControls(joinNames(names) + " comparison ready.");
+      if (shouldFocus && resultsHeading) {
+        resultsHeading.focus({ preventScroll: true });
+        resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    compareInputs.forEach(function (input) {
+      input.addEventListener("change", function () {
+        if (selectedInputs().length > maximumApps) input.checked = false;
+        updateControls();
+      });
+    });
+
+    if (compareButton) compareButton.addEventListener("click", function () { renderComparison(true); });
+    if (clearButton) clearButton.addEventListener("click", function () {
+      compareInputs.forEach(function (input) { input.checked = false; input.disabled = false; });
+      if (resultsSection) resultsSection.hidden = true;
+      updateAddress([]);
+      updateControls("Selection cleared. All ten apps remain visible in the overview.");
+    });
+
+    const initialValues = new URL(window.location.href).searchParams.get("apps");
+    if (initialValues) {
+      const requested = initialValues.split(",").filter(function (value, index, values) {
+        return validApps.has(value) && values.indexOf(value) === index;
+      }).slice(0, maximumApps);
+      compareInputs.forEach(function (input) { input.checked = requested.includes(input.value); });
+      if (requested.length >= 2) renderComparison(false);
+      else updateControls();
+    } else {
+      updateControls();
+    }
+  }
 })();

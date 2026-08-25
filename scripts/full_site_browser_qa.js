@@ -82,9 +82,11 @@ function collectHtml(directory) {
               isButton: trigger.tagName === "BUTTON",
             })),
             tableRegions: [...document.querySelectorAll(".comparison-table-wrap")].map((region) => {
+              const visible = region.offsetParent !== null;
               region.focus();
               const style = getComputedStyle(region);
               return {
+                visible,
                 focusable: region.tabIndex === 0,
                 label: region.getAttribute("aria-labelledby"),
                 labelExists: Boolean(document.getElementById(region.getAttribute("aria-labelledby") || "")),
@@ -102,7 +104,7 @@ function collectHtml(directory) {
           errors.push(`${pathname} @ ${width}: shared dropdown navigation contract failed`);
         }
         for (const [regionIndex, region] of result.tableRegions.entries()) {
-          if (!region.focusable || !region.label || !region.labelExists || !region.containsTable || !region.receivesFocus || !region.visibleFocus) {
+          if (!region.focusable || !region.label || !region.labelExists || !region.containsTable || (region.visible && (!region.receivesFocus || !region.visibleFocus))) {
             errors.push(`${pathname} @ ${width}: comparison table region ${regionIndex + 1} accessibility contract failed`);
           }
         }

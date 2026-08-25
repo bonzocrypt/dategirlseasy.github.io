@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-25 — All-app comparison and review navigation enhancement
+
+- Expanded the shared Dating Apps dropdown across all 52 pages into two clear hub routes followed by all ten individual app reviews in alphabetical order. Pair-specific and paid-versus-free links now remain contextual supporting routes instead of competing with the primary menu.
+- Rebuilt the protected `/comparisons/` hub around a complete ten-app decision table and a progressive two-or-three-app comparison tool. Selections can be bookmarked or shared through the `apps` query parameter, while app count, disabled fourth-choice behavior, focused result columns, clear behavior, and keyboard focus are covered by regression tests.
+- Preserved the comparison hub URL, canonical, title, H1 search intent, and the existing Tinder-versus-Bumble URL. Reframed the paid-versus-free page as the narrower **Are Paid Dating Apps Worth It for Men?** spending guide instead of duplicating the app-level plan information in the main table.
+- Final local QA passes across 52 HTML pages and 45 sitemap URLs, 312 full-site responsive combinations at six widths, 84 representative interaction/layout combinations, 104 axe/WCAG combinations with zero violations, HTML and JSON-LD validation, and all 71 unique external references with no material failures.
+- Mobile Lighthouse across 21 representative page types scores 98–100 performance, 100 accessibility, 100 SEO, LCP 1.50–2.41 seconds, and zero CLS. Best Practices remains 96 across the existing site due the current third-party analytics setup, with no regression from the prior release.
+- The exact pre-release production commit is preserved by `backup/pre-comparison-tool-2026-08-25` at `dc09116c0c493c502070d144fe2a2a3bc5642963`.
+
 ## 2026-08-24 — Ten-platform review directory expansion
 
 - Completed seven original, U.S.-focused reviews for Match, eHarmony, Facebook Dating, Feeld, OkCupid, Coffee Meets Bagel, and Plenty of Fish. The approved Hinge and Bumble reviews remain in the same local batch, and the existing Tinder review was not rewritten.

@@ -33,8 +33,16 @@ def header_markup(relative: Path) -> str:
         "/join.html": "join.html",
         "/reviews/": "reviews/index.html",
         "/comparisons/": "comparisons/index.html",
+        "/reviews/bumble.html": "reviews/bumble.html",
+        "/reviews/coffee-meets-bagel.html": "reviews/coffee-meets-bagel.html",
+        "/reviews/eharmony.html": "reviews/eharmony.html",
+        "/reviews/facebook-dating.html": "reviews/facebook-dating.html",
+        "/reviews/feeld.html": "reviews/feeld.html",
+        "/reviews/hinge.html": "reviews/hinge.html",
+        "/reviews/match.html": "reviews/match.html",
+        "/reviews/okcupid.html": "reviews/okcupid.html",
+        "/reviews/plenty-of-fish.html": "reviews/plenty-of-fish.html",
         "/reviews/tinder.html": "reviews/tinder.html",
-        "/comparisons/tinder-vs-bumble.html": "comparisons/tinder-vs-bumble.html",
         "/guides/": "guides/index.html",
         "/ebooks/": "ebooks/index.html",
         "/ebooks/profile-and-photos/": "ebooks/profile-and-photos/index.html",
@@ -59,11 +67,26 @@ def header_markup(relative: Path) -> str:
           <a class="nav-direct" href="/join.html"{start_current}>Start Here</a>
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger{apps_active}" type="button" aria-expanded="false" aria-controls="nav-dating-apps" data-nav-trigger>Dating Apps<span class="nav-chevron" aria-hidden="true"></span></button>
-            <div class="nav-submenu" id="nav-dating-apps" data-nav-submenu data-open="false">
-              <a href="/reviews/"{current_for("/reviews/")}>Dating App Reviews</a>
-              <a href="/comparisons/"{current_for("/comparisons/")}>Dating App Comparisons</a>
-              <a href="/reviews/tinder.html"{current_for("/reviews/tinder.html")}>Tinder Review</a>
-              <a href="/comparisons/tinder-vs-bumble.html"{current_for("/comparisons/tinder-vs-bumble.html")}>Tinder vs Bumble</a>
+            <div class="nav-submenu nav-submenu-apps" id="nav-dating-apps" data-nav-submenu data-open="false">
+              <div class="nav-submenu-featured">
+                <a href="/reviews/"{current_for("/reviews/")}><strong>Dating App Reviews</strong><span>Research one platform in depth</span></a>
+                <a href="/comparisons/"{current_for("/comparisons/")}><strong>Compare Dating Apps</strong><span>Compare two or three side by side</span></a>
+              </div>
+              <div class="nav-submenu-section">
+                <span class="nav-submenu-label">Individual app reviews</span>
+                <div class="nav-app-links">
+                  <a href="/reviews/bumble.html"{current_for("/reviews/bumble.html")}>Bumble Review</a>
+                  <a href="/reviews/coffee-meets-bagel.html"{current_for("/reviews/coffee-meets-bagel.html")}>Coffee Meets Bagel Review</a>
+                  <a href="/reviews/eharmony.html"{current_for("/reviews/eharmony.html")}>eHarmony Review</a>
+                  <a href="/reviews/facebook-dating.html"{current_for("/reviews/facebook-dating.html")}>Facebook Dating Review</a>
+                  <a href="/reviews/feeld.html"{current_for("/reviews/feeld.html")}>Feeld Review</a>
+                  <a href="/reviews/hinge.html"{current_for("/reviews/hinge.html")}>Hinge Review</a>
+                  <a href="/reviews/match.html"{current_for("/reviews/match.html")}>Match Review</a>
+                  <a href="/reviews/okcupid.html"{current_for("/reviews/okcupid.html")}>OkCupid Review</a>
+                  <a href="/reviews/plenty-of-fish.html"{current_for("/reviews/plenty-of-fish.html")}>Plenty of Fish Review</a>
+                  <a href="/reviews/tinder.html"{current_for("/reviews/tinder.html")}>Tinder Review</a>
+                </div>
+              </div>
             </div>
           </div>
           <div class="nav-group" data-nav-group>

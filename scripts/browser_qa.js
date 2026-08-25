@@ -22,6 +22,8 @@ const screenshotPages = [
   ["guides-hub-mobile.png", "/guides/", 390, 844],
   ["guide-library-desktop.png", "/ebooks/", 1440, 1000],
   ["guide-library-mobile.png", "/ebooks/", 390, 844],
+  ["comparisons-desktop.png", "/comparisons/", 1440, 1000],
+  ["comparisons-mobile.png", "/comparisons/", 390, 844],
   ["hinge-review-desktop.png", "/reviews/hinge.html", 1440, 1000],
   ["hinge-review-mobile.png", "/reviews/hinge.html", 390, 844],
   ["bumble-review-desktop.png", "/reviews/bumble.html", 1440, 1000],
@@ -44,6 +46,20 @@ const screenshotPages = [
 
 const representativePaths = [...new Set(screenshotPages.filter((item) => item[1] !== "/404.html").map((item) => item[1]))];
 const widths = [320, 375, 390, 768, 1024, 1440];
+const expectedDatingAppLinks = [
+  "/reviews/",
+  "/comparisons/",
+  "/reviews/bumble.html",
+  "/reviews/coffee-meets-bagel.html",
+  "/reviews/eharmony.html",
+  "/reviews/facebook-dating.html",
+  "/reviews/feeld.html",
+  "/reviews/hinge.html",
+  "/reviews/match.html",
+  "/reviews/okcupid.html",
+  "/reviews/plenty-of-fish.html",
+  "/reviews/tinder.html",
+];
 
 (async () => {
   fs.mkdirSync(outputDirectory, { recursive: true });
@@ -116,6 +132,13 @@ const widths = [320, 375, 390, 768, 1024, 1440];
   const appsTrigger = desktopNavPage.locator('[data-nav-trigger]').filter({ hasText: 'Dating Apps' });
   await appsTrigger.click();
   if ((await appsTrigger.getAttribute("aria-expanded")) !== "true") errors.push("Desktop Dating Apps dropdown does not open on click");
+  const desktopAppLinks = await desktopNavPage.locator("#nav-dating-apps a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(desktopAppLinks) !== JSON.stringify(expectedDatingAppLinks)) {
+    errors.push(`Desktop Dating Apps links are missing or out of order: ${JSON.stringify(desktopAppLinks)}`);
+  }
+  if ((await desktopNavPage.locator("#nav-dating-apps").innerText()).includes("Tinder vs Bumble")) {
+    errors.push("Tinder vs Bumble remains in the global Dating Apps dropdown");
+  }
   const firstAppLink = desktopNavPage.locator("#nav-dating-apps a").first();
   await desktopNavPage.keyboard.press("Tab");
   if (!(await firstAppLink.evaluate((node) => document.activeElement === node))) errors.push("Desktop dropdown Tab order does not enter its first link");
@@ -136,8 +159,18 @@ const widths = [320, 375, 390, 768, 1024, 1440];
   const nestedMobilePage = await nestedMobileContext.newPage();
   await nestedMobilePage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   const mobileMenuTrigger = nestedMobilePage.locator("[data-menu-toggle]");
+  const mobileAppsTrigger = nestedMobilePage.locator('[data-nav-trigger]').filter({ hasText: 'Dating Apps' });
   const mobileGuidesTrigger = nestedMobilePage.locator('[data-nav-trigger]').filter({ hasText: 'Guides' });
   await mobileMenuTrigger.click();
+  await mobileAppsTrigger.click();
+  const mobileAppLinks = await nestedMobilePage.locator("#nav-dating-apps a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(mobileAppLinks) !== JSON.stringify(expectedDatingAppLinks)) {
+    errors.push(`Mobile Dating Apps links are missing or out of order: ${JSON.stringify(mobileAppLinks)}`);
+  }
+  const lastMobileAppLink = nestedMobilePage.locator("#nav-dating-apps a").last();
+  await lastMobileAppLink.scrollIntoViewIfNeeded();
+  if (!(await lastMobileAppLink.isVisible())) errors.push("The last alphabetical app review is not reachable in the mobile menu");
+  await mobileAppsTrigger.click();
   await mobileGuidesTrigger.click();
   if ((await mobileGuidesTrigger.getAttribute("aria-expanded")) !== "true" || (await nestedMobilePage.locator("#nav-guides").getAttribute("data-open")) !== "true") {
     errors.push("Mobile Guides section does not expand on touch/click");
@@ -148,6 +181,42 @@ const widths = [320, 375, 390, 768, 1024, 1440];
   await nestedMobilePage.keyboard.press("Escape");
   if ((await mobileMenuTrigger.getAttribute("aria-expanded")) !== "false") errors.push("Second mobile Escape does not close the main menu");
   await nestedMobileContext.close();
+
+  for (const width of [390, 1440]) {
+    const compareContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const comparePage = await compareContext.newPage();
+    await comparePage.goto(`${baseUrl}/comparisons/`, { waitUntil: "domcontentloaded" });
+    const choices = comparePage.locator("[data-compare-app]");
+    if ((await choices.count()) !== 10) errors.push(`Comparison tool exposes ${(await choices.count())} apps at ${width}px instead of 10`);
+    const runButton = comparePage.locator("[data-compare-run]");
+    if (!(await runButton.isDisabled())) errors.push(`Compare button is enabled before two choices at ${width}px`);
+    await comparePage.locator('[data-compare-app][value="tinder"]').check();
+    await comparePage.locator('[data-compare-app][value="bumble"]').check();
+    if (await runButton.isDisabled()) errors.push(`Compare button remains disabled with two choices at ${width}px`);
+    await runButton.click();
+    const results = comparePage.locator("[data-compare-results]");
+    if (!(await results.isVisible())) errors.push(`Comparison results remain hidden at ${width}px`);
+    const visibleColumns = await results.locator("[data-compare-column]").evaluateAll((nodes) => [
+      ...new Set(nodes.filter((node) => node.offsetParent !== null).map((node) => node.getAttribute("data-compare-column"))),
+    ].sort());
+    if (JSON.stringify(visibleColumns) !== JSON.stringify(["bumble", "tinder"])) {
+      errors.push(`Focused comparison shows the wrong columns at ${width}px: ${JSON.stringify(visibleColumns)}`);
+    }
+    const focusedHeading = await comparePage.locator("#focused-comparison-title").innerText();
+    if (!focusedHeading.includes("Bumble") || !focusedHeading.includes("Tinder")) errors.push(`Focused heading omits selected apps at ${width}px`);
+    const savedApps = new URL(comparePage.url()).searchParams.get("apps")?.split(",").sort() || [];
+    if (JSON.stringify(savedApps) !== JSON.stringify(["bumble", "tinder"])) errors.push(`Comparison URL does not preserve choices at ${width}px: ${comparePage.url()}`);
+    await comparePage.locator('[data-compare-app][value="hinge"]').check();
+    if (!(await comparePage.locator('[data-compare-app][value="match"]').isDisabled())) errors.push(`A fourth app remains selectable at ${width}px`);
+    await comparePage.locator("[data-compare-clear]").click();
+    if (await results.isVisible()) errors.push(`Clear does not hide comparison results at ${width}px`);
+    if (comparePage.url().includes("apps=")) errors.push(`Clear does not remove comparison query at ${width}px`);
+    await comparePage.goto(`${baseUrl}/comparisons/?apps=tinder,bumble,hinge`, { waitUntil: "domcontentloaded" });
+    if (!(await comparePage.locator("[data-compare-results]").isVisible())) errors.push(`URL-restored comparison is hidden at ${width}px`);
+    const restoredCount = await comparePage.locator("[data-compare-app]:checked").count();
+    if (restoredCount !== 3) errors.push(`URL-restored comparison selected ${restoredCount} apps at ${width}px instead of 3`);
+    await compareContext.close();
+  }
 
   const cardContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   const cardPage = await cardContext.newPage();
@@ -161,7 +230,8 @@ const widths = [320, 375, 390, 768, 1024, 1440];
     const page = await context.newPage();
     await page.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(75);
-    await page.screenshot({ path: path.join(outputDirectory, filename), fullPage: true });
+    const useViewportCapture = pathname === "/comparisons/" && width === 390;
+    await page.screenshot({ path: path.join(outputDirectory, filename), fullPage: !useViewportCapture });
     await context.close();
   }
 

@@ -18,6 +18,7 @@ SITE_ORIGIN = "https://dategirlseasy.com"
 
 REPRESENTATIVE = {
     Path("index.html"),
+    Path("comparisons/index.html"),
     Path("reviews/tinder.html"),
     Path("reviews/hinge.html"),
     Path("reviews/bumble.html"),
@@ -33,6 +34,19 @@ REPRESENTATIVE = {
     Path("ebooks/profile-and-photos/internet-dating-guide-for-men.html"),
     Path("ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"),
 }
+
+NAV_REVIEW_LINKS = [
+    ("/reviews/bumble.html", "Bumble Review"),
+    ("/reviews/coffee-meets-bagel.html", "Coffee Meets Bagel Review"),
+    ("/reviews/eharmony.html", "eHarmony Review"),
+    ("/reviews/facebook-dating.html", "Facebook Dating Review"),
+    ("/reviews/feeld.html", "Feeld Review"),
+    ("/reviews/hinge.html", "Hinge Review"),
+    ("/reviews/match.html", "Match Review"),
+    ("/reviews/okcupid.html", "OkCupid Review"),
+    ("/reviews/plenty-of-fish.html", "Plenty of Fish Review"),
+    ("/reviews/tinder.html", "Tinder Review"),
+]
 
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
@@ -236,6 +250,30 @@ def main() -> int:
         for control_id in ("nav-dating-apps", "nav-guides"):
             if f'aria-controls="{control_id}"' not in raw or f'id="{control_id}"' not in raw:
                 errors.append(f"{rel}: navigation control contract is incomplete for #{control_id}")
+        header_match = re.search(r'<header class="publisher-header".*?</header>', raw, flags=re.DOTALL)
+        if not header_match:
+            errors.append(f"{rel}: shared publisher header is missing")
+        else:
+            header = header_match.group(0)
+            app_menu_match = re.search(r'<div class="nav-submenu nav-submenu-apps".*?</div>\s*</div>', header, flags=re.DOTALL)
+            if not app_menu_match:
+                errors.append(f"{rel}: expanded Dating Apps menu is missing")
+            else:
+                app_menu = app_menu_match.group(0)
+                expected_links = [
+                    ("/reviews/", "Dating App Reviews"),
+                    ("/comparisons/", "Compare Dating Apps"),
+                    *NAV_REVIEW_LINKS,
+                ]
+                actual_hrefs = re.findall(r'<a href="([^"]+)"', app_menu)
+                expected_hrefs = [href for href, _label in expected_links]
+                if actual_hrefs != expected_hrefs:
+                    errors.append(f"{rel}: Dating Apps links are missing, duplicated, or out of order")
+                for href, label in expected_links:
+                    if f'<a href="{href}"' not in app_menu or label not in app_menu:
+                        errors.append(f"{rel}: Dating Apps menu lacks {label} ({href})")
+                if "Tinder vs Bumble" in app_menu:
+                    errors.append(f"{rel}: contextual Tinder vs Bumble link remains in global navigation")
         if "fonts.googleapis.com" in raw or "fonts.gstatic.com" in raw or "Bricolage" in raw:
             errors.append(f"{rel}: external or retired typography dependency remains")
         if re.search(r'<(?:article|div|li)[^>]*class="[^"]*goal-card', raw, flags=re.IGNORECASE):
@@ -286,6 +324,22 @@ def main() -> int:
             errors.append(f"{rel}: missing required visitor-routing copy")
         if raw.count('class="goal-card"') != goal_count:
             errors.append(f"{rel}: expected {goal_count} whole-link goal cards")
+
+    comparison_raw = (ROOT / "comparisons" / "index.html").read_text(encoding="utf-8")
+    if comparison_raw.count("data-compare-app") != 10:
+        errors.append("comparisons/index.html: expected exactly 10 selectable apps")
+    for contract in ("data-compare-run", "data-compare-clear", "data-compare-results", 'id="build-comparison"'):
+        if contract not in comparison_raw:
+            errors.append(f"comparisons/index.html: missing comparison tool contract {contract}")
+    for app_id in (
+        "bumble", "coffee-meets-bagel", "eharmony", "facebook-dating", "feeld",
+        "hinge", "match", "okcupid", "plenty-of-fish", "tinder",
+    ):
+        if f'data-compare-column="{app_id}"' not in comparison_raw:
+            errors.append(f"comparisons/index.html: missing comparison column for {app_id}")
+    for href, label in NAV_REVIEW_LINKS:
+        if f'href="{href}"' not in comparison_raw or label not in comparison_raw:
+            errors.append(f"comparisons/index.html: overview lacks {label}")
 
     template = pages.get(Path("template-page.html"))
     if not template or "noindex" not in template.meta_content("name", "robots").lower():
