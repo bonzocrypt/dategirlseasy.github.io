@@ -337,7 +337,7 @@ def main() -> int:
                 errors.append(f"{rel}: Tawkify disclosure must precede the first commercial CTA")
         if rel == "reviews/index.html" and 'href="/reviews/tawkify.html"' not in raw:
             errors.append(f"{rel}: matchmaking alternative does not link to the Tawkify review")
-        if rel == "index.html" and raw.count('<meta name="impact-site-verification" value="bc6af6c1-e12b-4c94-ad6d-3e83f48f5aa6" />') != 1:
+        if rel == "index.html" and raw.count('<meta name="impact-site-verification" value="0109abc6-5f78-4a99-9a85-424e33181b44" />') != 1:
             errors.append(f"{rel}: Impact website-verification tag is missing or duplicated")
         if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
             errors.append(f"{rel}: contains a placeholder href")
