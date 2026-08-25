@@ -19,7 +19,7 @@ Date Girls Easy is a fast static publisher for adult men. It is not a dating pla
 
 ## Page and SEO contracts
 
-- Primary navigation: Start Here, Reviews, Comparisons, Guides, Library.
+- Primary navigation: Start Here, Dating Apps, and Guides. The Guides menu exposes one unified Guide Library, an In-Depth Guides view, and topic shelves; do not present Guides and Library as competing destinations.
 - Each indexable page needs a unique title and description, one H1, self-referencing canonical, appropriate robots directive, useful internal links, and accurate Open Graph metadata.
 - Use Article, CollectionPage, BreadcrumbList, Organization, and WebSite structured data conservatively. Do not invent ratings, testing, credentials, expertise, or personal experience.
 - Date and cite time-sensitive claims. Prefer current official product sources for platform features, prices, policies, and safety tools.

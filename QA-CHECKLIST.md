@@ -31,3 +31,17 @@
 - [x] All ten overview rows include best-matched goal tags, simplified free access, simplified paid access, and accessible relative cost labels
 - [x] Updated comparison screenshots include full mobile page, mobile overview, focused mobile results, and desktop overview
 - [x] Targeted mobile Lighthouse: 99 performance, 100 accessibility, 100 SEO, 2.10-second LCP, zero CLS
+
+## Unified Guide Library
+
+- [x] `/guides/` exposes all 18 public guides in one searchable, filterable catalog
+- [x] Topic and format filters work independently and together at 390 and 1440 pixels
+- [x] Search/filter state is bookmarkable; clearing restores all 18 guides and removes the query string
+- [x] `/ebooks/` identifies itself as the in-depth collection inside the main Guide Library
+- [x] Six topic shelves use one Start Here guide, one-guide-per-item rows, and separately labeled related topics
+- [x] Shared Guides navigation exposes the library, in-depth view, and six topic shelves on desktop and mobile
+- [x] All existing guide URLs, titles, descriptions, canonicals, robots directives, and sitemap policy remain intact
+- [x] Final HTML validation, 312 full-site responsive combinations, 90 representative combinations, and 104 axe combinations pass with zero violations
+- [x] Guide Library Lighthouse: 99 performance, 100 accessibility, 100 SEO, 2.10-second local LCP, zero CLS
+- [x] In-Depth Guides Lighthouse: 99 performance, 100 accessibility, 100 SEO, 1.95-second local LCP, zero CLS
+- [x] Repeated real-production baseline check: 1.23–1.38-second median LCP and 100 performance/accessibility/SEO on the five locally borderline unchanged pages

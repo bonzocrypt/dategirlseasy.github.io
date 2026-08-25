@@ -22,6 +22,8 @@ const screenshotPages = [
   ["guides-hub-mobile.png", "/guides/", 390, 844],
   ["guide-library-desktop.png", "/ebooks/", 1440, 1000],
   ["guide-library-mobile.png", "/ebooks/", 390, 844],
+  ["getting-dates-category-desktop.png", "/ebooks/dates-and-escalation/", 1440, 1000],
+  ["getting-dates-category-mobile.png", "/ebooks/dates-and-escalation/", 390, 844],
   ["comparisons-desktop.png", "/comparisons/", 1440, 1000],
   ["comparisons-mobile.png", "/comparisons/", 390, 844],
   ["hinge-review-desktop.png", "/reviews/hinge.html", 1440, 1000],
@@ -59,6 +61,16 @@ const expectedDatingAppLinks = [
   "/reviews/okcupid.html",
   "/reviews/plenty-of-fish.html",
   "/reviews/tinder.html",
+];
+const expectedGuideLinks = [
+  "/guides/",
+  "/ebooks/",
+  "/ebooks/profile-and-photos/",
+  "/ebooks/messaging-and-openers/",
+  "/ebooks/dates-and-escalation/",
+  "/ebooks/mindset-and-confidence/",
+  "/ebooks/body-language/",
+  "/ebooks/kissing-and-intimacy/",
 ];
 
 (async () => {
@@ -160,6 +172,11 @@ const expectedDatingAppLinks = [
   if (!(await appsTrigger.evaluate((node) => document.activeElement === node))) errors.push("Desktop dropdown focus does not return to its trigger");
   const guidesTriggerDesktop = desktopNavPage.locator('[data-nav-trigger]').filter({ hasText: 'Guides' });
   await guidesTriggerDesktop.click();
+  const desktopGuideLinks = await desktopNavPage.locator("#nav-guides a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(desktopGuideLinks) !== JSON.stringify(expectedGuideLinks)) {
+    errors.push(`Desktop Guide links are missing or out of order: ${JSON.stringify(desktopGuideLinks)}`);
+  }
+  if ((await desktopNavPage.locator("#nav-guides").innerText()).includes("All Dating Guides")) errors.push("Retired All Dating Guides label remains in desktop navigation");
   await desktopNavPage.locator("main").click({ position: { x: 5, y: 5 } });
   if ((await guidesTriggerDesktop.getAttribute("aria-expanded")) !== "false") errors.push("Clicking outside does not close the desktop dropdown");
   await desktopNavContext.close();
@@ -184,12 +201,37 @@ const expectedDatingAppLinks = [
   if ((await mobileGuidesTrigger.getAttribute("aria-expanded")) !== "true" || (await nestedMobilePage.locator("#nav-guides").getAttribute("data-open")) !== "true") {
     errors.push("Mobile Guides section does not expand on touch/click");
   }
+  const mobileGuideLinks = await nestedMobilePage.locator("#nav-guides a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(mobileGuideLinks) !== JSON.stringify(expectedGuideLinks)) {
+    errors.push(`Mobile Guide links are missing or out of order: ${JSON.stringify(mobileGuideLinks)}`);
+  }
+  const lastMobileGuideLink = nestedMobilePage.locator("#nav-guides a").last();
+  await lastMobileGuideLink.scrollIntoViewIfNeeded();
+  if (!(await lastMobileGuideLink.isVisible())) errors.push("The final Guide topic is not reachable in the mobile menu");
   await nestedMobilePage.keyboard.press("Escape");
   if ((await mobileGuidesTrigger.getAttribute("aria-expanded")) !== "false") errors.push("First mobile Escape does not close the nested section");
   if (!(await mobileGuidesTrigger.evaluate((node) => document.activeElement === node))) errors.push("Nested mobile focus does not return to its trigger");
   await nestedMobilePage.keyboard.press("Escape");
   if ((await mobileMenuTrigger.getAttribute("aria-expanded")) !== "false") errors.push("Second mobile Escape does not close the main menu");
   await nestedMobileContext.close();
+
+  for (const width of [390, 1440]) {
+    const guideContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const guidePage = await guideContext.newPage();
+    await guidePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
+    const items = guidePage.locator("[data-guide-item]");
+    if ((await items.count()) !== 18) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 18`);
+    await guidePage.locator('[data-guide-filter="topic"][data-guide-value="messaging"]').click();
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 5) errors.push(`Messaging filter failed at ${width}px`);
+    await guidePage.locator('[data-guide-filter="format"][data-guide-value="in-depth"]').click();
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 1) errors.push(`Combined Guide filters failed at ${width}px`);
+    await guidePage.locator("[data-guide-clear]").click();
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 18) errors.push(`Clearing Guide filters failed at ${width}px`);
+    if (new URL(guidePage.url()).search) errors.push(`Clearing Guide filters left query parameters at ${width}px`);
+    await guidePage.goto(`${baseUrl}/guides/?format=checklist`, { waitUntil: "domcontentloaded" });
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 2) errors.push(`Bookmarkable checklist filter failed at ${width}px`);
+    await guideContext.close();
+  }
 
   for (const width of [390, 1440]) {
     const compareContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });

@@ -48,6 +48,17 @@ NAV_REVIEW_LINKS = [
     ("/reviews/tinder.html", "Tinder Review"),
 ]
 
+NAV_GUIDE_LINKS = [
+    ("/guides/", "Guide Library"),
+    ("/ebooks/", "In-Depth Guides"),
+    ("/ebooks/profile-and-photos/", "Profiles &amp; Photos"),
+    ("/ebooks/messaging-and-openers/", "Messaging &amp; Texting"),
+    ("/ebooks/dates-and-escalation/", "Getting Dates &amp; Chemistry"),
+    ("/ebooks/mindset-and-confidence/", "Confidence &amp; Social Skills"),
+    ("/ebooks/body-language/", "Body Language"),
+    ("/ebooks/kissing-and-intimacy/", "Kissing &amp; Intimacy"),
+]
+
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
 }
@@ -274,6 +285,20 @@ def main() -> int:
                         errors.append(f"{rel}: Dating Apps menu lacks {label} ({href})")
                 if "Tinder vs Bumble" in app_menu:
                     errors.append(f"{rel}: contextual Tinder vs Bumble link remains in global navigation")
+            guide_start = header.find('<div class="nav-submenu nav-submenu-guides"')
+            if guide_start < 0:
+                errors.append(f"{rel}: unified Guides menu is missing")
+            else:
+                guide_menu = header[guide_start:]
+                actual_guide_hrefs = re.findall(r'<a href="([^"]+)"', guide_menu)
+                expected_guide_hrefs = [href for href, _label in NAV_GUIDE_LINKS]
+                if actual_guide_hrefs != expected_guide_hrefs:
+                    errors.append(f"{rel}: Guide links are missing, duplicated, or out of order")
+                for href, label in NAV_GUIDE_LINKS:
+                    if f'<a href="{href}"' not in guide_menu or label not in guide_menu:
+                        errors.append(f"{rel}: Guides menu lacks {label} ({href})")
+                if "All Dating Guides" in guide_menu:
+                    errors.append(f"{rel}: retired All Dating Guides label remains in navigation")
         if "fonts.googleapis.com" in raw or "fonts.gstatic.com" in raw or "Bricolage" in raw:
             errors.append(f"{rel}: external or retired typography dependency remains")
         if re.search(r'<(?:article|div|li)[^>]*class="[^"]*goal-card', raw, flags=re.IGNORECASE):
@@ -315,8 +340,6 @@ def main() -> int:
     entry_page_contracts = {
         Path("index.html"): ("Help me choose where to start", 6),
         Path("join.html"): ("What do you want help with?", 6),
-        Path("guides/index.html"): ("Choose the category that matches your bottleneck", 6),
-        Path("ebooks/index.html"): ("Choose the subject you want to improve", 6),
     }
     for rel, (required_text, goal_count) in entry_page_contracts.items():
         raw = (ROOT / rel).read_text(encoding="utf-8")
@@ -324,6 +347,40 @@ def main() -> int:
             errors.append(f"{rel}: missing required visitor-routing copy")
         if raw.count('class="goal-card"') != goal_count:
             errors.append(f"{rel}: expected {goal_count} whole-link goal cards")
+
+    guide_hub_raw = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):
+        if contract not in guide_hub_raw:
+            errors.append(f"guides/index.html: missing unified library contract {contract}")
+    if guide_hub_raw.count("data-guide-item") != 18:
+        errors.append("guides/index.html: expected exactly 18 searchable public guide entries")
+    if "All Dating Guides" in guide_hub_raw:
+        errors.append("guides/index.html: retired split-library wording remains")
+
+    in_depth_raw = (ROOT / "ebooks" / "index.html").read_text(encoding="utf-8")
+    if "This is not a separate library" not in in_depth_raw or 'href="/guides/"' not in in_depth_raw:
+        errors.append("ebooks/index.html: in-depth collection does not explain its place in the unified library")
+    if in_depth_raw.count('class="guide-list-item"') != 5:
+        errors.append("ebooks/index.html: expected five current in-depth guide entries")
+
+    topic_shelves = {
+        Path("ebooks/profile-and-photos/index.html"): 3,
+        Path("ebooks/messaging-and-openers/index.html"): 4,
+        Path("ebooks/dates-and-escalation/index.html"): 2,
+        Path("ebooks/mindset-and-confidence/index.html"): 1,
+        Path("ebooks/body-language/index.html"): 2,
+        Path("ebooks/kissing-and-intimacy/index.html"): 0,
+    }
+    for rel, expected_more in topic_shelves.items():
+        raw = (ROOT / rel).read_text(encoding="utf-8")
+        if raw.count('class="topic-start-card"') != 1:
+            errors.append(f"{rel}: expected one clear Start Here guide")
+        if raw.count('class="guide-list-item"') != expected_more:
+            errors.append(f"{rel}: expected {expected_more} one-guide-per-item rows")
+        if 'class="panel"' in raw:
+            errors.append(f"{rel}: retired multi-destination panel layout remains")
+        if "Browse the complete Guide Library" not in raw:
+            errors.append(f"{rel}: missing path back to the unified Guide Library")
 
     comparison_raw = (ROOT / "comparisons" / "index.html").read_text(encoding="utf-8")
     if comparison_raw.count("data-compare-app") != 10:

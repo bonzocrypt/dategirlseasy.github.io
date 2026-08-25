@@ -98,63 +98,151 @@
           </div>
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger is-active" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
-            <div class="nav-submenu nav-submenu-wide" id="nav-guides" data-nav-submenu data-open="false">
-              <a href="/guides/" aria-current="page">All Dating Guides</a>
-              <a href="/ebooks/">Guide Library</a>
-              <a href="/ebooks/profile-and-photos/">Profile and Photos</a>
-              <a href="/ebooks/messaging-and-openers/">Messaging and Texting</a>
-              <a href="/ebooks/dates-and-escalation/">Getting the Date</a>
-              <a href="/ebooks/mindset-and-confidence/">Confidence and Attraction</a>
-              <a href="/ebooks/body-language/">Body Language</a>
-              <a href="/ebooks/kissing-and-intimacy/">Kissing and Intimacy</a>
+            <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-open="false">
+              <div class="nav-submenu-featured">
+                <a href="/guides/" aria-current="page"><strong>Guide Library</strong><span>Search every guide by goal, topic, or format</span></a>
+                <a href="/ebooks/"><strong>In-Depth Guides</strong><span>Longer, chapter-based reading</span></a>
+              </div>
+              <div class="nav-submenu-section">
+                <span class="nav-submenu-label">Browse by topic</span>
+                <div class="nav-guide-links">
+                  <a href="/ebooks/profile-and-photos/">Profiles &amp; Photos</a>
+                  <a href="/ebooks/messaging-and-openers/">Messaging &amp; Texting</a>
+                  <a href="/ebooks/dates-and-escalation/">Getting Dates &amp; Chemistry</a>
+                  <a href="/ebooks/mindset-and-confidence/">Confidence &amp; Social Skills</a>
+                  <a href="/ebooks/body-language/">Body Language</a>
+                  <a href="/ebooks/kissing-and-intimacy/">Kissing &amp; Intimacy</a>
+                </div>
+              </div>
             </div>
           </div>
         </nav>
       </div>
     </header>
 
-    <main id="main-content">
-      <section class="hero">
-        <div class="container"><div class="hero-panel"><p class="eyebrow">All dating guides</p><h1>Practical dating guides for men who want better outcomes, not fluff.</h1><p class="lede">Choose the skill that is holding you back. Start with the strongest guide in that category, then go deeper only when you need it.</p><div class="cta-row"><a class="button" href="/join.html">Help me choose where to start</a><a class="button secondary" href="/ebooks/">Open the Guide Library</a></div></div></div>
+    <main id="main-content" class="guide-library-main" data-guide-library>
+      <section class="guide-library-hero">
+        <div class="site-shell"><div class="hero-panel"><p class="eyebrow">Guide Library</p><h1>Find the dating guide that solves what is holding you back.</h1><p class="lede">Every quick guide, checklist, playbook, and in-depth guide now lives in one searchable library. Filter by the result you want, then choose the depth that fits your time.</p><div class="cta-row"><a class="button" href="#browse-guides">Browse all guides</a><a class="button secondary" href="/join.html">Help me choose where to start</a></div></div></div>
       </section>
-
-      <section class="cards container" aria-labelledby="guide-categories">
-        <div class="section-head"><p class="eyebrow page-kicker">Browse by skill</p><h2 id="guide-categories">Choose the category that matches your bottleneck</h2><p class="lede">Each category starts with the most useful guide for that goal.</p></div>
-        <div class="goal-grid">
-          <a class="goal-card" href="/guides/profile-photo-checklist.html"><span class="goal-label">Profile and photos</span><h3>Build a stronger first impression</h3><p>Use the profile photo checklist before changing apps or buying visibility.</p><span class="card-link">Start with the photo checklist →</span></a>
-          <a class="goal-card" href="/guides/openers-that-get-replies.html"><span class="goal-label">Messaging and texting</span><h3>Start conversations that move</h3><p>Write specific openers that feel natural, confident, and easy to answer.</p><span class="card-link">Start with better openers →</span></a>
-          <a class="goal-card" href="/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html"><span class="goal-label">Getting the date</span><h3>Move from match to real plans</h3><p>Make a clear invitation, handle timing, and reduce planning friction.</p><span class="card-link">Start with match to date →</span></a>
-          <a class="goal-card" href="/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"><span class="goal-label">Confidence and attraction</span><h3>Build confidence through action</h3><p>Manage nerves, flirt honestly, and become more socially decisive.</p><span class="card-link">Start with confidence →</span></a>
-          <a class="goal-card" href="/ebooks/body-language/"><span class="goal-label">Body language</span><h3>Read interest and comfort better</h3><p>Notice reciprocal signals without treating any single cue as a guarantee.</p><span class="card-link">Start with body language →</span></a>
-          <a class="goal-card" href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html"><span class="goal-label">Kissing and intimacy</span><h3>Handle physical chemistry well</h3><p>Learn timing, clear consent, responsive pacing, and kissing fundamentals.</p><span class="card-link">Start with kissing confidence →</span></a>
+      <section class="site-shell" id="browse-guides" aria-labelledby="browse-guides-title">
+        <div class="section-head"><p class="eyebrow page-kicker">Find your next move</p><h2 id="browse-guides-title">Search by problem, topic, or format</h2><p class="lede">Try “get replies,” “first date,” “confidence,” “kissing,” or any phrase that describes what you need.</p></div>
+        <div class="guide-discovery">
+          <label class="guide-search-label"><span>What do you need help with?</span><input class="guide-search-input" id="guide-search" type="search" placeholder="Search all dating guides" autocomplete="off" data-guide-search /></label>
+          <div class="guide-filter-row"><strong>Topic</strong><div class="guide-filter-buttons" role="group" aria-label="Filter guides by topic">
+            <button class="guide-filter-button" type="button" aria-pressed="true" data-guide-filter="topic" data-guide-value="all">All topics</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="profile">Profiles &amp; Photos</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="messaging">Messaging</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="dates">Dates &amp; Chemistry</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="confidence">Confidence</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="body-language">Body Language</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="topic" data-guide-value="intimacy">Kissing &amp; Intimacy</button>
+          </div></div>
+          <div class="guide-filter-row"><strong>Format</strong><div class="guide-filter-buttons" role="group" aria-label="Filter guides by format">
+            <button class="guide-filter-button" type="button" aria-pressed="true" data-guide-filter="format" data-guide-value="all">All formats</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="format" data-guide-value="quick">Quick Guides</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="format" data-guide-value="checklist">Checklists</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="format" data-guide-value="playbook">Playbooks</button>
+            <button class="guide-filter-button" type="button" aria-pressed="false" data-guide-filter="format" data-guide-value="in-depth">In-Depth Guides</button>
+          </div></div>
         </div>
-      </section>
-
-      <section class="cards container" aria-labelledby="popular-guide-heading">
-        <div class="section-head"><p class="eyebrow page-kicker">Popular guides</p><h2 id="popular-guide-heading">Three practical starting points</h2></div>
-        <ul class="card-grid">
-          <li class="card"><a href="/guides/dating-app-reset-checklist.html"><span class="card-kicker">Free checklist</span><h3>Dating App Reset Checklist</h3><p>Reset your intent, photos, bio, messaging, invitations, consent, and weekly habits.</p></a></li>
-          <li class="card"><a href="/guides/profile-photo-checklist.html"><span class="card-kicker">Profile guide</span><h3>Profile photo checklist</h3><p>Improve first impressions before changing apps or paying for more visibility.</p></a></li>
-          <li class="card"><a href="/guides/openers-that-get-replies.html"><span class="card-kicker">Messaging guide</span><h3>Openers that get replies</h3><p>Move from match to conversation with cleaner first-message examples.</p></a></li>
+        <div class="guide-results-bar"><p aria-live="polite" data-guide-count>18 guides shown</p><button class="guide-clear-button" type="button" data-guide-clear>Clear search and filters</button></div>
+        <ul class="guide-catalog-list">
+            <li class="guide-list-item" data-guide-item data-guide-topic="profile" data-guide-format="checklist" data-guide-search="dating app reset checklist profiles &amp; photos checklist reset your intent, app mix, photos, bio, messaging, invitations, and weekly habits. more matches dating apps reset profile photos bio casual relationship">
+              <div class="guide-item-taxonomy"><span class="guide-format">Checklist</span><span class="guide-topic">Profiles &amp; Photos</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/dating-app-reset-checklist.html">Dating App Reset Checklist</a></h3><p>Reset your intent, app mix, photos, bio, messaging, invitations, and weekly habits.</p></div>
+              <div class="guide-item-meta"><span>4 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="profile" data-guide-format="in-depth" data-guide-search="internet dating guide for men profiles &amp; photos in-depth guide build the complete system: choose the right app, improve your profile, message well, and move toward a date. more matches profile platform photos bio messaging complete system">
+              <div class="guide-item-taxonomy"><span class="guide-format">In-Depth Guide</span><span class="guide-topic">Profiles &amp; Photos</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/profile-and-photos/internet-dating-guide-for-men.html">Internet Dating Guide for Men</a></h3><p>Build the complete system: choose the right app, improve your profile, message well, and move toward a date.</p></div>
+              <div class="guide-item-meta"><span>5 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="profile" data-guide-format="checklist" data-guide-search="profile photo checklist for men profiles &amp; photos checklist choose stronger photos before changing apps or paying for more visibility. more matches photos pictures first impression profile">
+              <div class="guide-item-taxonomy"><span class="guide-format">Checklist</span><span class="guide-topic">Profiles &amp; Photos</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/profile-photo-checklist.html">Profile Photo Checklist for Men</a></h3><p>Choose stronger photos before changing apps or paying for more visibility.</p></div>
+              <div class="guide-item-meta"><span>2 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="profile" data-guide-format="quick" data-guide-search="bio templates for men profiles &amp; photos quick guide use adaptable bio structures that communicate personality, intent, and an easy conversation hook. bio templates profile casual relationship prompts">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Profiles &amp; Photos</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/bio-templates.html">Bio Templates for Men</a></h3><p>Use adaptable bio structures that communicate personality, intent, and an easy conversation hook.</p></div>
+              <div class="guide-item-meta"><span>2 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="messaging" data-guide-format="quick" data-guide-search="openers that get replies messaging &amp; texting quick guide write specific, playful first messages that feel natural and are easy to answer. get replies opener first message match conversation flirting">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Messaging &amp; Texting</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/openers-that-get-replies.html">Openers That Get Replies</a></h3><p>Write specific, playful first messages that feel natural and are easy to answer.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="messaging" data-guide-format="in-depth" data-guide-search="conversation skills that build attraction messaging &amp; texting in-depth guide build attraction through attention, playful energy, honest flirting, listening, and reciprocal tension. conversation attraction flirting sexual tension listening get replies">
+              <div class="guide-item-taxonomy"><span class="guide-format">In-Depth Guide</span><span class="guide-topic">Messaging &amp; Texting</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html">Conversation Skills That Build Attraction</a></h3><p>Build attraction through attention, playful energy, honest flirting, listening, and reciprocal tension.</p></div>
+              <div class="guide-item-meta"><span>4 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="messaging" data-guide-format="quick" data-guide-search="texting that keeps momentum messaging &amp; texting quick guide keep the exchange moving without over-texting, disappearing, or turning it into an interview. texting momentum pacing get replies move to date">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Messaging &amp; Texting</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/texting-that-keeps-momentum.html">Texting That Keeps Momentum</a></h3><p>Keep the exchange moving without over-texting, disappearing, or turning it into an interview.</p></div>
+              <div class="guide-item-meta"><span>4 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="messaging" data-guide-format="quick" data-guide-search="dms and social media openers messaging &amp; texting quick guide start respectful conversations through stories, posts, and social media context. dm social media instagram opener reply">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Messaging &amp; Texting</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/dms-and-social-media.html">DMs and Social Media Openers</a></h3><p>Start respectful conversations through stories, posts, and social media context.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="messaging" data-guide-format="quick" data-guide-search="voice notes and dm etiquette messaging &amp; texting quick guide use voice notes, reactions, and dms without overwhelming the conversation. voice notes dm etiquette read receipts reactions">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Messaging &amp; Texting</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/voice-notes-and-dm-etiquette.html">Voice Notes and DM Etiquette</a></h3><p>Use voice notes, reactions, and DMs without overwhelming the conversation.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="dates" data-guide-format="quick" data-guide-search="video calls before meeting getting dates &amp; chemistry quick guide handle a short pre-date video call naturally and turn good energy into confirmed plans. video call verify before meeting get a date">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Getting Dates &amp; Chemistry</span></div>
+              <div class="guide-item-copy"><h3><a href="/guides/video-calls-before-meeting.html">Video Calls Before Meeting</a></h3><p>Handle a short pre-date video call naturally and turn good energy into confirmed plans.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="dates" data-guide-format="in-depth" data-guide-search="from match to date without pressure getting dates &amp; chemistry in-depth guide know when to ask, make a clear invitation, reduce planning friction, and handle vague answers well. get a date invitation plans rejection match chemistry">
+              <div class="guide-item-taxonomy"><span class="guide-format">In-Depth Guide</span><span class="guide-topic">Getting Dates &amp; Chemistry</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html">From Match to Date Without Pressure</a></h3><p>Know when to ask, make a clear invitation, reduce planning friction, and handle vague answers well.</p></div>
+              <div class="guide-item-meta"><span>4 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="dates" data-guide-format="playbook" data-guide-search="first date playbook getting dates &amp; chemistry playbook plan the first meeting, build momentum, read the room, and finish the date cleanly. first date playbook planning chemistry attraction">
+              <div class="guide-item-taxonomy"><span class="guide-format">Playbook</span><span class="guide-topic">Getting Dates &amp; Chemistry</span></div>
+              <div class="guide-item-copy"><h3><a href="/playbooks/first-date-playbook.html">First Date Playbook</a></h3><p>Plan the first meeting, build momentum, read the room, and finish the date cleanly.</p></div>
+              <div class="guide-item-meta"><span>2 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="confidence" data-guide-format="in-depth" data-guide-search="dating confidence for shy men confidence &amp; social skills in-depth guide turn nerves into a practical training plan for conversation, flirting, dates, rejection, and physical confidence. confidence shy anxiety social skills charisma rejection">
+              <div class="guide-item-taxonomy"><span class="guide-format">In-Depth Guide</span><span class="guide-topic">Confidence &amp; Social Skills</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html">Dating Confidence for Shy Men</a></h3><p>Turn nerves into a practical training plan for conversation, flirting, dates, rejection, and physical confidence.</p></div>
+              <div class="guide-item-meta"><span>10 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="confidence" data-guide-format="quick" data-guide-search="using body language to look more confident confidence &amp; social skills quick guide look more grounded through posture, eye contact, movement, and calmer physical presence. confidence body language posture eye contact charisma">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Confidence &amp; Social Skills</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/body-language/using-body-language-to-look-more-confident.html">Using Body Language to Look More Confident</a></h3><p>Look more grounded through posture, eye contact, movement, and calmer physical presence.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="body-language" data-guide-format="quick" data-guide-search="reading body language on dates and app meets body language quick guide notice comfort, hesitation, and reciprocal interest without treating any cue as a guarantee. body language date interest comfort hesitation signals consent">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Body Language</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/body-language/reading-body-language-on-dates-and-app-meets.html">Reading Body Language on Dates and App Meets</a></h3><p>Notice comfort, hesitation, and reciprocal interest without treating any cue as a guarantee.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="body-language" data-guide-format="quick" data-guide-search="body language clues that show interest body language quick guide read clusters of possible interest while avoiding projection and overconfidence. body language clues attraction interest flirting signals">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Body Language</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/body-language/body-language-clues-that-show-interest.html">Body Language Clues That Show Interest</a></h3><p>Read clusters of possible interest while avoiding projection and overconfidence.</p></div>
+              <div class="guide-item-meta"><span>3 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="body-language" data-guide-format="quick" data-guide-search="signals and subtext in dating body language quick guide understand tone, subtext, and mixed signals without drifting into mind reading. signals subtext mixed signals tone interest">
+              <div class="guide-item-taxonomy"><span class="guide-format">Quick Guide</span><span class="guide-topic">Body Language</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/body-language/signals-and-subtext-in-dating.html">Signals and Subtext in Dating</a></h3><p>Understand tone, subtext, and mixed signals without drifting into mind reading.</p></div>
+              <div class="guide-item-meta"><span>2 min read</span><span>Read guide →</span></div>
+            </li>
+            <li class="guide-list-item" data-guide-item data-guide-topic="intimacy" data-guide-format="in-depth" data-guide-search="kissing with confidence kissing &amp; intimacy in-depth guide build the moment, ask attractively, approach slowly, kiss responsively, and handle hesitation well. kissing intimacy chemistry consent physical confidence sexual confidence">
+              <div class="guide-item-taxonomy"><span class="guide-format">In-Depth Guide</span><span class="guide-topic">Kissing &amp; Intimacy</span></div>
+              <div class="guide-item-copy"><h3><a href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html">Kissing With Confidence</a></h3><p>Build the moment, ask attractively, approach slowly, kiss responsively, and handle hesitation well.</p></div>
+              <div class="guide-item-meta"><span>4 min read</span><span>Read guide →</span></div>
+            </li>
         </ul>
-      </section>
-
-      <section class="container" aria-labelledby="more-guides-heading">
-        <div class="section-head"><p class="eyebrow page-kicker">More practical guides</p><h2 id="more-guides-heading">Keep going when you need a narrower answer</h2><p class="lede">Every existing guide remains available without forcing you through repeated category panels.</p></div>
-        <ul class="compact-link-list">
-          <li><a href="/guides/bio-templates.html">Bio templates</a></li>
-          <li><a href="/guides/texting-that-keeps-momentum.html">Texting that keeps momentum</a></li>
-          <li><a href="/guides/dms-and-social-media.html">DMs and social media openers</a></li>
-          <li><a href="/guides/video-calls-before-meeting.html">Video calls before meeting</a></li>
-          <li><a href="/guides/voice-notes-and-dm-etiquette.html">Voice notes and DM etiquette</a></li>
-          <li><a href="/playbooks/first-date-playbook.html">First date playbook</a></li>
-          <li><a href="/reviews/tinder.html">Tinder review for men</a></li>
-          <li><a href="/comparisons/tinder-vs-bumble.html">Tinder vs Bumble</a></li>
-        </ul>
+        <p class="guide-empty-state" data-guide-empty hidden>No guides match those filters yet. Clear the filters or try a broader search.</p>
       </section>
     </main>
 
-    <footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">All Guides</a><a href="/ebooks/">Guide Library</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>
+    <footer class="publisher-footer"><div class="site-shell footer-grid-v2"><div><a class="publisher-brand" href="/"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a><p class="footer-copy">Direct advice for adult men, grounded in honesty, consent, respect, and independent editorial judgment.</p><p class="footer-meta-v2">&copy; <span data-current-year></span> DGE Inc.</p></div><nav class="footer-nav-v2" aria-label="Footer"><a href="/join.html">Start Here</a><a href="/reviews/">Dating App Reviews</a><a href="/comparisons/">Comparisons</a><a href="/guides/">Guide Library</a><a href="/ebooks/">In-Depth Guides</a><a href="/about.html">About</a><a href="/disclosure.html">Disclosure</a><a href="/contact.html">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></nav></div></footer>
     <script src="/assets/site.js" defer></script>
   </body>
 </html>

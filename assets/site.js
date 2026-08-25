@@ -152,6 +152,90 @@
     renderChecklist();
   }
 
+  const guideLibrary = document.querySelector("[data-guide-library]");
+  if (guideLibrary) {
+    const searchInput = guideLibrary.querySelector("[data-guide-search]");
+    const filterButtons = Array.from(guideLibrary.querySelectorAll("[data-guide-filter]"));
+    const guideItems = Array.from(guideLibrary.querySelectorAll("[data-guide-item]"));
+    const resultCount = guideLibrary.querySelector("[data-guide-count]");
+    const emptyState = guideLibrary.querySelector("[data-guide-empty]");
+    const clearButton = guideLibrary.querySelector("[data-guide-clear]");
+    const filters = { topic: "all", format: "all" };
+
+    function normalized(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function updateGuideAddress() {
+      const url = new URL(window.location.href);
+      const query = normalized(searchInput?.value);
+      if (query) url.searchParams.set("q", query);
+      else url.searchParams.delete("q");
+      Object.keys(filters).forEach(function (name) {
+        if (filters[name] === "all") url.searchParams.delete(name);
+        else url.searchParams.set(name, filters[name]);
+      });
+      window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+    }
+
+    function renderGuideLibrary() {
+      const query = normalized(searchInput?.value);
+      let visible = 0;
+      guideItems.forEach(function (item) {
+        const matchesQuery = !query || normalized(item.dataset.guideSearch).includes(query);
+        const matchesTopic = filters.topic === "all" || item.dataset.guideTopic === filters.topic;
+        const matchesFormat = filters.format === "all" || item.dataset.guideFormat === filters.format;
+        item.hidden = !(matchesQuery && matchesTopic && matchesFormat);
+        if (!item.hidden) visible += 1;
+      });
+      if (resultCount) resultCount.textContent = `${visible} guide${visible === 1 ? "" : "s"} shown`;
+      if (emptyState) emptyState.hidden = visible !== 0;
+      updateGuideAddress();
+    }
+
+    function selectGuideFilter(button) {
+      const group = button.dataset.guideFilter;
+      if (!Object.prototype.hasOwnProperty.call(filters, group)) return;
+      filters[group] = button.dataset.guideValue || "all";
+      filterButtons.filter(function (candidate) { return candidate.dataset.guideFilter === group; }).forEach(function (candidate) {
+        candidate.setAttribute("aria-pressed", String(candidate === button));
+      });
+      renderGuideLibrary();
+    }
+
+    const initialUrl = new URL(window.location.href);
+    if (searchInput) {
+      searchInput.value = initialUrl.searchParams.get("q") || "";
+      searchInput.addEventListener("input", renderGuideLibrary);
+    }
+    Object.keys(filters).forEach(function (group) {
+      const requested = initialUrl.searchParams.get(group);
+      const requestedButton = filterButtons.find(function (button) {
+        return button.dataset.guideFilter === group && button.dataset.guideValue === requested;
+      });
+      if (requestedButton) {
+        filters[group] = requested;
+        filterButtons.filter(function (button) { return button.dataset.guideFilter === group; }).forEach(function (button) {
+          button.setAttribute("aria-pressed", String(button === requestedButton));
+        });
+      }
+    });
+    filterButtons.forEach(function (button) {
+      button.addEventListener("click", function () { selectGuideFilter(button); });
+    });
+    if (clearButton) clearButton.addEventListener("click", function () {
+      if (searchInput) searchInput.value = "";
+      filters.topic = "all";
+      filters.format = "all";
+      filterButtons.forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.guideValue === "all"));
+      });
+      renderGuideLibrary();
+      if (searchInput) searchInput.focus();
+    });
+    renderGuideLibrary();
+  }
+
   const compareInputs = Array.from(document.querySelectorAll("[data-compare-app]"));
   if (compareInputs.length) {
     const maximumApps = 3;

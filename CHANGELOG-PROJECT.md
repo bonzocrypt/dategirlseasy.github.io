@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — Unified Guide Library and topic discovery
+
+- Replaced the competing **All Dating Guides** and **Guide Library** concepts with one user-facing Guide Library at `/guides/`. The existing `/ebooks/` URL remains live as a clearly labeled **In-Depth Guides** view inside that library, preserving every URL and its search history.
+- Added a searchable catalog of all 18 public guides with accessible topic and format filters, clear content-type labels, reading times, one destination per result, bookmarkable filter URLs, an empty state, and a one-click reset.
+- Rebuilt six topic shelves around one highlighted Start Here guide, one-guide-per-item lists, and a separate Related Topics section. The former multi-destination panel pattern is removed, and **Dates and escalation** is presented to readers as **Getting Dates & Chemistry** without changing its URL or protected metadata.
+- Redesigned the shared Guides dropdown into two featured destinations plus six topic routes. It no longer attempts to distinguish two competing libraries or list ambiguous guide links.
+- Search Console showed zero clicks and 30 impressions for `/guides/` and zero clicks and 25 impressions for `/ebooks/`; all existing titles, descriptions, canonicals, robots directives, and URLs remain preserved while the visible information architecture is clarified.
+- Final local checks pass across 52 HTML pages, 45 sitemap URLs, 312 full-site responsive combinations, 90 representative interaction/layout combinations, valid HTML, and 104 axe/WCAG combinations with zero violations. The redesigned Guide Library scores 99 performance, 100 accessibility, 100 SEO, 2.10-second local LCP, and zero CLS; the in-depth view scores 99/100/100, 1.95-second LCP, and zero CLS.
+- The simple local preview server exposed pre-existing uncompressed LCP readings on two unchanged pages. Repeated checks against the real compressed GitHub Pages baseline passed at 1.23–1.38-second median LCP with 100 performance, accessibility, and SEO. Rollback tag `backup/pre-unified-guide-library-2026-08-25` preserves deployed commit `a248850b52120578da219a452ccf897d8813cb46`.
+
 ## 2026-08-25 — Mobile comparison correction and decision-table refinement
 
 - Corrected the physical-phone clipping defect on `/comparisons/`. The desktop table's 1,080 px minimum width had expanded the comparison dashboard's implicit grid track to 1,106 px while page-level clipping concealed the excess. The dashboard now uses a zero-minimum grid track, every direct child is width-constrained, and the regression suite detects clipped descendants rather than relying only on document scroll width.
