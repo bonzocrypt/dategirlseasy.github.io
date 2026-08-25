@@ -15,6 +15,8 @@ Incremental enhancement rollback points:
 - Homepage hero balance and overlay correction: rollback point `4544875c9d0318d244c41b28425b46f518921cd3`.
 - First free ebook and confidence-shelf release: rollback point `9a8a0e1da1fb9af11b871f3060209038015510e5`.
 - Navigation and guide-discovery enhancement: rollback point `abbeb051380c2a1374f5306824683e6e131c8235`, preserved as `backup/pre-navigation-2026-08-24`; implementation commit `ad6c6c153b047fc3cf1619419bcab29c6c7ca096`.
+- Unified Guide Library enhancement: rollback point `a248850b52120578da219a452ccf897d8813cb46`, preserved as `backup/pre-unified-guide-library-2026-08-25`; implementation commit `5864b47f8f1cb0682f37c2a1d44afb8849f1260a`.
+- Shared guide reading-system enhancement: rollback point `5864b47f8f1cb0682f37c2a1d44afb8849f1260a`, preserved as `backup/pre-guide-reading-system-2026-08-25`.
 
 ## Release
 

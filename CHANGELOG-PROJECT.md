@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — Shared guide reading system
+
+- Standardized all 18 public guide pages around one reading contract without changing their approved advice, URLs, titles, descriptions, H1 topics, canonicals, robots directives, or sitemap policy.
+- Converted seven legacy guide layouts to the same desktop reading pattern as **Openers That Get Replies**, including a clear hero, reading details, a sticky **In this guide** rail, anchored sections, and a consistent path back to the Guide Library and topic shelf.
+- Added a large-tap-target mobile contents layout, a compact contents navigator for the interactive Dating App Reset Checklist, and a three-choice continuation panel on every guide: explore the topic, read the recommended next guide, or search the complete library.
+- Added a repeatable static generator and structural/browser regressions covering every guide, every contents link and target, keyboard focus visibility, breadcrumbs, and continuation paths.
+- Final local QA passes across 52 HTML pages, 45 sitemap URLs, 312 full-site responsive combinations, 102 representative combinations, 36 guide-reading contract combinations, valid HTML/JSON-LD, 104 axe/WCAG combinations with zero violations, and 122 external URLs with no material failures.
+- Changed legacy guide types score 99–100 performance, 100 accessibility, 100 SEO, 1.50–2.10-second LCP, and zero CLS. The broader Lighthouse suite shows no regression from the prior release; its simple uncompressed preview reproduces the same known threshold readings on unchanged pages.
+- Rollback tag `backup/pre-guide-reading-system-2026-08-25` preserves deployed commit `5864b47f8f1cb0682f37c2a1d44afb8849f1260a` before this enhancement.
+
 ## 2026-08-25 — Unified Guide Library and topic discovery
 
 - Replaced the competing **All Dating Guides** and **Guide Library** concepts with one user-facing Guide Library at `/guides/`. The existing `/ebooks/` URL remains live as a clearly labeled **In-Depth Guides** view inside that library, preserving every URL and its search history.

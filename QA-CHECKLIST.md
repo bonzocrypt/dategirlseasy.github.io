@@ -45,3 +45,15 @@
 - [x] Guide Library Lighthouse: 99 performance, 100 accessibility, 100 SEO, 2.10-second local LCP, zero CLS
 - [x] In-Depth Guides Lighthouse: 99 performance, 100 accessibility, 100 SEO, 1.95-second local LCP, zero CLS
 - [x] Repeated real-production baseline check: 1.23–1.38-second median LCP and 100 performance/accessibility/SEO on the five locally borderline unchanged pages
+
+## Shared guide reading system
+
+- [x] All 18 public guides expose one standardized breadcrumb, contents navigation, and continuation panel
+- [x] Every contents link points to a real section target and has a visible keyboard focus state
+- [x] Seven legacy guides use the polished article-plus-sticky-contents layout; the interactive reset checklist keeps its specialized layout with a compact contents navigator
+- [x] Mobile contents navigation uses large tap targets and does not require horizontal scrolling
+- [x] Protected guide titles, descriptions, H1s, canonicals, robots directives, URLs, and approved advice remain unchanged
+- [x] Structural QA, valid HTML/JSON-LD, 312 full-site responsive combinations, 102 representative combinations, 36 guide-reader contract combinations, and 104 axe combinations pass with zero material errors
+- [x] All 122 detected public HTTP references pass external-link review; three use ordinary automated-client protection and none returns a material 404, 5xx, DNS, or connection failure
+- [x] Changed legacy guide Lighthouse: 99–100 performance, 100 accessibility, 100 SEO, 1.50–2.10-second LCP, zero CLS
+- [x] Broader Lighthouse results match the prior release baseline; the two unchanged pages above the local preview threshold reproduce their known uncompressed-server readings rather than a new regression

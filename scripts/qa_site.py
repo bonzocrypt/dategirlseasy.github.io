@@ -59,6 +59,27 @@ NAV_GUIDE_LINKS = [
     ("/ebooks/kissing-and-intimacy/", "Kissing &amp; Intimacy"),
 ]
 
+GUIDE_READER_PAGES = [
+    Path("guides/dating-app-reset-checklist.html"),
+    Path("ebooks/profile-and-photos/internet-dating-guide-for-men.html"),
+    Path("guides/profile-photo-checklist.html"),
+    Path("guides/bio-templates.html"),
+    Path("guides/openers-that-get-replies.html"),
+    Path("ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html"),
+    Path("guides/texting-that-keeps-momentum.html"),
+    Path("guides/dms-and-social-media.html"),
+    Path("guides/voice-notes-and-dm-etiquette.html"),
+    Path("guides/video-calls-before-meeting.html"),
+    Path("ebooks/dates-and-escalation/from-match-to-date-without-pressure.html"),
+    Path("playbooks/first-date-playbook.html"),
+    Path("ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"),
+    Path("ebooks/body-language/using-body-language-to-look-more-confident.html"),
+    Path("ebooks/body-language/reading-body-language-on-dates-and-app-meets.html"),
+    Path("ebooks/body-language/body-language-clues-that-show-interest.html"),
+    Path("ebooks/body-language/signals-and-subtext-in-dating.html"),
+    Path("ebooks/kissing-and-intimacy/kissing-with-confidence.html"),
+]
+
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
 }
@@ -381,6 +402,17 @@ def main() -> int:
             errors.append(f"{rel}: retired multi-destination panel layout remains")
         if "Browse the complete Guide Library" not in raw:
             errors.append(f"{rel}: missing path back to the unified Guide Library")
+
+    for rel in GUIDE_READER_PAGES:
+        raw = (ROOT / rel).read_text(encoding="utf-8")
+        if raw.count("data-guide-reader") != 1:
+            errors.append(f"{rel}: expected one shared guide-reader contract")
+        if 'aria-label="Breadcrumb"' not in raw or "Guide Library" not in raw:
+            errors.append(f"{rel}: missing standardized Guide Library breadcrumb")
+        if "In this guide" not in raw or not re.search(r'class="[^"]*(?:reader-toc|reader-jump-nav)', raw):
+            errors.append(f"{rel}: missing guide contents navigation")
+        if raw.count('class="reader-next-grid"') != 1 or raw.count("Complete Guide Library") != 1:
+            errors.append(f"{rel}: missing one shared continuation panel")
 
     comparison_raw = (ROOT / "comparisons" / "index.html").read_text(encoding="utf-8")
     if comparison_raw.count("data-compare-app") != 10:

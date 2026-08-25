@@ -24,6 +24,10 @@ const screenshotPages = [
   ["guide-library-mobile.png", "/ebooks/", 390, 844],
   ["getting-dates-category-desktop.png", "/ebooks/dates-and-escalation/", 1440, 1000],
   ["getting-dates-category-mobile.png", "/ebooks/dates-and-escalation/", 390, 844],
+  ["bio-guide-reader-desktop.png", "/guides/bio-templates.html", 1440, 1000],
+  ["bio-guide-reader-mobile.png", "/guides/bio-templates.html", 390, 844],
+  ["body-language-reader-desktop.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 1440, 1000],
+  ["body-language-reader-mobile.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 390, 844],
   ["comparisons-desktop.png", "/comparisons/", 1440, 1000],
   ["comparisons-mobile.png", "/comparisons/", 390, 844],
   ["hinge-review-desktop.png", "/reviews/hinge.html", 1440, 1000],
@@ -71,6 +75,26 @@ const expectedGuideLinks = [
   "/ebooks/mindset-and-confidence/",
   "/ebooks/body-language/",
   "/ebooks/kissing-and-intimacy/",
+];
+const guideReaderPaths = [
+  "/guides/dating-app-reset-checklist.html",
+  "/ebooks/profile-and-photos/internet-dating-guide-for-men.html",
+  "/guides/profile-photo-checklist.html",
+  "/guides/bio-templates.html",
+  "/guides/openers-that-get-replies.html",
+  "/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html",
+  "/guides/texting-that-keeps-momentum.html",
+  "/guides/dms-and-social-media.html",
+  "/guides/voice-notes-and-dm-etiquette.html",
+  "/guides/video-calls-before-meeting.html",
+  "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html",
+  "/playbooks/first-date-playbook.html",
+  "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html",
+  "/ebooks/body-language/using-body-language-to-look-more-confident.html",
+  "/ebooks/body-language/reading-body-language-on-dates-and-app-meets.html",
+  "/ebooks/body-language/body-language-clues-that-show-interest.html",
+  "/ebooks/body-language/signals-and-subtext-in-dating.html",
+  "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
 ];
 
 (async () => {
@@ -231,6 +255,35 @@ const expectedGuideLinks = [
     await guidePage.goto(`${baseUrl}/guides/?format=checklist`, { waitUntil: "domcontentloaded" });
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 2) errors.push(`Bookmarkable checklist filter failed at ${width}px`);
     await guideContext.close();
+  }
+
+  for (const width of [390, 1440]) {
+    const readerContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const readerPage = await readerContext.newPage();
+    for (const pathname of guideReaderPaths) {
+      await readerPage.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
+      const contract = await readerPage.evaluate(() => {
+        const reader = document.querySelector("[data-guide-reader]");
+        const contents = reader?.querySelector(".reader-toc, .reader-jump-nav");
+        const links = contents ? [...contents.querySelectorAll('a[href^="#"]')] : [];
+        const firstLink = links[0];
+        firstLink?.focus();
+        const focusStyle = firstLink ? getComputedStyle(firstLink) : null;
+        return {
+          reader: Boolean(reader),
+          breadcrumb: Boolean(reader?.querySelector('[aria-label="Breadcrumb"] a[href="/guides/"]')),
+          contents: Boolean(contents),
+          contentLinks: links.length,
+          missingTargets: links.filter((link) => !document.getElementById(link.getAttribute("href").slice(1))).length,
+          continuationLinks: reader?.querySelectorAll(".reader-next-grid a").length || 0,
+          focusVisible: Boolean(firstLink && document.activeElement === firstLink && focusStyle && focusStyle.outlineStyle !== "none" && Number.parseFloat(focusStyle.outlineWidth) >= 3),
+        };
+      });
+      if (!contract.reader || !contract.breadcrumb || !contract.contents || contract.contentLinks < 5 || contract.missingTargets || contract.continuationLinks !== 3 || !contract.focusVisible) {
+        errors.push(`Guide reading contract failed on ${pathname} at ${width}px: ${JSON.stringify(contract)}`);
+      }
+    }
+    await readerContext.close();
   }
 
   for (const width of [390, 1440]) {
