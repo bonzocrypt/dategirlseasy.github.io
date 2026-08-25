@@ -706,6 +706,33 @@ body.design-v2::before {
   line-height: 1.45;
 }
 
+.adult-guide-section {
+  position: relative;
+}
+
+.adult-guide-section::before {
+  position: absolute;
+  inset: 8% 0 auto;
+  z-index: -1;
+  height: 78%;
+  background: radial-gradient(circle at 82% 35%, rgba(255, 173, 92, 0.09), transparent 42%);
+  content: "";
+  pointer-events: none;
+}
+
+.adult-guide-grid .editorial-card {
+  border-color: rgba(255, 173, 92, 0.2);
+}
+
+.adult-guide-grid .editorial-card:hover {
+  border-color: rgba(255, 173, 92, 0.58);
+}
+
+.premium-guide-card {
+  background: linear-gradient(145deg, rgba(77, 52, 155, 0.35), rgba(15, 30, 48, 0.96));
+  box-shadow: inset 0 3px 0 rgba(255, 173, 92, 0.72);
+}
+
 .trust-band {
   padding: 18px 0;
 }

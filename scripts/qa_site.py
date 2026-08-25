@@ -373,6 +373,21 @@ def main() -> int:
         if raw.count('class="goal-card"') != goal_count:
             errors.append(f"{rel}: expected {goal_count} whole-link goal cards")
 
+    homepage_raw = (ROOT / "index.html").read_text(encoding="utf-8")
+    if "hero-proof" in homepage_raw:
+        errors.append("index.html: noninteractive publishing-principle boxes remain in the hero")
+    for href in (
+        "/guides/when-to-make-the-first-move.html",
+        "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+        "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
+    ):
+        if f'href="{href}"' not in homepage_raw:
+            errors.append(f"index.html: adult-only guide section lacks {href}")
+    if homepage_raw.count("data-featured-link") != 3 or "Featured this month" not in homepage_raw:
+        errors.append("index.html: expected three measurable Featured this month links")
+    if "Popular now" in homepage_raw or "Tinder vs Bumble" in homepage_raw:
+        errors.append("index.html: retired or unsupported homepage popularity treatment remains")
+
     guide_hub_raw = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):
         if contract not in guide_hub_raw:

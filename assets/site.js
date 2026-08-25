@@ -375,4 +375,16 @@
       updateControls();
     }
   }
+
+  document.querySelectorAll("[data-featured-link]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "featured_content_click",
+        featured_title: link.querySelector(".card-title")?.textContent.trim() || link.textContent.trim(),
+        featured_destination: link.getAttribute("href"),
+        featured_position: Number(link.dataset.featuredPosition || 0),
+      });
+    });
+  });
 })();

@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-25 — Homepage discovery and featured-content polish
+
+- Removed the three noninteractive publishing-principle boxes from the hero; the editorial promise remains in the clearly noninteractive trust band below it.
+- Added a dedicated **Adult-only** physical-chemistry section with three real destinations: first-move timing, kissing confidence, and the premium-style free women’s-pleasure guide.
+- Replaced the unsupported **Popular now** treatment and Tinder/Tinder-vs-Bumble priority with a manually curated **Featured this month** module: Compare Dating Apps, Dating App Reset Checklist, and Openers That Get Replies.
+- Added privacy-compatible `featured_content_click` data-layer events containing title, internal destination, and position so future selections can follow actual reader interest once enough data exists.
+- Final QA passes across 54 HTML pages, 47 sitemap URLs, 324 full-site responsive combinations, 120 representative combinations, valid HTML/JSON-LD, and 108 axe/WCAG combinations with zero violations. Homepage Lighthouse scores 99 performance, 100 accessibility, and 100 SEO, with 2.10-second LCP and zero CLS.
+- Rollback tag `backup/pre-homepage-discovery-2026-08-25` preserves deployed commit `ade7ae7fb12481bd5676965ecfe74b7356b4d548` before this enhancement.
+
 ## 2026-08-25 — Adult-only intimacy guide cluster
 
 - Published two original, consent-aware additions requested by the owner: **When to Make the First Move** as a focused quick guide and **How to Pleasure a Woman** as a premium-style, free in-depth guide.

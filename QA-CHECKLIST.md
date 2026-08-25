@@ -1,5 +1,14 @@
 # QA Checklist
 
+## Homepage discovery and featured content
+
+- [x] Noninteractive hero boxes removed; hero retains its protected H1, metadata, image, and primary routes
+- [x] Adult-only section contains exactly three whole-card guide links with no placeholder destinations
+- [x] Featured this month contains exactly three curated destinations and no unsupported Tinder or Tinder-vs-Bumble priority
+- [x] Featured-link click event records title, internal destination, and display position in the existing data layer
+- [x] Structural, valid-HTML, 324 full-site responsive, 120 representative, and 108 axe/WCAG combinations pass with no material errors
+- [x] Homepage Lighthouse scores 99 performance, 100 accessibility, 100 SEO, 2.10-second LCP, and zero CLS
+
 ## Adult-only intimacy guide cluster
 
 - [x] Both new pages are original DGE Inc. content for adults and use the shared guide-reader contract

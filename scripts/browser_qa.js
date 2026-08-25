@@ -367,6 +367,28 @@ const guideReaderPaths = [
   if (!cardPage.url().endsWith("/reviews/")) errors.push(`Whole goal-card click navigated to ${cardPage.url()}`);
   await cardContext.close();
 
+  for (const width of [390, 1440]) {
+    const homepageContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const homepage = await homepageContext.newPage();
+    await homepage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+    const homepageState = await homepage.evaluate(() => ({
+      heroProof: Boolean(document.querySelector(".hero-proof")),
+      adultGuideLinks: document.querySelectorAll(".adult-guide-grid > a").length,
+      featuredLinks: document.querySelectorAll("[data-featured-link]").length,
+      featuredHeading: document.querySelector("[data-featured-link]")?.closest("section")?.querySelector("h2")?.textContent || "",
+    }));
+    if (homepageState.heroProof || homepageState.adultGuideLinks !== 3 || homepageState.featuredLinks !== 3 || !homepageState.featuredHeading.includes("Three useful moves")) {
+      errors.push(`Homepage discovery contract failed at ${width}px: ${JSON.stringify(homepageState)}`);
+    }
+    await homepage.evaluate(() => document.querySelectorAll("[data-featured-link]").forEach((link) => link.addEventListener("click", (event) => event.preventDefault())));
+    await homepage.locator("[data-featured-link]").first().click();
+    const trackedEvent = await homepage.evaluate(() => [...(window.dataLayer || [])].reverse().find((item) => item.event === "featured_content_click"));
+    if (!trackedEvent || trackedEvent.featured_destination !== "/comparisons/" || trackedEvent.featured_position !== 1) {
+      errors.push(`Homepage featured click event failed at ${width}px: ${JSON.stringify(trackedEvent)}`);
+    }
+    await homepageContext.close();
+  }
+
   for (const [filename, pathname, width, height] of screenshotPages) {
     const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1 });
     const page = await context.newPage();

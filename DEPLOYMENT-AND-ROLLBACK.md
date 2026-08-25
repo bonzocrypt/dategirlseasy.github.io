@@ -19,6 +19,7 @@ Incremental enhancement rollback points:
 - Shared guide reading-system enhancement: rollback point `5864b47f8f1cb0682f37c2a1d44afb8849f1260a`, preserved as `backup/pre-guide-reading-system-2026-08-25`.
 - Focused Dating App Reviews hub: rollback point `1ac7e28773f2390bf746cc87845de31503565fc2`, preserved as `backup/pre-focused-review-hub-2026-08-25`.
 - Adult-only intimacy guide cluster: rollback point `c759cf28a9e60e75853a1ef5dc0745d392e2dde7`, preserved as `backup/pre-intimacy-guide-cluster-2026-08-25`.
+- Homepage discovery and featured-content polish: rollback point `ade7ae7fb12481bd5676965ecfe74b7356b4d548`, preserved as `backup/pre-homepage-discovery-2026-08-25`.
 
 ## Release
 
