@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — Tawkify matchmaking alternative and Impact verification
+
+- Published an original, independently researched Tawkify review for U.S. adult men considering a human-led alternative to dating apps, with clear relationship-goal fit, client-versus-member distinctions, pricing conflicts, company-claim caveats, screening limits, pros and cons, consultation questions, and a direct verdict.
+- Added a visually distinct **Want more help than swiping can provide?** route on the review hub without presenting Tawkify as an app or inserting it into the ten-app comparison grid or app-only dropdown.
+- Positioned the sole commercial-style Tawkify CTA at the end of the article after the verdict and official sources. The owner-supplied commission disclosure appears verbatim immediately above the link; the affiliate registry records Impact activation and tracking-link requirements.
+- Added the Impact website-verification meta tag to the homepage without changing existing GTM, analytics, SEO, Open Graph, or structured metadata.
+- Final QA passes across 55 HTML pages, 48 sitemap URLs, 330 full-site responsive combinations, 132 representative combinations, valid HTML/JSON-LD, and 110 axe/WCAG combinations with zero violations. Tawkify scores 98 performance, 100 accessibility, and 100 SEO, with 2.40-second LCP and zero CLS; the homepage and review hub remain 99/100/100.
+- The pre-deployment external review checks 138 public HTTP references: all existing destinations pass or use ordinary automated-client protection, with only the expected unpublished Tawkify canonical returning 404 before this release.
+- Rollback tag `backup/pre-tawkify-impact-2026-08-25` preserves deployed commit `409dd0e2a08c5e823106872a6ffd754dc60d3165` before this enhancement.
+
 ## 2026-08-25 — Legal publisher identity correction
 
 - Corrected the legal publisher from the previously recorded name to **Vaulted Holdings LLC** while retaining **Date Girls Easy** as the public-facing publication and brand.

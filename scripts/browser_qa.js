@@ -56,6 +56,8 @@ const screenshotPages = [
   ["coffee-meets-bagel-review-mobile.png", "/reviews/coffee-meets-bagel.html", 390, 844],
   ["plenty-of-fish-review-desktop.png", "/reviews/plenty-of-fish.html", 1440, 1000],
   ["plenty-of-fish-review-mobile.png", "/reviews/plenty-of-fish.html", 390, 844],
+  ["tawkify-review-desktop.png", "/reviews/tawkify.html", 1440, 1000],
+  ["tawkify-review-mobile.png", "/reviews/tawkify.html", 390, 844],
 ];
 
 const representativePaths = [...new Set(screenshotPages.filter((item) => item[1] !== "/404.html").map((item) => item[1]))];

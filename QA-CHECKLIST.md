@@ -1,5 +1,17 @@
 # QA Checklist
 
+## Tawkify matchmaking alternative and Impact verification
+
+- [x] Tawkify is presented as a matchmaking-service alternative and is not mixed into the app-only comparison table or dropdown
+- [x] Review covers fit, process, client versus member access, pricing context, company-reported claims, pros and cons, privacy, screening limits, contract questions, and who should avoid it
+- [x] Sole commercial-style CTA follows the final verdict and official sources; the exact owner-supplied disclosure appears immediately above it
+- [x] Affiliate registry keeps the Tawkify tracking identifier pending and records Impact activation requirements
+- [x] Homepage contains the Impact verification UUID exactly once without removing or changing existing analytics or metadata
+- [x] Structural QA and HTML/JSON-LD validation pass across 55 HTML pages and 48 sitemap URLs
+- [x] Responsive/browser QA passes 330 full-site and 132 representative combinations at 320, 375, 390, 768, 1024, and 1440 pixels
+- [x] Axe/WCAG audit passes 110 combinations with zero violations
+- [x] Tawkify Lighthouse scores 98 performance, 100 accessibility, 100 SEO, 2.40-second LCP, and zero CLS; homepage and review hub remain 99/100/100
+
 ## Legal publisher identity correction
 
 - [x] Every one of the 54 public HTML pages contains the exact approved footer once

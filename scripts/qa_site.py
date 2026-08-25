@@ -325,6 +325,20 @@ def main() -> int:
         footer_match = re.search(r'<footer class="publisher-footer">.*?</footer>', raw, flags=re.DOTALL)
         if footer_match and "data-current-year" in footer_match.group(0):
             errors.append(f"{rel}: footer must use the approved fixed 2026 copyright line")
+        if rel == "reviews/tawkify.html":
+            tawkify_disclosure = "Date Girls Easy may earn a commission if you sign up through links on this page, at no additional cost to you."
+            disclosure_position = raw.find(tawkify_disclosure)
+            outbound_position = raw.find('id="tawkify-outbound-link"')
+            if disclosure_position < 0:
+                errors.append(f"{rel}: exact Tawkify affiliate disclosure is missing")
+            if outbound_position < 0:
+                errors.append(f"{rel}: Tawkify outbound CTA is missing")
+            if disclosure_position >= 0 and outbound_position >= 0 and disclosure_position > outbound_position:
+                errors.append(f"{rel}: Tawkify disclosure must precede the first commercial CTA")
+        if rel == "reviews/index.html" and 'href="/reviews/tawkify.html"' not in raw:
+            errors.append(f"{rel}: matchmaking alternative does not link to the Tawkify review")
+        if rel == "index.html" and raw.count('<meta name="impact-site-verification" value="bc6af6c1-e12b-4c94-ad6d-3e83f48f5aa6" />') != 1:
+            errors.append(f"{rel}: Impact website-verification tag is missing or duplicated")
         if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
             errors.append(f"{rel}: contains a placeholder href")
         if raw.count("data-nav-trigger") != 2:
