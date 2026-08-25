@@ -32,7 +32,7 @@ function collectHtml(directory) {
 (async () => {
   const errors = [];
   const pages = collectHtml(root).map(urlFor).sort();
-  const widths = [320, 390, 768, 1440];
+  const widths = [320, 375, 390, 768, 1024, 1440];
 
   let browser;
   try {

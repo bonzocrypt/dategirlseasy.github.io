@@ -948,6 +948,44 @@ a.goal-card:hover {
   color: var(--gold);
 }
 
+.transition-alert {
+  margin: 0 0 clamp(34px, 6vw, 58px);
+  padding: clamp(20px, 4vw, 30px);
+  border: 1px solid rgba(246, 204, 120, 0.42);
+  border-left: 5px solid var(--gold);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 94% 12%, rgba(246, 204, 120, 0.16), transparent 18rem),
+    rgba(246, 204, 120, 0.075);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.transition-alert .panel-title {
+  max-width: 920px;
+  margin-bottom: 10px;
+}
+
+.transition-alert p:not(.eyebrow) {
+  max-width: 1040px;
+  color: #d6e0ec;
+}
+
+.transition-alert a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 6px;
+  color: var(--gold);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.transition-alert a:hover {
+  color: #fff0c7;
+}
+
 .quick-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 38px 0;

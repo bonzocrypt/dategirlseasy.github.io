@@ -1,5 +1,29 @@
 # Project Changelog
 
+## 2026-08-24 — Ten-platform review directory expansion
+
+- Completed seven original, U.S.-focused reviews for Match, eHarmony, Facebook Dating, Feeld, OkCupid, Coffee Meets Bagel, and Plenty of Fish. The approved Hinge and Bumble reviews remain in the same local batch, and the existing Tinder review was not rewritten.
+- Standardized each new page around a direct verdict, goal fit, current free-versus-paid context, explicit pros and cons, profile strategy, who should avoid the service, privacy and account exit, consent-aware safety, related guides, and dated official sources.
+- Covered Feeld's casual-dating, FWB, threesome, and consensual non-monogamy use cases directly while rejecting entitlement, secrecy, coercion, intoxication-based tactics, and surprise-partner behavior.
+- Generated seven distinct editorial image masters with the built-in OpenAI image workflow. Most subjects are intentionally in their late twenties, Feeld uses a clearly adult mid-twenties nightlife subject, and eHarmony uses an over-40 relationship-focused exception. PNG masters remain private, while each public review uses optimized 1500×1000 JPEG, 960×640 WebP, and 640×427 WebP variants.
+- Replaced Feeld's initial goth portrait with an owner-requested alternative late-twenties portrait featuring visible tattoos, multiple piercings, and a sophisticated neon lounge. The original master remains preserved privately, and the public filenames and layout contract are unchanged.
+- Replaced that interim Feeld portrait again at the owner's request with a clearly adult blonde woman in her mid-twenties, styled for a more provocative and energetic alternative nightlife scene. Both earlier masters remain preserved privately.
+- Rechecked the Feeld replacement across all six responsive widths, the complete 52-page axe audit, HTML validation, and a page-specific Lighthouse run: 100 performance, 100 accessibility, 100 SEO, 1.65-second LCP, and zero CLS.
+- Expanded the review hub to all ten platforms, added all seven new URLs to the sitemap, and added structural and browser regression coverage for every new review and its keyboard-focusable comparison tables.
+- Final local QA passes across 52 HTML pages and 45 sitemap URLs, 312 full-site responsive combinations at six widths, 104 axe/WCAG combinations with zero violations, HTML and JSON-LD validation, and all 45 new official source links with no 5xx or unreachable response outside ordinary automated-client 403 protection.
+- Lighthouse across 20 representative page types scores 98–100 performance, 100 accessibility, 100 SEO, LCP 1.50–2.40 seconds, and zero CLS. Best Practices remains 96 across the existing site due the current third-party analytics setup, with no regression from the prior checkpoint.
+- Owner approved the complete review-directory batch for publication after all material release gates passed. The pre-release live rollback point is preserved by `backup/pre-review-directory-2026-08-24` at `1b3d72ff3c6efd57f880dc212a3ce3ac4aa2cbef`.
+
+## 2026-08-24 — Hinge and Bumble review checkpoint
+
+- Added original, U.S.-focused Hinge and Bumble reviews for adult men dating women. Both include goal-specific fit, explicit pros and cons, free-versus-paid decision tables, profile strategy, privacy and ownership context, subscription exit details, safety guidance, and official dated sources. The Tinder review remains unchanged.
+- Put Bumble's major messaging transition at the top of its review. The page reflects Bumble's August 2026 live rules: Opening Moves have ended, both people receive one opening message, and 72-hour timers govern the opening exchange. Broader announced product changes remain clearly separated from live features.
+- Rechecked Hinge against an official subscription page updated on August 24, 2026 and incorporated Unlimited Undo Skips, current HingeX wording, and the live Signals limitations.
+- Preserved the approved AI-generated PNG masters in the private image archive. Added only optimized 1500×1000 JPEG, 960×640 WebP, and 640×427 WebP delivery files to the public review asset folders, with documented provenance and alt text.
+- Added the two review URLs to the review hub and sitemap without changing the Tinder review, existing public URLs, or protected metadata.
+- Local QA passes across 45 HTML pages and 38 sitemap URLs, 270 responsive browser combinations at six widths, 90 axe/WCAG combinations with zero violations, HTML/schema validation, and official external-link review. Lighthouse across 13 representative page types scores 98–100 performance, 100 accessibility, 100 SEO, LCP 1.50–2.40 seconds, and zero CLS.
+- This approved checkpoint is included in the complete ten-platform review-directory release above.
+
 ## 2026-08-24 — Navigation and guide-discovery enhancement
 
 - Preserved deployed commit `abbeb051380c2a1374f5306824683e6e131c8235` with annotated rollback tag `backup/pre-navigation-2026-08-24` and the verified local backup at `C:\DGE\backups\dategirlseasy-2026-08-24-pre-navigation`.

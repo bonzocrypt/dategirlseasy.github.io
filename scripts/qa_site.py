@@ -19,6 +19,15 @@ SITE_ORIGIN = "https://dategirlseasy.com"
 REPRESENTATIVE = {
     Path("index.html"),
     Path("reviews/tinder.html"),
+    Path("reviews/hinge.html"),
+    Path("reviews/bumble.html"),
+    Path("reviews/match.html"),
+    Path("reviews/eharmony.html"),
+    Path("reviews/facebook-dating.html"),
+    Path("reviews/feeld.html"),
+    Path("reviews/okcupid.html"),
+    Path("reviews/coffee-meets-bagel.html"),
+    Path("reviews/plenty-of-fish.html"),
     Path("comparisons/tinder-vs-bumble.html"),
     Path("guides/openers-that-get-replies.html"),
     Path("ebooks/profile-and-photos/internet-dating-guide-for-men.html"),
@@ -30,6 +39,15 @@ NOINDEX_SHELVES = {
 }
 
 SITEMAP_REQUIRED = {
+    "/reviews/hinge.html",
+    "/reviews/bumble.html",
+    "/reviews/match.html",
+    "/reviews/eharmony.html",
+    "/reviews/facebook-dating.html",
+    "/reviews/feeld.html",
+    "/reviews/okcupid.html",
+    "/reviews/coffee-meets-bagel.html",
+    "/reviews/plenty-of-fish.html",
     "/guides/dating-app-reset-checklist.html",
     "/ebooks/body-language/",
     "/ebooks/body-language/body-language-clues-that-show-interest.html",
