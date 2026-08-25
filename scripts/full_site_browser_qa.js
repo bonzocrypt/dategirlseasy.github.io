@@ -81,6 +81,9 @@ function collectHtml(directory) {
               targetExists: Boolean(document.getElementById(trigger.getAttribute("aria-controls") || "")),
               isButton: trigger.tagName === "BUTTON",
             })),
+            comparisonClipping: [...document.querySelectorAll(".comparison-dashboard > *:not([hidden])")]
+              .map((element) => element.getBoundingClientRect())
+              .some((rect) => rect.left < -1 || rect.right > window.innerWidth + 1),
             tableRegions: [...document.querySelectorAll(".comparison-table-wrap")].map((region) => {
               const visible = region.offsetParent !== null;
               region.focus();
@@ -99,6 +102,7 @@ function collectHtml(directory) {
         });
         if (!response || !response.ok()) errors.push(`${pathname} @ ${width}: HTTP ${response ? response.status() : "none"}`);
         if (result.overflow) errors.push(`${pathname} @ ${width}: overflow ${result.scrollWidth}/${result.innerWidth}`);
+        if (result.comparisonClipping) errors.push(`${pathname} @ ${width}: comparison dashboard content is clipped by the viewport`);
         if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${pathname} @ ${width}: mobile menu initial state failed`);
         if (result.navTriggers.length !== 2 || result.navTriggers.some((item) => item.expanded !== "false" || !item.controls || !item.targetExists || !item.isButton)) {
           errors.push(`${pathname} @ ${width}: shared dropdown navigation contract failed`);

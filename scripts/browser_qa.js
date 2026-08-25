@@ -47,8 +47,8 @@ const screenshotPages = [
 const representativePaths = [...new Set(screenshotPages.filter((item) => item[1] !== "/404.html").map((item) => item[1]))];
 const widths = [320, 375, 390, 768, 1024, 1440];
 const expectedDatingAppLinks = [
-  "/reviews/",
   "/comparisons/",
+  "/reviews/",
   "/reviews/bumble.html",
   "/reviews/coffee-meets-bagel.html",
   "/reviews/eharmony.html",
@@ -94,10 +94,19 @@ const expectedDatingAppLinks = [
           scrollWidth: doc.scrollWidth,
           overflow: doc.scrollWidth > window.innerWidth + 1,
           offenders,
+          comparisonClipping: [...document.querySelectorAll(".comparison-dashboard > *:not([hidden])")]
+            .map((element) => ({ element, rect: element.getBoundingClientRect() }))
+            .filter(({ rect }) => rect.left < -1 || rect.right > window.innerWidth + 1)
+            .map(({ element, rect }) => ({
+              element: `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${element.classList.length ? `.${[...element.classList].join(".")}` : ""}`,
+              left: Math.round(rect.left),
+              right: Math.round(rect.right),
+            })),
         };
       });
       if (!response || !response.ok()) errors.push(`${pathname} @ ${width}px returned ${response ? response.status() : "no response"}`);
       if (measurement.overflow) errors.push(`${pathname} @ ${width}px overflows: ${JSON.stringify(measurement)}`);
+      if (measurement.comparisonClipping.length) errors.push(`${pathname} @ ${width}px clips comparison content: ${JSON.stringify(measurement.comparisonClipping)}`);
       if (consoleErrors.length) errors.push(`${pathname} @ ${width}px console: ${consoleErrors.join(" | ")}`);
       results.push({ pathname, width, ...measurement, consoleErrors: consoleErrors.length });
       await context.close();
@@ -188,6 +197,17 @@ const expectedDatingAppLinks = [
     await comparePage.goto(`${baseUrl}/comparisons/`, { waitUntil: "domcontentloaded" });
     const choices = comparePage.locator("[data-compare-app]");
     if ((await choices.count()) !== 10) errors.push(`Comparison tool exposes ${(await choices.count())} apps at ${width}px instead of 10`);
+    if (width === 390) {
+      const mobileOverview = await comparePage.evaluate(() => {
+        const wrapper = document.querySelector(".compare-overview-wrap");
+        const rows = [...document.querySelectorAll("[data-compare-row]")];
+        return {
+          wrapperScrolls: wrapper ? wrapper.scrollWidth > wrapper.clientWidth + 1 : true,
+          clippedRows: rows.filter((row) => row.getBoundingClientRect().right > window.innerWidth + 1).length,
+        };
+      });
+      if (mobileOverview.wrapperScrolls || mobileOverview.clippedRows) errors.push(`Mobile overview still scrolls horizontally or clips rows: ${JSON.stringify(mobileOverview)}`);
+    }
     const runButton = comparePage.locator("[data-compare-run]");
     if (!(await runButton.isDisabled())) errors.push(`Compare button is enabled before two choices at ${width}px`);
     await comparePage.locator('[data-compare-app][value="tinder"]').check();
@@ -230,12 +250,28 @@ const expectedDatingAppLinks = [
     const page = await context.newPage();
     await page.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(75);
-    const useViewportCapture = pathname === "/comparisons/" && width === 390;
-    await page.screenshot({ path: path.join(outputDirectory, filename), fullPage: !useViewportCapture });
+    await page.screenshot({ path: path.join(outputDirectory, filename), fullPage: true });
     await context.close();
   }
 
+  const mobileTableContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  const mobileTablePage = await mobileTableContext.newPage();
+  await mobileTablePage.goto(`${baseUrl}/comparisons/`, { waitUntil: "domcontentloaded" });
+  await mobileTablePage.locator("#all-apps-title").scrollIntoViewIfNeeded();
+  await mobileTablePage.screenshot({ path: path.join(outputDirectory, "comparisons-mobile-table.png"), fullPage: false });
+  await mobileTableContext.close();
+
+  const mobileFocusedContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  const mobileFocusedPage = await mobileFocusedContext.newPage();
+  await mobileFocusedPage.goto(`${baseUrl}/comparisons/`, { waitUntil: "domcontentloaded" });
+  await mobileFocusedPage.locator('[data-compare-app][value="bumble"]').check();
+  await mobileFocusedPage.locator('[data-compare-app][value="tinder"]').check();
+  await mobileFocusedPage.locator("[data-compare-run]").click();
+  await mobileFocusedPage.locator("[data-compare-results]").scrollIntoViewIfNeeded();
+  await mobileFocusedPage.screenshot({ path: path.join(outputDirectory, "comparisons-mobile-focused.png"), fullPage: false });
+  await mobileFocusedContext.close();
+
   await browser.close();
-  console.log(JSON.stringify({ pagesChecked: representativePaths.length, widths, measurements: results.length, screenshots: screenshotPages.length + 1, errors }, null, 2));
+  console.log(JSON.stringify({ pagesChecked: representativePaths.length, widths, measurements: results.length, screenshots: screenshotPages.length + 3, errors }, null, 2));
   process.exitCode = errors.length ? 1 : 0;
 })();

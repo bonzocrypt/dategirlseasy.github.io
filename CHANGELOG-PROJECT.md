@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-08-25 — Mobile comparison correction and decision-table refinement
+
+- Corrected the physical-phone clipping defect on `/comparisons/`. The desktop table's 1,080 px minimum width had expanded the comparison dashboard's implicit grid track to 1,106 px while page-level clipping concealed the excess. The dashboard now uses a zero-minimum grid track, every direct child is width-constrained, and the regression suite detects clipped descendants rather than relying only on document scroll width.
+- Reordered the shared Dating Apps menu so **Compare Dating Apps** precedes **Dating App Reviews** on desktop and mobile across all 52 pages.
+- Replaced vague casual-versus-relationship strength labels with scannable best-matched goal tags: Casual dating, Hookups, FWB, Long-term, and Non-monogamy. Removed the redundant long-term-fit column.
+- Simplified free and paid access into plain-language feature summaries. Added an accessible relative paid-cost band from $ to $$$$$ based on free-tier usefulness, paywall strength, tier depth, and minimum commitment; the table makes clear that this is budget pressure rather than a quoted price or quality rating.
+- On screens up to 700 px, the ten-app overview becomes stacked app cards and focused two-or-three-app results become dedicated comparison cards. Neither mobile experience requires horizontal scrolling.
+- Final local checks pass across 52 HTML pages, 45 sitemap URLs, 312 full-site responsive combinations, 84 representative interaction/layout combinations, and 104 axe/WCAG combinations with zero violations. Targeted mobile Lighthouse scores 99 performance, 100 accessibility, 100 SEO, 2.10-second LCP, and zero CLS for both the homepage and comparison hub.
+- Rollback tag `backup/pre-mobile-comparison-fix-2026-08-25` preserves deployed commit `cbf4165d54097499bb04c1903f68d0eaa0a094a0` before this enhancement.
+
 ## 2026-08-25 — All-app comparison and review navigation enhancement
 
 - Expanded the shared Dating Apps dropdown across all 52 pages into two clear hub routes followed by all ten individual app reviews in alphabetical order. Pair-specific and paid-versus-free links now remain contextual supporting routes instead of competing with the primary menu.

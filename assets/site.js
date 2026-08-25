@@ -160,6 +160,10 @@
     const statusNode = document.querySelector("[data-compare-status]");
     const resultsSection = document.querySelector("[data-compare-results]");
     const resultsHeading = document.querySelector("[data-compare-heading]");
+    const resultCardGrid = document.querySelector("[data-compare-card-grid]");
+    const overviewRows = new Map(Array.from(document.querySelectorAll("[data-compare-row]")).map(function (row) {
+      return [row.dataset.compareRow, row];
+    }));
     const comparisonCells = Array.from(document.querySelectorAll("[data-compare-column]"));
     const validApps = new Set(compareInputs.map(function (input) { return input.value; }));
 
@@ -209,6 +213,35 @@
       window.history.replaceState({}, "", url.pathname + url.search + url.hash);
     }
 
+    function renderComparisonCards(values) {
+      if (!resultCardGrid) return;
+      resultCardGrid.replaceChildren();
+      values.forEach(function (value) {
+        const sourceRow = overviewRows.get(value);
+        if (!sourceRow) return;
+        const card = document.createElement("article");
+        card.className = "compare-result-card";
+        card.dataset.compareColumn = value;
+
+        const heading = document.createElement("h3");
+        heading.textContent = sourceRow.querySelector("th")?.textContent || value;
+        card.appendChild(heading);
+
+        const details = document.createElement("dl");
+        sourceRow.querySelectorAll("td[data-label]").forEach(function (sourceCell) {
+          const row = document.createElement("div");
+          const term = document.createElement("dt");
+          const description = document.createElement("dd");
+          term.textContent = sourceCell.dataset.label || "Detail";
+          sourceCell.childNodes.forEach(function (child) { description.appendChild(child.cloneNode(true)); });
+          row.append(term, description);
+          details.appendChild(row);
+        });
+        card.appendChild(details);
+        resultCardGrid.appendChild(card);
+      });
+    }
+
     function renderComparison(shouldFocus) {
       const values = selectedValues();
       const names = selectedNames();
@@ -219,6 +252,7 @@
       comparisonCells.forEach(function (cell) {
         cell.hidden = !values.includes(cell.dataset.compareColumn);
       });
+      renderComparisonCards(values);
       if (resultsHeading) resultsHeading.textContent = joinNames(names) + ": focused comparison";
       resultsSection.hidden = false;
       updateAddress(values);
@@ -240,6 +274,7 @@
     if (clearButton) clearButton.addEventListener("click", function () {
       compareInputs.forEach(function (input) { input.checked = false; input.disabled = false; });
       if (resultsSection) resultsSection.hidden = true;
+      if (resultCardGrid) resultCardGrid.replaceChildren();
       updateAddress([]);
       updateControls("Selection cleared. All ten apps remain visible in the overview.");
     });

@@ -261,8 +261,8 @@ def main() -> int:
             else:
                 app_menu = app_menu_match.group(0)
                 expected_links = [
-                    ("/reviews/", "Dating App Reviews"),
                     ("/comparisons/", "Compare Dating Apps"),
+                    ("/reviews/", "Dating App Reviews"),
                     *NAV_REVIEW_LINKS,
                 ]
                 actual_hrefs = re.findall(r'<a href="([^"]+)"', app_menu)
@@ -328,6 +328,16 @@ def main() -> int:
     comparison_raw = (ROOT / "comparisons" / "index.html").read_text(encoding="utf-8")
     if comparison_raw.count("data-compare-app") != 10:
         errors.append("comparisons/index.html: expected exactly 10 selectable apps")
+    if comparison_raw.count("data-compare-row") != 10:
+        errors.append("comparisons/index.html: expected exactly 10 overview app rows")
+    if comparison_raw.count('class="cost-band"') != 10:
+        errors.append("comparisons/index.html: expected exactly 10 relative paid-cost labels")
+    for retired_label in ("Casual or FWB fit", "Long-term fit", "pricing varies"):
+        if retired_label in comparison_raw:
+            errors.append(f"comparisons/index.html: retired comparison wording remains: {retired_label}")
+    for current_label in ("Best-matched goals", "Free access", "Paid access", "Relative paid cost"):
+        if current_label not in comparison_raw:
+            errors.append(f"comparisons/index.html: missing decision-table label: {current_label}")
     for contract in ("data-compare-run", "data-compare-clear", "data-compare-results", 'id="build-comparison"'):
         if contract not in comparison_raw:
             errors.append(f"comparisons/index.html: missing comparison tool contract {contract}")

@@ -21,3 +21,13 @@
 ## Checkpoint gate
 
 `python scripts/qa_site.py` passes across 52 HTML pages and 45 sitemap URLs with zero errors. `scripts/full_site_browser_qa.js` covers all pages at 320, 375, 390, 768, 1024, and 1440 pixels: 312 combinations pass with zero overflow, local-request, menu-state, console, or comparison-table accessibility errors. `scripts/browser_qa.js` captures desktop and mobile evidence for the review directory, expanded navigation, and comparison tool and passes 84 representative width combinations. The 10-app menu order, two-to-three-app comparison limit, focused columns, bookmarkable query state, clear behavior, Search Console safeguards, HTML and JSON-LD validation, 71-link external review, 21-page Lighthouse targets, and the 104-combination axe/WCAG audit pass. Platform-level 404 status is included in immediate live verification after GitHub Pages finishes building.
+
+## Mobile comparison correction
+
+- [x] Comparison dashboard descendants remain within the viewport at 320, 375, 390, 768, 1024, and 1440 pixels
+- [x] Physical-phone regression verifies the mobile overview wrapper has no horizontal scrolling and all ten app cards fit the viewport
+- [x] Mobile focused results render as stacked cards for two or three selected apps
+- [x] Compare Dating Apps precedes Dating App Reviews in every shared desktop/mobile menu
+- [x] All ten overview rows include best-matched goal tags, simplified free access, simplified paid access, and accessible relative cost labels
+- [x] Updated comparison screenshots include full mobile page, mobile overview, focused mobile results, and desktop overview
+- [x] Targeted mobile Lighthouse: 99 performance, 100 accessibility, 100 SEO, 2.10-second LCP, zero CLS
