@@ -27,7 +27,7 @@ Incremental enhancement rollback points:
 - Persistent light and dark themes: rollback point `ff30d15b757d1bdedbbe559c4ebd3dc12925b083`, preserved as `backup/pre-light-theme-2026-08-26`.
 - Light-default readability and guide-panel polish: rollback point `afb28c57b26353c0c36dcc3f9925acd2ac1dea0e`, preserved as `backup/pre-light-default-polish-2026-08-26`.
 - Sitewide light-theme reading contrast correction: rollback point `3a68433c6da5c22c820526d234c1e55381a17101`, preserved as `backup/pre-light-text-contrast-2026-08-26`.
-- Sitewide privacy consent controls: rollback point `aafa64e62e3c006ba93a30a643e5dfe0062ff06c`; implementation commit `e707c027bc33532e01b0d8f95852066b7a320458`.
+- Sitewide privacy consent controls: rollback point `aafa64e62e3c006ba93a30a643e5dfe0062ff06c`; implementation commit `e707c02c1b56625d22fd421b2f877bfdc97f9e6a`.
 
 ## Release
 
