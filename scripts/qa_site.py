@@ -36,26 +36,26 @@ REPRESENTATIVE = {
 }
 
 NAV_REVIEW_LINKS = [
-    ("/reviews/bumble.html", "Bumble Review"),
-    ("/reviews/coffee-meets-bagel.html", "Coffee Meets Bagel Review"),
-    ("/reviews/eharmony.html", "eHarmony Review"),
-    ("/reviews/facebook-dating.html", "Facebook Dating Review"),
-    ("/reviews/feeld.html", "Feeld Review"),
-    ("/reviews/hinge.html", "Hinge Review"),
-    ("/reviews/match.html", "Match Review"),
-    ("/reviews/okcupid.html", "OkCupid Review"),
-    ("/reviews/plenty-of-fish.html", "Plenty of Fish Review"),
-    ("/reviews/tinder.html", "Tinder Review"),
+    ("/reviews/bumble.html", "Bumble"),
+    ("/reviews/coffee-meets-bagel.html", "Coffee Meets Bagel"),
+    ("/reviews/eharmony.html", "eHarmony"),
+    ("/reviews/facebook-dating.html", "Facebook Dating"),
+    ("/reviews/feeld.html", "Feeld"),
+    ("/reviews/hinge.html", "Hinge"),
+    ("/reviews/match.html", "Match"),
+    ("/reviews/okcupid.html", "OkCupid"),
+    ("/reviews/plenty-of-fish.html", "Plenty of Fish"),
+    ("/reviews/tinder.html", "Tinder"),
 ]
 
 NAV_GUIDE_LINKS = [
     ("/guides/", "Guide Library"),
     ("/ebooks/", "In-Depth Guides"),
-    ("/ebooks/profile-and-photos/", "Profiles &amp; Photos"),
-    ("/ebooks/messaging-and-openers/", "Messaging &amp; Texting"),
-    ("/ebooks/dates-and-escalation/", "Getting Dates &amp; Chemistry"),
-    ("/ebooks/mindset-and-confidence/", "Confidence &amp; Social Skills"),
-    ("/ebooks/body-language/", "Body Language"),
+    ("/ebooks/profile-and-photos/", "Build a Better Profile"),
+    ("/ebooks/messaging-and-openers/", "Start Better Conversations"),
+    ("/ebooks/dates-and-escalation/", "Get More Dates"),
+    ("/ebooks/mindset-and-confidence/", "Build Confidence"),
+    ("/ebooks/body-language/", "Read Interest &amp; Body Language"),
     ("/ebooks/kissing-and-intimacy/", "Kissing &amp; Intimacy"),
 ]
 
@@ -351,39 +351,45 @@ def main() -> int:
             errors.append(f"{rel}: shared publisher header is missing")
         else:
             header = header_match.group(0)
-            app_menu_match = re.search(r'<div class="nav-submenu nav-submenu-apps".*?</div>\s*</div>', header, flags=re.DOTALL)
-            if not app_menu_match:
+            app_menu_start = header.find('<div class="nav-submenu nav-submenu-apps"')
+            guide_menu_start = header.find('<div class="nav-submenu nav-submenu-guides"')
+            if app_menu_start < 0 or guide_menu_start < 0:
                 errors.append(f"{rel}: expanded Dating Apps menu is missing")
             else:
-                app_menu = app_menu_match.group(0)
+                app_menu = header[app_menu_start:guide_menu_start]
                 expected_links = [
                     ("/comparisons/", "Compare Dating Apps"),
-                    ("/reviews/", "Dating App Reviews"),
+                    ("/reviews/", "Browse All Reviews"),
+                    ("/reviews/tawkify.html", "Consider Matchmaking"),
                     *NAV_REVIEW_LINKS,
                 ]
-                actual_hrefs = re.findall(r'<a href="([^"]+)"', app_menu)
+                actual_hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', app_menu)
                 expected_hrefs = [href for href, _label in expected_links]
                 if actual_hrefs != expected_hrefs:
                     errors.append(f"{rel}: Dating Apps links are missing, duplicated, or out of order")
                 for href, label in expected_links:
-                    if f'<a href="{href}"' not in app_menu or label not in app_menu:
+                    if not re.search(rf'<a\b[^>]*\bhref="{re.escape(href)}"', app_menu) or label not in app_menu:
                         errors.append(f"{rel}: Dating Apps menu lacks {label} ({href})")
                 if "Tinder vs Bumble" in app_menu:
                     errors.append(f"{rel}: contextual Tinder vs Bumble link remains in global navigation")
-            guide_start = header.find('<div class="nav-submenu nav-submenu-guides"')
+                if "Beyond apps" not in app_menu or "Individual app reviews" not in app_menu:
+                    errors.append(f"{rel}: Dating Apps menu hierarchy is incomplete")
+            guide_start = guide_menu_start
             if guide_start < 0:
                 errors.append(f"{rel}: unified Guides menu is missing")
             else:
                 guide_menu = header[guide_start:]
-                actual_guide_hrefs = re.findall(r'<a href="([^"]+)"', guide_menu)
+                actual_guide_hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', guide_menu)
                 expected_guide_hrefs = [href for href, _label in NAV_GUIDE_LINKS]
                 if actual_guide_hrefs != expected_guide_hrefs:
                     errors.append(f"{rel}: Guide links are missing, duplicated, or out of order")
                 for href, label in NAV_GUIDE_LINKS:
-                    if f'<a href="{href}"' not in guide_menu or label not in guide_menu:
+                    if not re.search(rf'<a\b[^>]*\bhref="{re.escape(href)}"', guide_menu) or label not in guide_menu:
                         errors.append(f"{rel}: Guides menu lacks {label} ({href})")
                 if "All Dating Guides" in guide_menu:
                     errors.append(f"{rel}: retired All Dating Guides label remains in navigation")
+                if "Browse by goal" not in guide_menu:
+                    errors.append(f"{rel}: Guides menu lacks goal-oriented hierarchy")
         if "fonts.googleapis.com" in raw or "fonts.gstatic.com" in raw or "Bricolage" in raw:
             errors.append(f"{rel}: external or retired typography dependency remains")
         if re.search(r'<(?:article|div|li)[^>]*class="[^"]*goal-card', raw, flags=re.IGNORECASE):

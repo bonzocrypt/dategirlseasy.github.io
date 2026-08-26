@@ -62,9 +62,7 @@ const screenshotPages = [
 
 const representativePaths = [...new Set(screenshotPages.filter((item) => item[1] !== "/404.html").map((item) => item[1]))];
 const widths = [320, 375, 390, 768, 1024, 1440];
-const expectedDatingAppLinks = [
-  "/comparisons/",
-  "/reviews/",
+const appReviewLinks = [
   "/reviews/bumble.html",
   "/reviews/coffee-meets-bagel.html",
   "/reviews/eharmony.html",
@@ -75,6 +73,12 @@ const expectedDatingAppLinks = [
   "/reviews/okcupid.html",
   "/reviews/plenty-of-fish.html",
   "/reviews/tinder.html",
+];
+const expectedDatingAppLinks = [
+  "/comparisons/",
+  "/reviews/",
+  "/reviews/tawkify.html",
+  ...appReviewLinks,
 ];
 const expectedGuideLinks = [
   "/guides/",
@@ -196,6 +200,7 @@ const guideReaderPaths = [
   if ((await desktopNavPage.locator("#nav-dating-apps").innerText()).includes("Tinder vs Bumble")) {
     errors.push("Tinder vs Bumble remains in the global Dating Apps dropdown");
   }
+  await desktopNavPage.screenshot({ path: path.join(outputDirectory, "homepage-desktop-dating-apps-menu.png"), fullPage: false });
   const firstAppLink = desktopNavPage.locator("#nav-dating-apps a").first();
   await desktopNavPage.keyboard.press("Tab");
   if (!(await firstAppLink.evaluate((node) => document.activeElement === node))) errors.push("Desktop dropdown Tab order does not enter its first link");
@@ -213,9 +218,39 @@ const guideReaderPaths = [
     errors.push(`Desktop Guide links are missing or out of order: ${JSON.stringify(desktopGuideLinks)}`);
   }
   if ((await desktopNavPage.locator("#nav-guides").innerText()).includes("All Dating Guides")) errors.push("Retired All Dating Guides label remains in desktop navigation");
+  await desktopNavPage.screenshot({ path: path.join(outputDirectory, "homepage-desktop-guides-menu.png"), fullPage: false });
   await desktopNavPage.locator("main").click({ position: { x: 5, y: 5 } });
   if ((await guidesTriggerDesktop.getAttribute("aria-expanded")) !== "false") errors.push("Clicking outside does not close the desktop dropdown");
   await desktopNavContext.close();
+
+  for (const width of [1024, 1440]) {
+    const menuFitContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const menuFitPage = await menuFitContext.newPage();
+    await menuFitPage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+    for (const label of ["Dating Apps", "Guides"]) {
+      const trigger = menuFitPage.locator("[data-nav-trigger]").filter({ hasText: label });
+      await trigger.click();
+      const menuId = label === "Dating Apps" ? "#nav-dating-apps" : "#nav-guides";
+      const fit = await menuFitPage.locator(menuId).evaluate((menu) => {
+        const rect = menu.getBoundingClientRect();
+        return {
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          top: Math.round(rect.top),
+          bottom: Math.round(rect.bottom),
+          visibleLinks: [...menu.querySelectorAll("a")].filter((link) => {
+            const linkRect = link.getBoundingClientRect();
+            return linkRect.width > 0 && linkRect.height > 0;
+          }).length,
+        };
+      });
+      if (fit.left < 0 || fit.right > width || fit.top < 0 || fit.bottom > 900 || fit.visibleLinks === 0) {
+        errors.push(`${label} desktop menu does not fit at ${width}px: ${JSON.stringify(fit)}`);
+      }
+      await trigger.click();
+    }
+    await menuFitContext.close();
+  }
 
   const nestedMobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   const nestedMobilePage = await nestedMobileContext.newPage();
@@ -232,6 +267,7 @@ const guideReaderPaths = [
   const lastMobileAppLink = nestedMobilePage.locator("#nav-dating-apps a").last();
   await lastMobileAppLink.scrollIntoViewIfNeeded();
   if (!(await lastMobileAppLink.isVisible())) errors.push("The last alphabetical app review is not reachable in the mobile menu");
+  await nestedMobilePage.screenshot({ path: path.join(outputDirectory, "homepage-mobile-dating-apps-menu.png"), fullPage: false });
   await mobileAppsTrigger.click();
   await mobileGuidesTrigger.click();
   if ((await mobileGuidesTrigger.getAttribute("aria-expanded")) !== "true" || (await nestedMobilePage.locator("#nav-guides").getAttribute("data-open")) !== "true") {
@@ -311,7 +347,7 @@ const guideReaderPaths = [
       comparisonRoutes: document.querySelectorAll('main a[href="/comparisons/"]').length,
       directoryTarget: Boolean(document.getElementById("review-directory")),
     }));
-    const expectedReviewHrefs = expectedDatingAppLinks.slice(2);
+    const expectedReviewHrefs = appReviewLinks;
     if (JSON.stringify(reviewState.reviewHrefs) !== JSON.stringify(expectedReviewHrefs)) errors.push(`Review hub cards are missing or out of order at ${width}px: ${JSON.stringify(reviewState.reviewHrefs)}`);
     if (reviewState.heroHasTinderPriority || reviewState.comparisonRoutes < 2 || !reviewState.directoryTarget) errors.push(`Review hub decision hierarchy failed at ${width}px: ${JSON.stringify(reviewState)}`);
     await reviewContext.close();

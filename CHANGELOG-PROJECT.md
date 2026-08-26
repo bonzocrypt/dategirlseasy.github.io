@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-26 — Desktop navigation hierarchy refinement
+
+- Reorganized both desktop dropdowns into a clear two-part flow: prioritized starting routes on the left and compact, scannable destination links on the right. Existing URLs, page metadata, navigation triggers, and active-page behavior remain unchanged.
+- Dating Apps now leads with **Compare Dating Apps**, follows with **Browse All Reviews**, lists all ten app reviews alphabetically without repeating “Review,” and presents Tawkify separately under **Beyond apps** as a matchmaking alternative rather than a dating app.
+- Guides now leads with the unified **Guide Library** and **In-Depth Guides**, then uses goal-oriented labels such as **Build a Better Profile**, **Start Better Conversations**, and **Get More Dates** while preserving every destination URL.
+- Preserved the mobile navigation as a single stacked column with full reachability, large touch targets, keyboard focus, and Escape behavior. Added regression coverage and visual evidence for both desktop menus and the mobile Dating Apps menu.
+- Final QA passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 330 full-site responsive combinations, 132 representative combinations, and 110 axe/WCAG combinations with zero violations. Homepage, review hub, and Tawkify Lighthouse results remain 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.40-second LCP, and zero CLS.
+- All 138 external URLs pass review with no material failures; six use ordinary automated-client protection. Rollback tag `backup/pre-desktop-navigation-refinement-2026-08-26` preserves deployed commit `a3c48f9dacf54ff2d2fef2e5272cd6d5511600a4` before this enhancement.
+
 ## 2026-08-25 — Tawkify matchmaking alternative and Impact verification
 
 - Published an original, independently researched Tawkify review for U.S. adult men considering a human-led alternative to dating apps, with clear relationship-goal fit, client-versus-member distinctions, pricing conflicts, company-claim caveats, screening limits, pros and cons, consultation questions, and a direct verdict.

@@ -23,6 +23,7 @@ Incremental enhancement rollback points:
 - CJ privacy and affiliate-compliance readiness: rollback point `a90decce0a3485db82fb56ab8aa60cca3b47cd5b`, preserved as `backup/pre-cj-privacy-2026-08-25`.
 - Legal publisher identity correction: rollback point `cad930faac5b35ec2ca5f49a1cdd9c466d36cc51`, preserved as `backup/pre-vaulted-publisher-2026-08-25`.
 - Tawkify matchmaking alternative and Impact verification: rollback point `409dd0e2a08c5e823106872a6ffd754dc60d3165`, preserved as `backup/pre-tawkify-impact-2026-08-25`.
+- Desktop navigation hierarchy refinement: rollback point `a3c48f9dacf54ff2d2fef2e5272cd6d5511600a4`, preserved as `backup/pre-desktop-navigation-refinement-2026-08-26`.
 
 ## Release
 

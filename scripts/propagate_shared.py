@@ -42,6 +42,7 @@ def header_markup(relative: Path) -> str:
         "/reviews/match.html": "reviews/match.html",
         "/reviews/okcupid.html": "reviews/okcupid.html",
         "/reviews/plenty-of-fish.html": "reviews/plenty-of-fish.html",
+        "/reviews/tawkify.html": "reviews/tawkify.html",
         "/reviews/tinder.html": "reviews/tinder.html",
         "/guides/": "guides/index.html",
         "/ebooks/": "ebooks/index.html",
@@ -68,23 +69,30 @@ def header_markup(relative: Path) -> str:
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger{apps_active}" type="button" aria-expanded="false" aria-controls="nav-dating-apps" data-nav-trigger>Dating Apps<span class="nav-chevron" aria-hidden="true"></span></button>
             <div class="nav-submenu nav-submenu-apps" id="nav-dating-apps" data-nav-submenu data-open="false">
-              <div class="nav-submenu-featured">
-                <a href="/comparisons/"{current_for("/comparisons/")}><strong>Compare Dating Apps</strong><span>Compare two or three side by side</span></a>
-                <a href="/reviews/"{current_for("/reviews/")}><strong>Dating App Reviews</strong><span>Research one platform in depth</span></a>
+              <div class="nav-menu-primary">
+                <span class="nav-submenu-label">Start here</span>
+                <div class="nav-menu-paths">
+                  <a class="nav-menu-path nav-menu-path-primary" href="/comparisons/"{current_for("/comparisons/")}><strong>Compare Dating Apps</strong><span>Narrow two or three options side by side</span></a>
+                  <a class="nav-menu-path" href="/reviews/"{current_for("/reviews/")}><strong>Browse All Reviews</strong><span>Research each platform in depth</span></a>
+                </div>
+                <div class="nav-menu-beyond">
+                  <span class="nav-submenu-label">Beyond apps</span>
+                  <a class="nav-menu-path nav-menu-matchmaking" href="/reviews/tawkify.html"{current_for("/reviews/tawkify.html")}><strong>Consider Matchmaking</strong><span>Explore a more personalized alternative</span></a>
+                </div>
               </div>
-              <div class="nav-submenu-section">
+              <div class="nav-submenu-section nav-menu-directory">
                 <span class="nav-submenu-label">Individual app reviews</span>
                 <div class="nav-app-links">
-                  <a href="/reviews/bumble.html"{current_for("/reviews/bumble.html")}>Bumble Review</a>
-                  <a href="/reviews/coffee-meets-bagel.html"{current_for("/reviews/coffee-meets-bagel.html")}>Coffee Meets Bagel Review</a>
-                  <a href="/reviews/eharmony.html"{current_for("/reviews/eharmony.html")}>eHarmony Review</a>
-                  <a href="/reviews/facebook-dating.html"{current_for("/reviews/facebook-dating.html")}>Facebook Dating Review</a>
-                  <a href="/reviews/feeld.html"{current_for("/reviews/feeld.html")}>Feeld Review</a>
-                  <a href="/reviews/hinge.html"{current_for("/reviews/hinge.html")}>Hinge Review</a>
-                  <a href="/reviews/match.html"{current_for("/reviews/match.html")}>Match Review</a>
-                  <a href="/reviews/okcupid.html"{current_for("/reviews/okcupid.html")}>OkCupid Review</a>
-                  <a href="/reviews/plenty-of-fish.html"{current_for("/reviews/plenty-of-fish.html")}>Plenty of Fish Review</a>
-                  <a href="/reviews/tinder.html"{current_for("/reviews/tinder.html")}>Tinder Review</a>
+                  <a href="/reviews/bumble.html"{current_for("/reviews/bumble.html")}>Bumble</a>
+                  <a href="/reviews/coffee-meets-bagel.html"{current_for("/reviews/coffee-meets-bagel.html")}>Coffee Meets Bagel</a>
+                  <a href="/reviews/eharmony.html"{current_for("/reviews/eharmony.html")}>eHarmony</a>
+                  <a href="/reviews/facebook-dating.html"{current_for("/reviews/facebook-dating.html")}>Facebook Dating</a>
+                  <a href="/reviews/feeld.html"{current_for("/reviews/feeld.html")}>Feeld</a>
+                  <a href="/reviews/hinge.html"{current_for("/reviews/hinge.html")}>Hinge</a>
+                  <a href="/reviews/match.html"{current_for("/reviews/match.html")}>Match</a>
+                  <a href="/reviews/okcupid.html"{current_for("/reviews/okcupid.html")}>OkCupid</a>
+                  <a href="/reviews/plenty-of-fish.html"{current_for("/reviews/plenty-of-fish.html")}>Plenty of Fish</a>
+                  <a href="/reviews/tinder.html"{current_for("/reviews/tinder.html")}>Tinder</a>
                 </div>
               </div>
             </div>
@@ -92,18 +100,21 @@ def header_markup(relative: Path) -> str:
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger{guides_active}" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
             <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-open="false">
-              <div class="nav-submenu-featured">
-                <a href="/guides/"{current_for("/guides/")}><strong>Guide Library</strong><span>Search every guide by goal, topic, or format</span></a>
-                <a href="/ebooks/"{current_for("/ebooks/")}><strong>In-Depth Guides</strong><span>Longer, chapter-based reading</span></a>
+              <div class="nav-menu-primary">
+                <span class="nav-submenu-label">Start here</span>
+                <div class="nav-menu-paths">
+                  <a class="nav-menu-path nav-menu-path-primary" href="/guides/"{current_for("/guides/")}><strong>Guide Library</strong><span>Find advice by goal, topic, or format</span></a>
+                  <a class="nav-menu-path" href="/ebooks/"{current_for("/ebooks/")}><strong>In-Depth Guides</strong><span>Read longer, chapter-based guides</span></a>
+                </div>
               </div>
-              <div class="nav-submenu-section">
-                <span class="nav-submenu-label">Browse by topic</span>
+              <div class="nav-submenu-section nav-menu-directory">
+                <span class="nav-submenu-label">Browse by goal</span>
                 <div class="nav-guide-links">
-                  <a href="/ebooks/profile-and-photos/"{current_for("/ebooks/profile-and-photos/")}>Profiles &amp; Photos</a>
-                  <a href="/ebooks/messaging-and-openers/"{current_for("/ebooks/messaging-and-openers/")}>Messaging &amp; Texting</a>
-                  <a href="/ebooks/dates-and-escalation/"{current_for("/ebooks/dates-and-escalation/")}>Getting Dates &amp; Chemistry</a>
-                  <a href="/ebooks/mindset-and-confidence/"{current_for("/ebooks/mindset-and-confidence/")}>Confidence &amp; Social Skills</a>
-                  <a href="/ebooks/body-language/"{current_for("/ebooks/body-language/")}>Body Language</a>
+                  <a href="/ebooks/profile-and-photos/"{current_for("/ebooks/profile-and-photos/")}>Build a Better Profile</a>
+                  <a href="/ebooks/messaging-and-openers/"{current_for("/ebooks/messaging-and-openers/")}>Start Better Conversations</a>
+                  <a href="/ebooks/dates-and-escalation/"{current_for("/ebooks/dates-and-escalation/")}>Get More Dates</a>
+                  <a href="/ebooks/mindset-and-confidence/"{current_for("/ebooks/mindset-and-confidence/")}>Build Confidence</a>
+                  <a href="/ebooks/body-language/"{current_for("/ebooks/body-language/")}>Read Interest &amp; Body Language</a>
                   <a href="/ebooks/kissing-and-intimacy/"{current_for("/ebooks/kissing-and-intimacy/")}>Kissing &amp; Intimacy</a>
                 </div>
               </div>

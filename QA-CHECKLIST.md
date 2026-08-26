@@ -1,5 +1,19 @@
 # QA Checklist
 
+## Desktop navigation hierarchy refinement
+
+- [x] Dating Apps prioritizes Compare Dating Apps and Browse All Reviews before the individual directory
+- [x] All ten app reviews remain alphabetized with unchanged URLs and concise app-name labels
+- [x] Tawkify appears only in a separately labeled Beyond apps matchmaking route and remains outside the app comparison tool
+- [x] Guides prioritizes the unified library and in-depth view before six goal-oriented topic routes
+- [x] Both expanded desktop menus remain inside the viewport at 1024 and 1440 pixels
+- [x] Mobile menus remain single-column, scrollable within the header panel, keyboard accessible, and fully reachable
+- [x] Structural QA and valid HTML/JSON-LD pass across 55 HTML pages and 48 sitemap URLs
+- [x] Responsive/browser QA passes 330 full-site and 132 representative combinations at 320, 375, 390, 768, 1024, and 1440 pixels
+- [x] Axe/WCAG audit passes 110 combinations with zero violations
+- [x] Homepage, review hub, and Tawkify Lighthouse scores remain 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.40-second LCP, and zero CLS
+- [x] All 138 external URLs pass with no material failures
+
 ## Tawkify matchmaking alternative and Impact verification
 
 - [x] Tawkify is presented as a matchmaking-service alternative and is not mixed into the app-only comparison table or dropdown
