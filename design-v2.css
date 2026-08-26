@@ -3643,6 +3643,257 @@ a.goal-card:hover {
   text-decoration-color: currentColor;
 }
 
+/* Date-idea finder and guide */
+.date-ideas-hero-image {
+  overflow: hidden;
+  margin: 0 0 30px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--panel-soft);
+  box-shadow: var(--shadow);
+}
+
+.date-ideas-hero-image img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+}
+
+.date-ideas-tool {
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(111, 88, 255, 0.14), transparent 38%),
+    var(--panel-soft);
+  box-shadow: var(--shadow);
+}
+
+.date-search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+  margin-top: 22px;
+}
+
+.date-search-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.date-search-form input {
+  min-width: 0;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  color: var(--ink);
+  background: var(--surface-raised);
+  font: inherit;
+}
+
+.date-search-form input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.date-location-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.date-location-examples button {
+  min-height: 40px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--link);
+  background: var(--surface-raised);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+:root[data-theme="light"] .date-location-examples button {
+  color: #06675d;
+}
+
+.date-location-examples button:hover {
+  border-color: var(--accent);
+}
+
+.date-location-examples button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.date-ideas-status {
+  min-height: 1.6em;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.viator-consent-gate {
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background: var(--surface-raised);
+}
+
+.viator-consent-gate h3 {
+  margin-top: 0;
+}
+
+.affiliate-disclosure {
+  margin-top: 22px;
+  padding: 13px 15px;
+  border-left: 4px solid var(--coral);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface-raised);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.viator-widget-host {
+  min-width: 0;
+  margin-top: 18px;
+}
+
+.viator-widget-host[aria-busy="true"] {
+  min-height: 180px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 18px;
+  background: linear-gradient(100deg, transparent 20%, rgba(111, 88, 255, 0.1) 45%, transparent 70%);
+  background-size: 220% 100%;
+  animation: date-ideas-loading 1.4s ease infinite;
+}
+
+@keyframes date-ideas-loading {
+  to { background-position: -220% 0; }
+}
+
+.widget-privacy-note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.date-idea-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.date-idea-grid article {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel-soft);
+}
+
+.date-idea-grid h3 {
+  margin-top: 0;
+}
+
+:root[data-theme="light"] body.design-v2 .template {
+  background: #f8fafc;
+}
+
+:root[data-theme="light"] body.design-v2 code {
+  color: #0f5f56;
+}
+
+.date-ideas-page .template strong {
+  color: var(--ink);
+}
+
+.homepage-date-ideas-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 20px;
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  color: var(--ink);
+  background:
+    linear-gradient(120deg, rgba(111, 88, 255, 0.14), rgba(27, 207, 191, 0.08)),
+    var(--panel-soft);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+
+.homepage-date-ideas-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.homepage-date-ideas-card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.homepage-date-ideas-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--teal));
+  font-size: 1.45rem;
+}
+
+.homepage-date-ideas-card h3,
+.homepage-date-ideas-card p {
+  margin: 0;
+}
+
+.homepage-date-ideas-card h3 {
+  margin-bottom: 6px;
+  font-size: clamp(1.25rem, 2.3vw, 1.7rem);
+}
+
+.homepage-date-ideas-card .card-link {
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .date-search-form,
+  .date-idea-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .date-search-form .button {
+    width: 100%;
+  }
+
+  .homepage-date-ideas-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .homepage-date-ideas-card .card-link {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viator-widget-host[aria-busy="true"] {
+    animation: none;
+  }
+}
+
 @media (max-width: 800px) {
   .consent-banner {
     right: 12px;

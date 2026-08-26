@@ -16,7 +16,7 @@ All three will be independently structured and written. Archive files are resear
 - Flirting and sexual tension without manipulation
 - Masculine confidence without dominance theater
 - Casual dating and FWB agreements
-- Date ideas and romantic momentum
+- Date ideas and romantic momentum — first interactive guide complete as Find Date Ideas Near You; broader romantic-momentum material remains queued
 
 ## Archive hold
 

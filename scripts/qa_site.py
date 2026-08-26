@@ -31,6 +31,7 @@ REPRESENTATIVE = {
     Path("reviews/plenty-of-fish.html"),
     Path("comparisons/tinder-vs-bumble.html"),
     Path("guides/openers-that-get-replies.html"),
+    Path("guides/date-ideas-near-you/index.html"),
     Path("ebooks/profile-and-photos/internet-dating-guide-for-men.html"),
     Path("ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"),
 }
@@ -72,6 +73,7 @@ GUIDE_READER_PAGES = [
     Path("guides/video-calls-before-meeting.html"),
     Path("ebooks/dates-and-escalation/from-match-to-date-without-pressure.html"),
     Path("playbooks/first-date-playbook.html"),
+    Path("guides/date-ideas-near-you/index.html"),
     Path("ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html"),
     Path("ebooks/body-language/using-body-language-to-look-more-confident.html"),
     Path("ebooks/body-language/reading-body-language-on-dates-and-app-meets.html"),
@@ -97,6 +99,7 @@ SITEMAP_REQUIRED = {
     "/reviews/coffee-meets-bagel.html",
     "/reviews/plenty-of-fish.html",
     "/guides/dating-app-reset-checklist.html",
+    "/guides/date-ideas-near-you/",
     "/ebooks/body-language/",
     "/ebooks/body-language/body-language-clues-that-show-interest.html",
     "/ebooks/body-language/reading-body-language-on-dates-and-app-meets.html",
@@ -253,8 +256,8 @@ def main() -> int:
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"data/affiliate-programs.json: invalid registry: {exc}")
         affiliate_registry = {}
-    if affiliate_registry.get("linksEnabled") is not False:
-        errors.append("data/affiliate-programs.json: affiliate links must remain globally disabled")
+    if not isinstance(affiliate_registry.get("linksEnabled"), bool):
+        errors.append("data/affiliate-programs.json: linksEnabled must be a boolean")
     consent_config = affiliate_registry.get("consentManagement", {})
     if consent_config.get("implementation") != "custom-sitewide":
         errors.append("data/affiliate-programs.json: custom sitewide consent manager is not registered")
@@ -276,6 +279,16 @@ def main() -> int:
             errors.append("data/affiliate-programs.json: CJ promotional method must remain website/editorial content only")
         if len(cj_program.get("activationRequirements", [])) < 6:
             errors.append("data/affiliate-programs.json: CJ activation requirements are incomplete")
+    viator_program = next((item for item in affiliate_registry.get("programs", []) if item.get("id") == "viator"), None)
+    if not viator_program:
+        errors.append("data/affiliate-programs.json: missing Viator entry")
+    else:
+        if viator_program.get("status") != "active-consent-gated-widget":
+            errors.append("data/affiliate-programs.json: Viator widget is not registered as active and consent-gated")
+        if viator_program.get("trackingIdentifier") != "P00316944" or viator_program.get("widgetReference") != "W-1e85be51-22c9-4ee6-981a-a49ddc586901":
+            errors.append("data/affiliate-programs.json: Viator partner or widget identifier does not match the owner-supplied embed")
+        if viator_program.get("consentCategory") != "affiliate":
+            errors.append("data/affiliate-programs.json: Viator must use the affiliate consent category")
 
     for page in sorted(ROOT.rglob("*.html")):
         if any(part.startswith(".") for part in page.relative_to(ROOT).parts):
@@ -504,6 +517,8 @@ def main() -> int:
         "Affiliate and third-party experiences",
         "Privacy choices",
         "Global Privacy Control",
+        "Viator experience widget and affiliate attribution",
+        "https://www.viator.com/support/privacyPolicy",
     )
     for required_text in privacy_contract:
         if required_text not in privacy_raw:
@@ -511,12 +526,45 @@ def main() -> int:
     if "utm_source=" in privacy_raw:
         errors.append("privacy.html: tracking parameters must not appear in policy links")
 
+    disclosure_raw = (ROOT / "disclosure.html").read_text(encoding="utf-8")
+    if not re.search(r"affiliate links or\s+third-party booking widgets", disclosure_raw):
+        errors.append("disclosure.html: active Viator booking-widget disclosure is missing")
+
+    date_ideas_raw = (ROOT / "guides" / "date-ideas-near-you" / "index.html").read_text(encoding="utf-8")
+    date_ideas_script = (ROOT / "assets" / "date-ideas.js").read_text(encoding="utf-8")
+    for required_text in (
+        'data-date-ideas-form',
+        'data-date-location',
+        'data-viator-consent-gate',
+        'data-viator-host',
+        'Affiliate disclosure:',
+        '/assets/date-ideas.js',
+    ):
+        if required_text not in date_ideas_raw:
+            errors.append(f"guides/date-ideas-near-you/index.html: missing widget or disclosure contract {required_text}")
+    if 'src="https://www.viator.com/orion/partner/widget.js"' in date_ideas_raw:
+        errors.append("guides/date-ideas-near-you/index.html: Viator script bypasses the affiliate consent gate")
+    for required_script_text in (
+        'P00316944',
+        'W-1e85be51-22c9-4ee6-981a-a49ddc586901',
+        'window.DGEConsent.allows("affiliate")',
+        'dge:consentchange',
+        'script.dataset.dgeService = "viator-widget"',
+    ):
+        if required_script_text not in date_ideas_script:
+            errors.append(f"assets/date-ideas.js: missing Viator consent contract {required_script_text}")
+    if 'href="/guides/date-ideas-near-you/"' not in homepage_raw:
+        errors.append("index.html: missing homepage route to the date-idea finder")
+    for rel in ("playbooks/first-date-playbook.html", "reviews/tinder.html", "reviews/bumble.html", "reviews/hinge.html"):
+        if 'href="/guides/date-ideas-near-you/"' not in (ROOT / rel).read_text(encoding="utf-8"):
+            errors.append(f"{rel}: missing contextual date-idea finder link")
+
     guide_hub_raw = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
     for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):
         if contract not in guide_hub_raw:
             errors.append(f"guides/index.html: missing unified library contract {contract}")
-    if guide_hub_raw.count("data-guide-item") != 20:
-        errors.append("guides/index.html: expected exactly 20 searchable public guide entries")
+    if guide_hub_raw.count("data-guide-item") != 21:
+        errors.append("guides/index.html: expected exactly 21 searchable public guide entries")
     if "All Dating Guides" in guide_hub_raw:
         errors.append("guides/index.html: retired split-library wording remains")
 
@@ -529,7 +577,7 @@ def main() -> int:
     topic_shelves = {
         Path("ebooks/profile-and-photos/index.html"): 3,
         Path("ebooks/messaging-and-openers/index.html"): 4,
-        Path("ebooks/dates-and-escalation/index.html"): 2,
+        Path("ebooks/dates-and-escalation/index.html"): 3,
         Path("ebooks/mindset-and-confidence/index.html"): 1,
         Path("ebooks/body-language/index.html"): 2,
         Path("ebooks/kissing-and-intimacy/index.html"): 2,

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "lastEditorialReview": "2026-08-26",
-  "linksEnabled": false,
+  "linksEnabled": true,
   "consentManagement": {
     "implementation": "custom-sitewide",
     "version": 1,
@@ -73,11 +73,13 @@
     {
       "id": "viator",
       "name": "Viator",
-      "status": "application-target",
+      "status": "active-consent-gated-widget",
       "officialDestination": "https://partnerresources.viator.com/",
-      "trackingIdentifier": null,
-      "allowedPlacements": ["date-idea guides", "city guides"],
-      "verificationDate": "2026-08-12",
+      "trackingIdentifier": "P00316944",
+      "widgetReference": "W-1e85be51-22c9-4ee6-981a-a49ddc586901",
+      "consentCategory": "affiliate",
+      "allowedPlacements": ["/guides/date-ideas-near-you/"],
+      "verificationDate": "2026-08-26",
       "disclosureRequirement": "Clear affiliate disclosure near monetized date recommendations."
     },
     {

@@ -347,13 +347,13 @@ const guideReaderPaths = [
     const guidePage = await guideContext.newPage();
     await guidePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
     const items = guidePage.locator("[data-guide-item]");
-    if ((await items.count()) !== 20) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 20`);
+    if ((await items.count()) !== 21) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 21`);
     await guidePage.locator('[data-guide-filter="topic"][data-guide-value="messaging"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 5) errors.push(`Messaging filter failed at ${width}px`);
     await guidePage.locator('[data-guide-filter="format"][data-guide-value="in-depth"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 1) errors.push(`Combined Guide filters failed at ${width}px`);
     await guidePage.locator("[data-guide-clear]").click();
-    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 20) errors.push(`Clearing Guide filters failed at ${width}px`);
+    if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 21) errors.push(`Clearing Guide filters failed at ${width}px`);
     if (new URL(guidePage.url()).search) errors.push(`Clearing Guide filters left query parameters at ${width}px`);
     await guidePage.locator('[data-guide-filter="topic"][data-guide-value="intimacy"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 3) errors.push(`Kissing & Intimacy filter failed at ${width}px`);
