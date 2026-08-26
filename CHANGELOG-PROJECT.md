@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-26 — Local date ideas guide and Viator experience finder
+
+- Published **Find Date Ideas Near You** as a substantive original first-date planning guide with city or destination search, activity recommendations by stage and intent, budget guidance, invitation examples, safety guidance, and an accessible reading menu.
+- Integrated the owner-supplied Viator Dynamic Widget using partner `P00316944` and widget `W-1e85be51-22c9-4ee6-981a-a49ddc586901`. The widget receives only the reader-entered destination, never requests precise browser location, and remains unloaded until Affiliate and third-party experiences consent is granted.
+- Added a prominent homepage route plus contextual links from the Guide Library, Getting Dates & Chemistry shelf, First Date Playbook, Tinder, Bumble, and Hinge. The unified Guide Library now exposes 21 finished entries and a dedicated Interactive Guides filter.
+- Updated the privacy notice, disclosure, affiliate registry, sitemap, content inventory, conversion queue, and automated regressions. The private ebook archive remains outside the public repository and is still subject to editorial rewrite, modernization, combination, or exclusion before publication.
+- Final QA passes across 56 HTML pages and 49 sitemap URLs, valid HTML/JSON-LD, 672 responsive/theme combinations, 224 axe/WCAG combinations with zero violations, and the complete consent regression. Mobile Lighthouse scores 97 performance, 100 accessibility, 96 best practices, and 100 SEO with 2.4-second LCP and zero CLS; the best-practices deduction is the local audit environment blocking the existing Clarity request.
+- GitHub Pages built implementation commit `b3dfb77952869a12abfc73b3fcc133369415c3e0`. Production verification confirmed HTTP 200 for all affected routes and assets, a real 404 response, correct sitemap and policy contracts, no Viator request under Necessary only, HTTP 200 for the live Viator loader after consent, current experience cards on phone and desktop, and zero horizontal overflow. Rollback point: `e0923ea08d99819192c8ee8e9e3c5cd360e88f30`.
+
 ## 2026-08-26 — Sitewide light-theme reading contrast correction
 
 - Replaced the shared hard-coded navy-theme article copy color with a theme-aware reading token across 31 affected guide, comparison, and app-review pages. Paragraphs, lists, inline emphasis, labels, source notes, and supporting copy now render as dark slate in light mode while retaining the approved navy presentation in dark mode.
