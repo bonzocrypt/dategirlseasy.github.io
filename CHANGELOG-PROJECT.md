@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-08-26 — Sitewide light-theme reading contrast correction
+
+- Replaced the shared hard-coded navy-theme article copy color with a theme-aware reading token across 31 affected guide, comparison, and app-review pages. Paragraphs, lists, inline emphasis, labels, source notes, and supporting copy now render as dark slate in light mode while retaining the approved navy presentation in dark mode.
+- Restored teal hierarchy for article eyebrow labels and source links, and corrected the smaller light-mode contrast problems in messaging examples, library-directory controls, filter labels, and the keyboard skip link.
+- Added a rendered-text contrast regression that evaluates visible text against its effective light-mode surface while recognizing intentionally light text on dark controls, image overlays, and branded panels. A dedicated full-site diagnostic reports zero remaining low-contrast findings.
+- Final QA passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 660 responsive/theme combinations, 132 representative browser combinations, and 220 axe/WCAG combinations with zero violations. All 138 external URLs pass with no material failures.
+- The representative adult guide scores 100 performance, accessibility, and SEO; Bumble and Openers score 98 performance and 100 accessibility/SEO. LCP is 1.50–2.40 seconds with zero CLS.
+
 ## 2026-08-26 — Light-default readability and guide-panel polish
 
 - Made the white presentation the default for first-time visitors while preserving an explicitly saved dark preference. The early head initializer and browser theme color now agree with the selected theme before page content renders.

@@ -1,5 +1,18 @@
 # QA Checklist
 
+## Sitewide light-theme reading contrast correction
+
+- [x] Every public page is rendered and scanned for visible low-contrast text in light mode
+- [x] Shared article paragraphs, lists, labels, inline emphasis, source notes, and supporting copy use a theme-aware reading color
+- [x] Article eyebrow labels and source links retain their intended teal/coral hierarchy instead of inheriting body copy
+- [x] Messaging examples, library-directory controls, filter labels, and the keyboard skip link meet the light-theme contrast treatment
+- [x] Intentional light text on dark buttons, image overlays, ebook covers, selected navigation, and branded surfaces remains unchanged
+- [x] Structural QA and valid HTML/JSON-LD pass across 55 HTML pages and 48 sitemap URLs
+- [x] Full-site browser QA passes 660 dark/light combinations at 320, 375, 390, 768, 1024, and 1440 pixels; representative interaction QA passes 132 combinations
+- [x] Rendered-text diagnostic reports zero remaining light-mode findings; axe/WCAG passes 220 dark/light combinations with zero violations
+- [x] Representative guide/review Lighthouse scores remain 98–100 performance, 100 accessibility, 100 SEO, 1.50–2.40-second LCP, and zero CLS
+- [x] All 138 external URLs pass with no material failures
+
 ## Light-default readability and guide-panel polish
 
 - [x] The white presentation is the default for first-time visitors; an explicitly saved dark preference remains respected across pages

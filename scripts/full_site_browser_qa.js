@@ -72,6 +72,51 @@ function collectHtml(directory) {
         await page.waitForTimeout(75);
         const result = await page.evaluate(() => {
           const doc = document.documentElement;
+          const lowContrastText = (() => {
+            if (doc.dataset.theme !== "light") return [];
+            const parseColor = (value) => {
+              const match = value.match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)(?:[, /]+([\d.]+))?\)/);
+              return match ? { r: +match[1], g: +match[2], b: +match[3], a: match[4] === undefined ? 1 : +match[4] } : null;
+            };
+            const luminance = (color) => {
+              const channel = (value) => { const s = value / 255; return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4; };
+              return 0.2126 * channel(color.r) + 0.7152 * channel(color.g) + 0.0722 * channel(color.b);
+            };
+            const contrast = (a, b) => {
+              const high = Math.max(luminance(a), luminance(b));
+              const low = Math.min(luminance(a), luminance(b));
+              return (high + 0.05) / (low + 0.05);
+            };
+            const composite = (top, bottom) => ({
+              r: Math.round(top.r * top.a + bottom.r * (1 - top.a)),
+              g: Math.round(top.g * top.a + bottom.g * (1 - top.a)),
+              b: Math.round(top.b * top.a + bottom.b * (1 - top.a)),
+              a: 1,
+            });
+            const effectiveBackground = (element) => {
+              const chain = [];
+              for (let node = element; node instanceof Element; node = node.parentElement) chain.unshift(node);
+              return chain.reduce((background, node) => {
+                const color = parseColor(getComputedStyle(node).backgroundColor);
+                return color && color.a > 0 ? composite(color, background) : background;
+              }, { r: 255, g: 255, b: 255, a: 1 });
+            };
+            return [...document.querySelectorAll("body *")].flatMap((element) => {
+              if (element.closest("[hidden], [aria-hidden='true'], script, style, noscript, svg")) return [];
+              const style = getComputedStyle(element);
+              if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0 || !element.getClientRects().length) return [];
+              const directText = [...element.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent.trim()).filter(Boolean).join(" ");
+              if (!directText || element.closest(".brand-seal, .button, .ebook-cover, .transition-alert, .choice-column, .hero-headline, [aria-current='page']")) return [];
+              if ((style.backgroundClip === "text" || style.webkitBackgroundClip === "text") && style.backgroundImage !== "none") return [];
+              const foreground = parseColor(style.color);
+              if (!foreground) return [];
+              const ratio = contrast(foreground, effectiveBackground(element));
+              const fontSize = Number.parseFloat(style.fontSize);
+              const fontWeight = Number.parseInt(style.fontWeight, 10) || 400;
+              const threshold = fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 700) ? 3 : 4.5;
+              return ratio + 0.05 < threshold ? [`${element.tagName.toLowerCase()}.${element.className || ""}: ${directText.slice(0, 60)} (${ratio.toFixed(2)}:1)`] : [];
+            }).slice(0, 8);
+          })();
           const button = document.querySelector("[data-menu-toggle]");
           const nav = document.querySelector("[data-primary-nav]");
           const footerMeta = document.querySelector(".footer-meta-v2");
@@ -93,6 +138,7 @@ function collectHtml(directory) {
             paleLegacyLinks: [...document.querySelectorAll("main a")]
               .filter((link) => link.offsetParent !== null && getComputedStyle(link).color === "rgb(215, 246, 242)")
               .map((link) => link.textContent.trim()).filter(Boolean),
+            lowContrastText,
             guideHeroInset: !guideHero || !guideHeroEyebrow || !guideHeroRect || !guideHeroEyebrowRect || (
               guideHeroEyebrowRect.left >= guideHeroRect.left + 20 &&
               guideHeroEyebrowRect.top >= guideHeroRect.top + 20
@@ -138,6 +184,7 @@ function collectHtml(directory) {
         if (result.themeButtons.some((item) => item.label !== expectedThemeLabel)) errors.push(`${location}: theme control accessible label failed`);
         if (theme === "light" && result.bodyBackground !== "rgb(255, 255, 255)") errors.push(`${location}: light page background is not white (${result.bodyBackground})`);
         if (theme === "light" && result.paleLegacyLinks.length) errors.push(`${location}: pale legacy links remain (${result.paleLegacyLinks.join(", ")})`);
+        if (theme === "light" && result.lowContrastText.length) errors.push(`${location}: low-contrast text remains (${result.lowContrastText.join(" | ")})`);
         if (!result.guideHeroInset) errors.push(`${location}: guide hero content is clipped by the rounded panel edge`);
         if (result.overflow) errors.push(`${location}: overflow ${result.scrollWidth}/${result.innerWidth}`);
         if (result.comparisonClipping) errors.push(`${location}: comparison dashboard content is clipped by the viewport`);

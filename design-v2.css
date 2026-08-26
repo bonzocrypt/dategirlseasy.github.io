@@ -32,6 +32,8 @@
   --premium-card-background: linear-gradient(145deg, rgba(77, 52, 155, 0.35), rgba(15, 30, 48, 0.96));
   --on-soft-strong: #ffffff;
   --transition-copy: #d6e0ec;
+  --article-copy: #c9d5e5;
+  --skip-background: #f6cc78;
   --radius-sm: 14px;
   --radius: 22px;
   --radius-lg: 32px;
@@ -49,7 +51,7 @@
   --ink-soft: #475569;
   --ink-mute: #64748b;
   --muted: #475569;
-  --faint: #64748b;
+  --faint: #58677a;
   --night: #ffffff;
   --night-2: #f1f5f9;
   --panel: rgba(255, 255, 255, 0.96);
@@ -83,6 +85,8 @@
   --premium-card-background: linear-gradient(145deg, rgba(238, 242, 255, 0.96), rgba(245, 243, 255, 0.96));
   --on-soft-strong: #172033;
   --transition-copy: #475569;
+  --article-copy: #475569;
+  --skip-background: #f6cc78;
 }
 
 * {
@@ -255,7 +259,7 @@ body.design-v2::before {
   transform: translateY(-180%);
   border-radius: 10px;
   color: #08111d;
-  background: var(--gold);
+  background: var(--skip-background);
   font-weight: 800;
 }
 
@@ -1336,7 +1340,22 @@ a.goal-card:hover {
 
 .article-content p,
 .article-content li {
-  color: #c9d5e5;
+  color: var(--article-copy);
+}
+
+.article-content a:not(.button) {
+  color: var(--teal);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 48%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.article-content .eyebrow {
+  color: var(--teal);
+}
+
+.article-content .eyebrow.warm {
+  color: var(--coral);
 }
 
 .article-content li + li {
@@ -2132,6 +2151,20 @@ a.goal-card:hover {
   font-weight: 900;
 }
 
+:root[data-theme="light"] .message-bubble {
+  color: #334155;
+  background: #eef2f7;
+}
+
+:root[data-theme="light"] .message-bubble.outgoing {
+  color: #312e5f;
+  background: #ede9fe;
+}
+
+:root[data-theme="light"] .message-bubble small {
+  color: #0f665c;
+}
+
 .principle-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2654,6 +2687,14 @@ a.goal-card:hover {
 .library-directory a:focus-visible {
   outline: 3px solid var(--gold);
   outline-offset: 2px;
+}
+
+:root[data-theme="light"] .library-directory {
+  background: #f1f5f9;
+}
+
+:root[data-theme="light"] .library-directory a:hover {
+  background: rgba(98, 70, 229, 0.08);
 }
 
 .ebook-cover {
