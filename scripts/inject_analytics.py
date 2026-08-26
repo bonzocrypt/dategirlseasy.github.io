@@ -1,96 +1,83 @@
 #!/usr/bin/env python3
-"""Insert or update Google Tag Manager and the GA4 Google tag (gtag.js) on every page."""
+"""Install DGE's consent bootstrap and remove trackers that bypass it."""
 
 from __future__ import annotations
 
 import re
 from pathlib import Path
 
+
 ROOT = Path(__file__).resolve().parents[1]
-MEASUREMENT_ID = "G-T2TQHDFBZP"
-GTM_ID = "GTM-KLM9MDV3"
-
-GTM_HEAD_SNIPPET = f'''    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
-    new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    }})(window,document,'script','dataLayer','{GTM_ID}');</script>
-    <!-- End Google Tag Manager -->
-'''
-
-GTM_BODY_SNIPPET = f'''    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-'''
-
-GA_SNIPPET = f'''    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={MEASUREMENT_ID}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){{dataLayer.push(arguments);}}
-      gtag('js', new Date());
-
-      gtag('config', '{MEASUREMENT_ID}');
-    </script>
-'''
-
-HEAD_SNIPPET = GTM_HEAD_SNIPPET + GA_SNIPPET
-
-EXISTING_HEAD_BLOCK_RE = re.compile(
-    r'[ \t]*<!-- Google Tag Manager -->\n'
-    r'.*?'
-    r'<!-- End Google Tag Manager -->\n'
-    r'([ \t]*<!-- Google tag \(gtag\.js\) -->\n'
-    r'[ \t]*<script async src="https://www\.googletagmanager\.com/gtag/js\?id=[^"]*"></script>\n'
-    r'[ \t]*<script>\n'
-    r'.*?'
-    r'</script>\n)?',
-    re.DOTALL,
-)
-
-EXISTING_GA_ONLY_BLOCK_RE = re.compile(
-    r'[ \t]*<!-- Google tag \(gtag\.js\) -->\n'
-    r'[ \t]*<script async src="https://www\.googletagmanager\.com/gtag/js\?id=[^"]*"></script>\n'
-    r'[ \t]*<script>\n'
-    r'.*?'
-    r'</script>\n',
-    re.DOTALL,
-)
-
-EXISTING_GTM_BODY_RE = re.compile(
-    r'[ \t]*<!-- Google Tag Manager \(noscript\) -->\n'
-    r'.*?'
-    r'<!-- End Google Tag Manager \(noscript\) -->\n',
-    re.DOTALL,
-)
+CONSENT_SNIPPET = '    <script src="/assets/consent.js"></script>\n'
 
 
-def inject_head(source: str) -> str:
-    if EXISTING_HEAD_BLOCK_RE.search(source):
-        return EXISTING_HEAD_BLOCK_RE.sub(HEAD_SNIPPET, source, count=1)
-    if EXISTING_GA_ONLY_BLOCK_RE.search(source):
-        return EXISTING_GA_ONLY_BLOCK_RE.sub(HEAD_SNIPPET, source, count=1)
-    if "<head>" in source:
-        return source.replace("<head>", "<head>\n" + HEAD_SNIPPET, 1)
-    raise ValueError("No <head> tag found")
+def remove_tracking_markup(source: str) -> str:
+    updated = source
 
+    # Normal multiline GTM and Google tag blocks.
+    updated = re.sub(
+        r'\s*<!-- Google Tag Manager -->.*?<!-- End Google Tag Manager -->\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    updated = re.sub(
+        r'\s*<!-- Google tag \(gtag\.js\) -->.*?(?=(?:\s*<meta|\s*<link|\s*<title|\s*<script[^>]+(?:type|id)=))',
+        "\n",
+        updated,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
 
-def inject_body(source: str) -> str:
-    if EXISTING_GTM_BODY_RE.search(source):
-        return EXISTING_GTM_BODY_RE.sub(GTM_BODY_SNIPPET, source, count=1)
-    match = re.search(r'<body[^>]*>', source)
-    if not match:
-        raise ValueError("No <body> tag found")
-    insert_at = match.end()
-    return source[:insert_at] + "\n" + GTM_BODY_SNIPPET.rstrip("\n") + source[insert_at:]
+    # Compact pages have the same trackers without comments.
+    updated = re.sub(
+        r'\s*<script[^>]*>[^<]*(?:googletagmanager\.com/gtm\.js|GTM-KLM9MDV3)[^<]*</script>\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE,
+    )
+    updated = re.sub(
+        r'\s*<script[^>]+src=["\']https://www\.googletagmanager\.com/gtag/js\?id=[^"\']+["\'][^>]*></script>\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE,
+    )
+    updated = re.sub(
+        r'\s*<script[^>]*>[^<]*gtag\(["\']config["\'],\s*["\']G-[A-Z0-9]+["\'][^<]*</script>\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE,
+    )
+
+    # A no-JavaScript iframe cannot receive a consent choice and must not load.
+    updated = re.sub(
+        r'\s*<!-- Google Tag Manager \(noscript\) -->.*?<!-- End Google Tag Manager \(noscript\) -->\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    updated = re.sub(
+        r'\s*<noscript>\s*<iframe[^>]+googletagmanager\.com/ns\.html[^>]*>\s*</iframe>\s*</noscript>\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    # Re-running this script is idempotent.
+    updated = re.sub(
+        r'\s*<script[^>]+src=["\']/assets/consent\.js["\'][^>]*></script>\s*',
+        "\n",
+        updated,
+        flags=re.IGNORECASE,
+    )
+    return updated
 
 
 def transform(page: Path) -> bool:
     source = page.read_text(encoding="utf-8")
-    updated = inject_head(source)
-    updated = inject_body(updated)
+    updated = remove_tracking_markup(source)
+    if "<head>" not in updated:
+        raise ValueError(f"No <head> tag found in {page.relative_to(ROOT)}")
+    updated = updated.replace("<head>", "<head>\n" + CONSENT_SNIPPET, 1)
     if updated == source:
         return False
     page.write_text(updated, encoding="utf-8", newline="\n")
@@ -105,7 +92,7 @@ def main() -> None:
             continue
         if transform(page):
             changed.append(relative.as_posix())
-    print(f"Injected/updated GTM + Google tag in {len(changed)} pages.")
+    print(f"Installed consent-aware analytics bootstrap in {len(changed)} pages.")
     for item in changed:
         print(item)
 

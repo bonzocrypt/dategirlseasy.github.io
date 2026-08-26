@@ -27,6 +27,7 @@ Date Girls Easy is a fast static publisher for adult men. It is not a dating pla
 - Empty library shelves stay `noindex,follow` and out of the sitemap until they provide substantive value.
 - Images require useful alt text when informative, empty alt text when decorative, explicit dimensions where applicable, responsive delivery, and approved provenance.
 - Affiliate links remain inactive until the owner supplies approved accounts and identifiers. Editorial recommendations must remain independent and correctly disclosed.
+- Keep `/assets/consent.js` as the only analytics and affiliate-script gate. New embedded partner scripts must use the `affiliate` category through `window.DGEConsent`; ordinary disclosed links may remain usable without embedded tracking. Run `python scripts/inject_analytics.py` after adding or regenerating HTML so no page bypasses the consent bootstrap.
 
 ## UX and quality gates
 

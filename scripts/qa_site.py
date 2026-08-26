@@ -255,6 +255,17 @@ def main() -> int:
         affiliate_registry = {}
     if affiliate_registry.get("linksEnabled") is not False:
         errors.append("data/affiliate-programs.json: affiliate links must remain globally disabled")
+    consent_config = affiliate_registry.get("consentManagement", {})
+    if consent_config.get("implementation") != "custom-sitewide":
+        errors.append("data/affiliate-programs.json: custom sitewide consent manager is not registered")
+    if consent_config.get("scope") != "global":
+        errors.append("data/affiliate-programs.json: consent scope must remain global")
+    if consent_config.get("categories") != ["necessary", "analytics", "affiliate"]:
+        errors.append("data/affiliate-programs.json: consent categories are incomplete or out of order")
+    if consent_config.get("defaultAnalytics") is not False or consent_config.get("defaultAffiliate") is not False:
+        errors.append("data/affiliate-programs.json: optional consent categories must default to disabled")
+    if consent_config.get("honorsGlobalPrivacyControl") is not True:
+        errors.append("data/affiliate-programs.json: consent manager must honor Global Privacy Control")
     cj_program = next((item for item in affiliate_registry.get("programs", []) if item.get("id") == "cj-affiliate"), None)
     if not cj_program:
         errors.append("data/affiliate-programs.json: missing CJ compliance entry")
@@ -317,6 +328,16 @@ def main() -> int:
             errors.append(f"{rel}: references nonexistent assets/og/default.jpg")
 
         raw = page.read_text(encoding="utf-8")
+        if raw.count('<script src="/assets/consent.js"></script>') != 1:
+            errors.append(f"{rel}: consent bootstrap must appear exactly once")
+        for bypass in (
+            "googletagmanager.com/gtm.js",
+            "googletagmanager.com/gtag/js",
+            "googletagmanager.com/ns.html",
+            "clarity.ms/tag/",
+        ):
+            if bypass in raw:
+                errors.append(f"{rel}: tracker bypasses the consent bootstrap ({bypass})")
         expected_footer_line = "&copy; 2026 Date Girls Easy. A Vaulted Holdings LLC publication."
         if raw.count(expected_footer_line) != 1:
             errors.append(f"{rel}: expected the approved legal publication line exactly once")
@@ -476,6 +497,13 @@ def main() -> int:
         "https://www.cj.com/legal/privacy-uk",
         "withhold or withdraw consent",
         "directly identifying visitor information",
+        "Google Analytics does not load until you accept Analytics",
+        "Date Girls Easy applies its consent control worldwide",
+        "Accept all",
+        "Necessary only",
+        "Affiliate and third-party experiences",
+        "Privacy choices",
+        "Global Privacy Control",
     )
     for required_text in privacy_contract:
         if required_text not in privacy_raw:

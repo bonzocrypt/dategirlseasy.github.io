@@ -116,6 +116,14 @@ const guideReaderPaths = [
 (async () => {
   fs.mkdirSync(outputDirectory, { recursive: true });
   const browser = await chromium.launch({ headless: true, executablePath: chromePath });
+  const createContext = browser.newContext.bind(browser);
+  browser.newContext = async function (options) {
+    const context = await createContext(options);
+    await context.addInitScript(() => {
+      localStorage.setItem("dge-consent-v1", JSON.stringify({ version: 1, analytics: false, affiliate: false, updatedAt: "qa" }));
+    });
+    return context;
+  };
   const errors = [];
   const results = [];
 

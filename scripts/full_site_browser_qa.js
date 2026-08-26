@@ -38,6 +38,14 @@ function collectHtml(directory) {
   let browser;
   try {
     browser = await chromium.launch({ headless: true, executablePath: chromePath });
+    const createContext = browser.newContext.bind(browser);
+    browser.newContext = async function (options) {
+      const context = await createContext(options);
+      await context.addInitScript(() => {
+        localStorage.setItem("dge-consent-v1", JSON.stringify({ version: 1, analytics: false, affiliate: false, updatedAt: "qa" }));
+      });
+      return context;
+    };
     for (const theme of themes) {
     for (const width of widths) {
       const context = await browser.newContext({ viewport: { width, height: 900 } });

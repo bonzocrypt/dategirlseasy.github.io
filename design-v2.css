@@ -7,10 +7,15 @@
   --night-2: #0b1725;
   --panel: rgba(16, 30, 46, 0.88);
   --panel-strong: #112236;
+  --panel-soft: #112236;
   --line: rgba(188, 208, 236, 0.16);
+  --line-strong: rgba(118, 87, 255, 0.56);
   --purple: #7657ff;
   --purple-soft: #a99aff;
   --teal: #3dd5c3;
+  --accent: #3dd5c3;
+  --link: #65e7d7;
+  --focus: #f6cc78;
   --coral: #ff8b75;
   --gold: #f6cc78;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
@@ -21,6 +26,7 @@
   --mobile-nav-background: rgba(7, 17, 29, 0.98);
   --hero-surface: rgba(8, 20, 33, 0.88);
   --surface-hover: rgba(22, 39, 59, 0.96);
+  --surface-raised: rgba(22, 39, 59, 0.96);
   --surface-translucent: rgba(17, 34, 53, 0.78);
   --surface-related: rgba(17, 34, 53, 0.58);
   --field-background: #0a1827;
@@ -56,6 +62,7 @@
   --night-2: #f1f5f9;
   --panel: rgba(255, 255, 255, 0.96);
   --panel-strong: #f1f5f9;
+  --panel-soft: #f8fafc;
   --line: rgba(15, 23, 42, 0.16);
   --line-strong: rgba(98, 70, 229, 0.42);
   --purple: #6246e5;
@@ -64,6 +71,8 @@
   --brand-strong: #5138c9;
   --teal: #087f72;
   --accent: #087f72;
+  --link: #087f72;
+  --focus: #6246e5;
   --coral: #b93f30;
   --gold: #9a5a08;
   --shadow: 0 20px 55px rgba(15, 23, 42, 0.12);
@@ -74,6 +83,7 @@
   --mobile-nav-background: rgba(255, 255, 255, 0.98);
   --hero-surface: rgba(255, 255, 255, 0.92);
   --surface-hover: #f3f0ff;
+  --surface-raised: #f3f0ff;
   --surface-translucent: rgba(241, 245, 249, 0.92);
   --surface-related: rgba(241, 245, 249, 0.86);
   --field-background: #ffffff;
@@ -3431,6 +3441,245 @@ a.goal-card:hover {
   }
 }
 
+/* Privacy and consent */
+.consent-banner {
+  position: fixed;
+  z-index: 1200;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  color: var(--ink);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 10, 17, 0.28);
+}
+
+.consent-banner[hidden] {
+  display: none !important;
+}
+
+.consent-banner-copy h2,
+.consent-dialog h2 {
+  margin: 2px 0 7px;
+  color: var(--ink);
+  font-size: clamp(1.2rem, 2.1vw, 1.55rem);
+  line-height: 1.16;
+}
+
+.consent-banner-copy p,
+.consent-dialog p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.91rem;
+  line-height: 1.55;
+}
+
+.consent-banner-copy a,
+.consent-dialog a {
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.consent-kicker {
+  color: var(--accent) !important;
+  font-size: 0.72rem !important;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.consent-banner-actions,
+.consent-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consent-banner-actions {
+  justify-content: flex-end;
+}
+
+.consent-banner-actions button,
+.consent-dialog-actions button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  background: var(--panel-soft);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.consent-banner-actions button:hover,
+.consent-dialog-actions button:hover {
+  border-color: var(--accent);
+  background: var(--surface-raised);
+}
+
+.consent-banner-actions button:focus-visible,
+.consent-dialog-actions button:focus-visible,
+.consent-dialog-close:focus-visible,
+.footer-privacy-choices:focus-visible,
+.consent-option input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.consent-dialog {
+  width: min(650px, calc(100% - 28px));
+  max-height: min(760px, calc(100dvh - 28px));
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  color: var(--ink);
+  background: var(--panel);
+  box-shadow: 0 28px 90px rgba(4, 10, 17, 0.45);
+}
+
+.consent-dialog::backdrop {
+  background: rgba(4, 10, 17, 0.68);
+  backdrop-filter: blur(3px);
+}
+
+.consent-dialog-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 22px 14px;
+}
+
+.consent-dialog-close {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--panel-soft);
+  font: inherit;
+  font-size: 1.65rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.consent-dialog-intro {
+  padding: 0 22px 16px;
+}
+
+.consent-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin: 0 22px 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-soft);
+}
+
+.consent-option strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 0.98rem;
+}
+
+.consent-option small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.consent-option input {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+.consent-dialog-actions {
+  padding: 8px 22px 14px;
+}
+
+.consent-dialog-policy {
+  padding: 0 22px 22px;
+}
+
+.footer-privacy-choices {
+  display: inline;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.footer-privacy-choices:hover {
+  color: var(--link);
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 800px) {
+  .consent-banner {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    width: calc(100% - 24px);
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .consent-banner-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .consent-banner-actions button {
+    padding-inline: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .consent-banner-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .consent-banner-actions button,
+  .consent-dialog-actions button {
+    width: 100%;
+  }
+
+  .consent-dialog-actions {
+    display: grid;
+  }
+}
+
 @media print {
   :root {
     color-scheme: light;
@@ -3444,6 +3693,8 @@ a.goal-card:hover {
 
   .publisher-header,
   .publisher-footer,
+  .consent-banner,
+  .consent-dialog,
   .breadcrumbs,
   .no-print,
   .toc {

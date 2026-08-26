@@ -1,7 +1,19 @@
 {
   "schemaVersion": 1,
-  "lastEditorialReview": "2026-08-25",
+  "lastEditorialReview": "2026-08-26",
   "linksEnabled": false,
+  "consentManagement": {
+    "implementation": "custom-sitewide",
+    "version": 1,
+    "storageKey": "dge-consent-v1",
+    "scope": "global",
+    "categories": ["necessary", "analytics", "affiliate"],
+    "defaultAnalytics": false,
+    "defaultAffiliate": false,
+    "honorsGlobalPrivacyControl": true,
+    "privacyChoicesLocation": "site footer",
+    "lastVerified": "2026-08-26"
+  },
   "programs": [
     {
       "id": "cj-affiliate",
