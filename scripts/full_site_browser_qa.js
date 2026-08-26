@@ -33,12 +33,17 @@ function collectHtml(directory) {
   const errors = [];
   const pages = collectHtml(root).map(urlFor).sort();
   const widths = [320, 375, 390, 768, 1024, 1440];
+  const themes = ["dark", "light"];
 
   let browser;
   try {
     browser = await chromium.launch({ headless: true, executablePath: chromePath });
+    for (const theme of themes) {
     for (const width of widths) {
       const context = await browser.newContext({ viewport: { width, height: 900 } });
+      await context.addInitScript((selectedTheme) => {
+        try { localStorage.setItem("dge-theme", selectedTheme); } catch (error) { /* no-op */ }
+      }, theme);
       const page = await context.newPage();
       for (const pathname of pages) {
         const consoleErrors = [];
@@ -73,7 +78,14 @@ function collectHtml(directory) {
           const footerRect = footerMeta?.getBoundingClientRect();
           const footerStyle = footerMeta ? getComputedStyle(footerMeta) : null;
           const footerLineHeight = footerStyle ? Number.parseFloat(footerStyle.lineHeight) : 0;
+          const themeButtons = [...document.querySelectorAll("[data-theme-toggle]")];
           return {
+            theme: doc.dataset.theme,
+            bodyBackground: getComputedStyle(document.body).backgroundColor,
+            themeButtons: themeButtons.map((themeButton) => ({
+              visible: getComputedStyle(themeButton).display !== "none",
+              label: themeButton.getAttribute("aria-label"),
+            })),
             overflow: doc.scrollWidth > window.innerWidth + 1,
             scrollWidth: doc.scrollWidth,
             innerWidth: window.innerWidth,
@@ -107,22 +119,28 @@ function collectHtml(directory) {
             }),
           };
         });
-        if (!response || !response.ok()) errors.push(`${pathname} @ ${width}: HTTP ${response ? response.status() : "none"}`);
-        if (result.overflow) errors.push(`${pathname} @ ${width}: overflow ${result.scrollWidth}/${result.innerWidth}`);
-        if (result.comparisonClipping) errors.push(`${pathname} @ ${width}: comparison dashboard content is clipped by the viewport`);
-        if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${pathname} @ ${width}: mobile menu initial state failed`);
-        if (result.footerText !== "© 2026 Date Girls Easy. A Vaulted Holdings LLC publication.") errors.push(`${pathname} @ ${width}: footer legal line is incorrect`);
-        if (!result.footerWithinViewport || !result.footerWrappedOnMobile) errors.push(`${pathname} @ ${width}: footer legal line does not wrap cleanly`);
+        const location = `${pathname} @ ${width} (${theme})`;
+        if (!response || !response.ok()) errors.push(`${location}: HTTP ${response ? response.status() : "none"}`);
+        if (result.theme !== theme) errors.push(`${location}: selected theme did not apply`);
+        if (result.themeButtons.length !== 2 || result.themeButtons.filter((item) => item.visible).length !== 1) errors.push(`${location}: responsive theme control visibility failed`);
+        const expectedThemeLabel = theme === "light" ? "Switch to dark theme" : "Switch to light theme";
+        if (result.themeButtons.some((item) => item.label !== expectedThemeLabel)) errors.push(`${location}: theme control accessible label failed`);
+        if (theme === "light" && result.bodyBackground !== "rgb(255, 255, 255)") errors.push(`${location}: light page background is not white (${result.bodyBackground})`);
+        if (result.overflow) errors.push(`${location}: overflow ${result.scrollWidth}/${result.innerWidth}`);
+        if (result.comparisonClipping) errors.push(`${location}: comparison dashboard content is clipped by the viewport`);
+        if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${location}: mobile menu initial state failed`);
+        if (result.footerText !== "© 2026 Date Girls Easy. A Vaulted Holdings LLC publication.") errors.push(`${location}: footer legal line is incorrect`);
+        if (!result.footerWithinViewport || !result.footerWrappedOnMobile) errors.push(`${location}: footer legal line does not wrap cleanly`);
         if (result.navTriggers.length !== 2 || result.navTriggers.some((item) => item.expanded !== "false" || !item.controls || !item.targetExists || !item.isButton)) {
-          errors.push(`${pathname} @ ${width}: shared dropdown navigation contract failed`);
+          errors.push(`${location}: shared dropdown navigation contract failed`);
         }
         for (const [regionIndex, region] of result.tableRegions.entries()) {
           if (!region.focusable || !region.label || !region.labelExists || !region.containsTable || (region.visible && (!region.receivesFocus || !region.visibleFocus))) {
-            errors.push(`${pathname} @ ${width}: comparison table region ${regionIndex + 1} accessibility contract failed`);
+            errors.push(`${location}: comparison table region ${regionIndex + 1} accessibility contract failed`);
           }
         }
-        if (consoleErrors.length) errors.push(`${pathname} @ ${width}: console ${consoleErrors.join(" | ")}`);
-        if (localFailures.length) errors.push(`${pathname} @ ${width}: local requests ${localFailures.join(" | ")}`);
+        if (consoleErrors.length) errors.push(`${location}: console ${consoleErrors.join(" | ")}`);
+        if (localFailures.length) errors.push(`${location}: local requests ${localFailures.join(" | ")}`);
         page.off("console", onConsole);
         page.off("pageerror", onPageError);
         page.off("requestfailed", onRequestFailed);
@@ -130,7 +148,8 @@ function collectHtml(directory) {
       }
       await context.close();
     }
-    const report = { status: errors.length ? "failed" : "passed", pages: pages.length, widths, combinations: pages.length * widths.length, errors };
+    }
+    const report = { status: errors.length ? "failed" : "passed", pages: pages.length, widths, themes, combinations: pages.length * widths.length * themes.length, errors };
     console.log(JSON.stringify(report, null, 2));
     process.exitCode = errors.length ? 1 : 0;
   } catch (error) {

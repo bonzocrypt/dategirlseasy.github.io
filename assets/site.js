@@ -1,5 +1,38 @@
 (function () {
   document.documentElement.classList.add("js");
+  const themeStorageKey = "dge-theme";
+  const themeButtons = Array.from(document.querySelectorAll("[data-theme-toggle]"));
+
+  function activeTheme() {
+    return document.documentElement.dataset.theme === "light" ? "light" : "dark";
+  }
+
+  function renderTheme(theme, persist) {
+    const nextTheme = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    const nextLabel = nextTheme === "light" ? "Switch to dark theme" : "Switch to light theme";
+    themeButtons.forEach(function (button) {
+      button.setAttribute("aria-label", nextLabel);
+      button.setAttribute("title", nextLabel);
+    });
+    if (persist) {
+      try { localStorage.setItem(themeStorageKey, nextTheme); } catch (error) { /* The visual toggle still works. */ }
+    }
+  }
+
+  renderTheme(activeTheme(), false);
+  themeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      renderTheme(activeTheme() === "light" ? "dark" : "light", true);
+    });
+  });
+
+  window.addEventListener("storage", function (event) {
+    if (event.key === themeStorageKey && (event.newValue === "light" || event.newValue === "dark")) {
+      renderTheme(event.newValue, false);
+    }
+  });
+
   const menuButton = document.querySelector("[data-menu-toggle]");
   const nav = document.querySelector("[data-primary-nav]");
   const navGroups = Array.from(document.querySelectorAll("[data-nav-group]"));

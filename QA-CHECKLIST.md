@@ -1,5 +1,19 @@
 # QA Checklist
 
+## Persistent light and dark themes
+
+- [x] Existing navy presentation remains the default and the optional light presentation uses a true white page background
+- [x] Standard sun/moon control appears at the far right on desktop and beside Menu on mobile
+- [x] Exactly one responsive theme control is visible at every tested viewport, with a 44-pixel target and dynamic accessible action label
+- [x] Mouse, touch, Enter-key activation, cross-page persistence, and cross-tab storage synchronization are implemented
+- [x] Early head initialization restores the saved theme before page content renders and safely tolerates unavailable storage
+- [x] Shared modern and legacy page templates retain readable, consistent panels, tables, fields, cards, navigation, and footer styling in both themes
+- [x] Structural QA and valid HTML/JSON-LD pass across 55 HTML pages and 48 sitemap URLs
+- [x] Full-site browser QA passes 660 dark/light combinations at 320, 375, 390, 768, 1024, and 1440 pixels; representative interaction QA passes 132 combinations
+- [x] Axe/WCAG audit passes 220 dark/light combinations with zero violations
+- [x] Lighthouse remains 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.40-second LCP, and zero CLS
+- [x] All 138 external URLs pass with no material failures
+
 ## Desktop navigation hierarchy refinement
 
 - [x] Dating Apps prioritizes Compare Dating Apps and Browse All Reviews before the individual directory

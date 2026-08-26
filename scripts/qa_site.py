@@ -343,6 +343,10 @@ def main() -> int:
             errors.append(f"{rel}: contains a placeholder href")
         if raw.count("data-nav-trigger") != 2:
             errors.append(f"{rel}: expected two shared navigation dropdown triggers")
+        if raw.count('id="dge-theme-init"') != 1:
+            errors.append(f"{rel}: theme initialization script is missing or duplicated")
+        if raw.count("data-theme-toggle") != 2:
+            errors.append(f"{rel}: expected desktop and mobile theme controls")
         for control_id in ("nav-dating-apps", "nav-guides"):
             if f'aria-controls="{control_id}"' not in raw or f'id="{control_id}"' not in raw:
                 errors.append(f"{rel}: navigation control contract is incomplete for #{control_id}")
@@ -351,6 +355,10 @@ def main() -> int:
             errors.append(f"{rel}: shared publisher header is missing")
         else:
             header = header_match.group(0)
+            if header.count('aria-label="Switch to light theme"') != 2:
+                errors.append(f"{rel}: theme controls lack their default accessible name")
+            if "theme-toggle-desktop" not in header or "theme-toggle-mobile" not in header:
+                errors.append(f"{rel}: responsive theme controls are incomplete")
             app_menu_start = header.find('<div class="nav-submenu nav-submenu-apps"')
             guide_menu_start = header.find('<div class="nav-submenu nav-submenu-guides"')
             if app_menu_start < 0 or guide_menu_start < 0:

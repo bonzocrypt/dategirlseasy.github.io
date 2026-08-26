@@ -27,6 +27,7 @@
     <meta name="theme-color" content="#07111d" />
     <link rel="stylesheet" href="/design-v2.css" />
     <script>document.documentElement.className = "js";</script>
+    <script id="dge-theme-init">(function(){document.documentElement.classList.add("js");try{var theme=localStorage.getItem("dge-theme");if(theme==="light"||theme==="dark"){document.documentElement.dataset.theme=theme;}}catch(error){}}());</script>
   </head>
   <body class="design-v2">
     <!-- Google Tag Manager (noscript) -->
@@ -37,7 +38,13 @@
     <header class="publisher-header">
       <div class="site-shell header-bar">
         <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
-        <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        <div class="mobile-header-controls">
+          <button class="theme-toggle theme-toggle-mobile" type="button" aria-label="Switch to light theme" title="Switch to light theme" data-theme-toggle>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
+        </button>
+          <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        </div>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">
           <a class="nav-direct" href="/join.html">Start Here</a>
           <div class="nav-group" data-nav-group>
@@ -95,6 +102,10 @@
             </div>
           </div>
         </nav>
+        <button class="theme-toggle theme-toggle-desktop" type="button" aria-label="Switch to light theme" title="Switch to light theme" data-theme-toggle>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
+        </button>
       </div>
     </header>
     <main class="article-main" id="main-content"><section class="site-shell"><div class="article-hero"><div><p class="eyebrow warm">Error 404</p><h1 class="article-title">Wrong turn. Strong recovery.</h1><p class="lede">That page is not here, but the useful part of the site is one move away. Choose the result you want and keep going.</p><div class="button-row"><a class="button-primary" href="/join.html">Start with your goal</a><a class="button-secondary" href="/">Back to homepage</a></div></div><div class="decision-visual" role="img" aria-label="Abstract route card pointing back to the Date Girls Easy guides"><p class="eyebrow">Reset the route</p><div class="choice-column"><small>Best next move</small><strong>Pick one practical path below</strong></div></div></div><div class="path-grid" aria-label="Useful destinations"><article class="editorial-card"><span class="card-number">01</span><h2 class="card-title">Choose an app</h2><p>See which dating environment fits your goal and temperament.</p><a class="card-link" href="/reviews/">Browse reviews →</a></article><article class="editorial-card"><span class="card-number">02</span><h2 class="card-title">Improve your profile</h2><p>Fix the photos and bio that shape the first decision.</p><a class="card-link" href="/guides/">Browse guides →</a></article><article class="editorial-card"><span class="card-number">03</span><h2 class="card-title">Build the full system</h2><p>Read deeper, original guides for adult men.</p><a class="card-link" href="/ebooks/">Open the library →</a></article></div></section></main>

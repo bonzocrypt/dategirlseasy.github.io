@@ -223,6 +223,53 @@ const guideReaderPaths = [
   if ((await guidesTriggerDesktop.getAttribute("aria-expanded")) !== "false") errors.push("Clicking outside does not close the desktop dropdown");
   await desktopNavContext.close();
 
+  const themeContext = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
+  const themePage = await themeContext.newPage();
+  await themePage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+  const desktopThemeToggle = themePage.locator(".theme-toggle-desktop");
+  const mobileThemeToggle = themePage.locator(".theme-toggle-mobile");
+  if (!(await desktopThemeToggle.isVisible()) || (await mobileThemeToggle.isVisible())) errors.push("Desktop theme control visibility is incorrect");
+  if ((await desktopThemeToggle.getAttribute("aria-label")) !== "Switch to light theme") errors.push("Default theme control label is incorrect");
+  await desktopThemeToggle.click();
+  const lightState = await themePage.evaluate(() => ({
+    theme: document.documentElement.dataset.theme,
+    stored: localStorage.getItem("dge-theme"),
+    background: getComputedStyle(document.body).backgroundColor,
+    labels: [...document.querySelectorAll("[data-theme-toggle]")].map((button) => button.getAttribute("aria-label")),
+  }));
+  if (lightState.theme !== "light" || lightState.stored !== "light" || lightState.background !== "rgb(255, 255, 255)" || lightState.labels.some((label) => label !== "Switch to dark theme")) {
+    errors.push(`Light theme activation failed: ${JSON.stringify(lightState)}`);
+  }
+  await themePage.screenshot({ path: path.join(outputDirectory, "homepage-light-theme-desktop.png"), fullPage: false });
+  await themePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
+  if ((await themePage.evaluate(() => document.documentElement.dataset.theme)) !== "light") errors.push("Light theme did not persist across navigation");
+  await themePage.screenshot({ path: path.join(outputDirectory, "guides-light-theme-desktop.png"), fullPage: false });
+  await themePage.goto(`${baseUrl}/comparisons/`, { waitUntil: "domcontentloaded" });
+  await themePage.screenshot({ path: path.join(outputDirectory, "comparisons-light-theme-desktop.png"), fullPage: false });
+  await themePage.goto(`${baseUrl}/about.html`, { waitUntil: "domcontentloaded" });
+  await themePage.screenshot({ path: path.join(outputDirectory, "about-light-theme-desktop.png"), fullPage: false });
+  await themePage.locator(".theme-toggle-desktop").press("Enter");
+  if ((await themePage.evaluate(() => `${document.documentElement.dataset.theme}:${localStorage.getItem("dge-theme")}`)) !== "dark:dark") errors.push("Keyboard theme toggle did not restore and persist dark mode");
+  await themeContext.close();
+
+  const mobileThemeContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
+  const mobileThemePage = await mobileThemeContext.newPage();
+  await mobileThemePage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+  if (!(await mobileThemePage.locator(".theme-toggle-mobile").isVisible()) || (await mobileThemePage.locator(".theme-toggle-desktop").isVisible())) errors.push("Mobile theme control visibility is incorrect");
+  await mobileThemePage.locator(".theme-toggle-mobile").click();
+  await mobileThemePage.locator("[data-menu-toggle]").click();
+  const mobileLightLayout = await mobileThemePage.evaluate(() => ({
+    theme: document.documentElement.dataset.theme,
+    overflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+    headerControlsWithinViewport: [...document.querySelectorAll(".mobile-header-controls button")].every((button) => {
+      const rect = button.getBoundingClientRect();
+      return rect.left >= 0 && rect.right <= window.innerWidth;
+    }),
+  }));
+  if (mobileLightLayout.theme !== "light" || mobileLightLayout.overflow || !mobileLightLayout.headerControlsWithinViewport) errors.push(`Mobile light theme layout failed: ${JSON.stringify(mobileLightLayout)}`);
+  await mobileThemePage.screenshot({ path: path.join(outputDirectory, "homepage-light-theme-mobile-navigation.png"), fullPage: false });
+  await mobileThemeContext.close();
+
   for (const width of [1024, 1440]) {
     const menuFitContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
     const menuFitPage = await menuFitContext.newPage();

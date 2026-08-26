@@ -24,6 +24,7 @@ Incremental enhancement rollback points:
 - Legal publisher identity correction: rollback point `cad930faac5b35ec2ca5f49a1cdd9c466d36cc51`, preserved as `backup/pre-vaulted-publisher-2026-08-25`.
 - Tawkify matchmaking alternative and Impact verification: rollback point `409dd0e2a08c5e823106872a6ffd754dc60d3165`, preserved as `backup/pre-tawkify-impact-2026-08-25`.
 - Desktop navigation hierarchy refinement: rollback point `a3c48f9dacf54ff2d2fef2e5272cd6d5511600a4`, preserved as `backup/pre-desktop-navigation-refinement-2026-08-26`.
+- Persistent light and dark themes: rollback point `ff30d15b757d1bdedbbe559c4ebd3dc12925b083`, preserved as `backup/pre-light-theme-2026-08-26`.
 
 ## Release
 

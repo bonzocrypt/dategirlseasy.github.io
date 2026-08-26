@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-08-26 — Persistent light and dark themes
+
+- Added a compact, accessible sun/moon control at the far right of the desktop header and beside the mobile Menu control. The existing navy presentation remains the default, while the new light theme uses a white background, slate text, pale editorial panels, and restrained DGE purple, teal, and coral accents.
+- Applied the theme through shared design variables and targeted legacy-template corrections rather than duplicating layouts or introducing a second stylesheet. Existing content, imagery, URLs, metadata, navigation, analytics, and responsive structure remain unchanged.
+- Added an early head script to restore the saved preference before page content renders, preventing an avoidable dark-to-light flash. The selection persists across pages and synchronizes across open tabs when browser storage is available; the page remains fully usable when storage is unavailable.
+- Both desktop and mobile controls have dynamic action labels, visible keyboard focus, 44-pixel targets, standard sun/moon iconography, and keyboard activation. Only the control appropriate to the current viewport is visible.
+- Final QA passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 660 full-site responsive/theme combinations, 132 representative browser combinations, and 220 dark/light axe/WCAG combinations with zero violations. Lighthouse remains 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.40-second LCP, and zero CLS.
+- All 138 external URLs pass with no material failures; six use ordinary automated-client protection. Rollback tag `backup/pre-light-theme-2026-08-26` preserves deployed commit `ff30d15b757d1bdedbbe559c4ebd3dc12925b083` before this enhancement.
+
 ## 2026-08-26 — Desktop navigation hierarchy refinement
 
 - Reorganized both desktop dropdowns into a clear two-part flow: prioritized starting routes on the left and compact, scannable destination links on the right. Existing URLs, page metadata, navigation triggers, and active-page behavior remain unchanged.

@@ -11,6 +11,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+THEME_INIT = '''    <script id="dge-theme-init">(function(){document.documentElement.classList.add("js");try{var theme=localStorage.getItem("dge-theme");if(theme==="light"||theme==="dark"){document.documentElement.dataset.theme=theme;}}catch(error){}}());</script>'''
+
+
+def theme_toggle(extra_class: str) -> str:
+    return f'''<button class="theme-toggle {extra_class}" type="button" aria-label="Switch to light theme" title="Switch to light theme" data-theme-toggle>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
+        </button>'''
+
 
 def current_section(relative: Path) -> str | None:
     parts = relative.as_posix().split("/")
@@ -63,7 +72,10 @@ def header_markup(relative: Path) -> str:
     return f'''<header class="publisher-header">
       <div class="site-shell header-bar">
         <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
-        <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        <div class="mobile-header-controls">
+          {theme_toggle("theme-toggle-mobile")}
+          <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
+        </div>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">
           <a class="nav-direct" href="/join.html"{start_current}>Start Here</a>
           <div class="nav-group" data-nav-group>
@@ -121,6 +133,7 @@ def header_markup(relative: Path) -> str:
             </div>
           </div>
         </nav>
+        {theme_toggle("theme-toggle-desktop")}
       </div>
     </header>'''
 
@@ -142,6 +155,12 @@ def remove_external_fonts(source: str) -> str:
         flags=re.IGNORECASE,
     )
     return re.sub(r'\s*<noscript>\s*</noscript>\s*', "\n", updated, flags=re.IGNORECASE)
+
+
+def ensure_theme_init(source: str) -> str:
+    if 'id="dge-theme-init"' in source:
+        return re.sub(r'\s*<script id="dge-theme-init">.*?</script>', "\n" + THEME_INIT, source, count=1, flags=re.DOTALL)
+    return source.replace("</head>", THEME_INIT + "\n  </head>", 1)
 
 
 def first_match(pattern: str, source: str) -> str:
@@ -208,6 +227,7 @@ def transform(page: Path) -> bool:
         count=1,
         flags=re.DOTALL,
     )
+    updated = ensure_theme_init(updated)
 
     if "/design-v2.css" in source:
         if updated == source:
