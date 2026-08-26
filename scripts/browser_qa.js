@@ -229,16 +229,15 @@ const guideReaderPaths = [
   const desktopThemeToggle = themePage.locator(".theme-toggle-desktop");
   const mobileThemeToggle = themePage.locator(".theme-toggle-mobile");
   if (!(await desktopThemeToggle.isVisible()) || (await mobileThemeToggle.isVisible())) errors.push("Desktop theme control visibility is incorrect");
-  if ((await desktopThemeToggle.getAttribute("aria-label")) !== "Switch to light theme") errors.push("Default theme control label is incorrect");
-  await desktopThemeToggle.click();
+  if ((await desktopThemeToggle.getAttribute("aria-label")) !== "Switch to dark theme") errors.push("Default theme control label is incorrect");
   const lightState = await themePage.evaluate(() => ({
     theme: document.documentElement.dataset.theme,
     stored: localStorage.getItem("dge-theme"),
     background: getComputedStyle(document.body).backgroundColor,
     labels: [...document.querySelectorAll("[data-theme-toggle]")].map((button) => button.getAttribute("aria-label")),
   }));
-  if (lightState.theme !== "light" || lightState.stored !== "light" || lightState.background !== "rgb(255, 255, 255)" || lightState.labels.some((label) => label !== "Switch to dark theme")) {
-    errors.push(`Light theme activation failed: ${JSON.stringify(lightState)}`);
+  if (lightState.theme !== "light" || lightState.stored !== null || lightState.background !== "rgb(255, 255, 255)" || lightState.labels.some((label) => label !== "Switch to dark theme")) {
+    errors.push(`Default light theme failed: ${JSON.stringify(lightState)}`);
   }
   await themePage.screenshot({ path: path.join(outputDirectory, "homepage-light-theme-desktop.png"), fullPage: false });
   await themePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
@@ -250,13 +249,14 @@ const guideReaderPaths = [
   await themePage.screenshot({ path: path.join(outputDirectory, "about-light-theme-desktop.png"), fullPage: false });
   await themePage.locator(".theme-toggle-desktop").press("Enter");
   if ((await themePage.evaluate(() => `${document.documentElement.dataset.theme}:${localStorage.getItem("dge-theme")}`)) !== "dark:dark") errors.push("Keyboard theme toggle did not restore and persist dark mode");
+  await themePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
+  if ((await themePage.evaluate(() => document.documentElement.dataset.theme)) !== "dark") errors.push("Saved dark theme did not persist across navigation");
   await themeContext.close();
 
   const mobileThemeContext = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
   const mobileThemePage = await mobileThemeContext.newPage();
   await mobileThemePage.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   if (!(await mobileThemePage.locator(".theme-toggle-mobile").isVisible()) || (await mobileThemePage.locator(".theme-toggle-desktop").isVisible())) errors.push("Mobile theme control visibility is incorrect");
-  await mobileThemePage.locator(".theme-toggle-mobile").click();
   await mobileThemePage.locator("[data-menu-toggle]").click();
   const mobileLightLayout = await mobileThemePage.evaluate(() => ({
     theme: document.documentElement.dataset.theme,

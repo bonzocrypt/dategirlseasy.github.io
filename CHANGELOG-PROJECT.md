@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-08-26 — Light-default readability and guide-panel polish
+
+- Made the white presentation the default for first-time visitors while preserving an explicitly saved dark preference. The early head initializer and browser theme color now agree with the selected theme before page content renders.
+- Added comfortable responsive inset spacing to the rounded Guide Library and In-Depth Guides hero panels so eyebrow text and headings do not collide with or clip against the curved border.
+- Replaced pale navy-theme link styling on legacy light pages with contrast-safe teal, including the Start Here breadcrumb and all four Recommended Path links. Buttons, navigation, brand colors, page content, URLs, and SEO metadata remain unchanged.
+- Added full-site regressions for pale legacy links and guide-panel inset clipping. Final QA passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 660 responsive/theme combinations, 132 representative browser combinations, and 220 axe/WCAG combinations with zero violations.
+- Start Here, Guide Library, and In-Depth Guides each score 99 performance, 100 accessibility, and 100 SEO in mobile Lighthouse, with 1.65–2.10-second LCP and zero CLS. All 138 external URLs pass with no material failures; six use ordinary automated-client protection.
+
 ## 2026-08-26 — Persistent light and dark themes
 
 - Added a compact, accessible sun/moon control at the far right of the desktop header and beside the mobile Menu control. The existing navy presentation remains the default, while the new light theme uses a white background, slate text, pale editorial panels, and restrained DGE purple, teal, and coral accents.

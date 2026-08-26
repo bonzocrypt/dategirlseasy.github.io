@@ -79,6 +79,10 @@ function collectHtml(directory) {
           const footerStyle = footerMeta ? getComputedStyle(footerMeta) : null;
           const footerLineHeight = footerStyle ? Number.parseFloat(footerStyle.lineHeight) : 0;
           const themeButtons = [...document.querySelectorAll("[data-theme-toggle]")];
+          const guideHero = document.querySelector(".guide-library-hero .hero-panel");
+          const guideHeroEyebrow = guideHero?.querySelector(".eyebrow");
+          const guideHeroRect = guideHero?.getBoundingClientRect();
+          const guideHeroEyebrowRect = guideHeroEyebrow?.getBoundingClientRect();
           return {
             theme: doc.dataset.theme,
             bodyBackground: getComputedStyle(document.body).backgroundColor,
@@ -86,6 +90,13 @@ function collectHtml(directory) {
               visible: getComputedStyle(themeButton).display !== "none",
               label: themeButton.getAttribute("aria-label"),
             })),
+            paleLegacyLinks: [...document.querySelectorAll("main a")]
+              .filter((link) => link.offsetParent !== null && getComputedStyle(link).color === "rgb(215, 246, 242)")
+              .map((link) => link.textContent.trim()).filter(Boolean),
+            guideHeroInset: !guideHero || !guideHeroEyebrow || !guideHeroRect || !guideHeroEyebrowRect || (
+              guideHeroEyebrowRect.left >= guideHeroRect.left + 20 &&
+              guideHeroEyebrowRect.top >= guideHeroRect.top + 20
+            ),
             overflow: doc.scrollWidth > window.innerWidth + 1,
             scrollWidth: doc.scrollWidth,
             innerWidth: window.innerWidth,
@@ -126,6 +137,8 @@ function collectHtml(directory) {
         const expectedThemeLabel = theme === "light" ? "Switch to dark theme" : "Switch to light theme";
         if (result.themeButtons.some((item) => item.label !== expectedThemeLabel)) errors.push(`${location}: theme control accessible label failed`);
         if (theme === "light" && result.bodyBackground !== "rgb(255, 255, 255)") errors.push(`${location}: light page background is not white (${result.bodyBackground})`);
+        if (theme === "light" && result.paleLegacyLinks.length) errors.push(`${location}: pale legacy links remain (${result.paleLegacyLinks.join(", ")})`);
+        if (!result.guideHeroInset) errors.push(`${location}: guide hero content is clipped by the rounded panel edge`);
         if (result.overflow) errors.push(`${location}: overflow ${result.scrollWidth}/${result.innerWidth}`);
         if (result.comparisonClipping) errors.push(`${location}: comparison dashboard content is clipped by the viewport`);
         if (width <= 768 && (!result.menuButtonVisible || !result.menuCollapsed)) errors.push(`${location}: mobile menu initial state failed`);

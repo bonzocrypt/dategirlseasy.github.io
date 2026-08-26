@@ -374,6 +374,20 @@ body.design-v2::before {
     var(--panel);
 }
 
+:root[data-theme="light"] .legacy-layout .prose a,
+:root[data-theme="light"] .legacy-layout .content a,
+:root[data-theme="light"] .legacy-layout .guide a {
+  color: #0f766e;
+  text-decoration-color: rgba(15, 118, 110, 0.48);
+}
+
+:root[data-theme="light"] .legacy-layout .prose a:hover,
+:root[data-theme="light"] .legacy-layout .content a:hover,
+:root[data-theme="light"] .legacy-layout .guide a:hover {
+  color: #115e59;
+  text-decoration-color: currentColor;
+}
+
 :root[data-theme="light"] .legacy-layout .template {
   background: #f8fafc;
 }
@@ -1182,6 +1196,10 @@ a.goal-card:hover {
   margin: 0 0 28px;
   color: var(--faint);
   font-size: 0.83rem;
+}
+
+.breadcrumbs a {
+  color: var(--teal);
 }
 
 .breadcrumbs a:hover {
@@ -2282,6 +2300,7 @@ a.goal-card:hover {
 
 .guide-library-hero .hero-panel {
   overflow: hidden;
+  padding: clamp(28px, 5vw, 56px);
   background:
     radial-gradient(circle at 90% 10%, rgba(61, 213, 195, 0.15), transparent 32%),
     radial-gradient(circle at 10% 100%, rgba(255, 139, 117, 0.12), transparent 34%),

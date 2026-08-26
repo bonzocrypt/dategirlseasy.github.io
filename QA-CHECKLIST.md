@@ -1,17 +1,19 @@
 # QA Checklist
 
-## Persistent light and dark themes
+## Light-default readability and guide-panel polish
 
-- [x] Existing navy presentation remains the default and the optional light presentation uses a true white page background
+- [x] The white presentation is the default for first-time visitors; an explicitly saved dark preference remains respected across pages
 - [x] Standard sun/moon control appears at the far right on desktop and beside Menu on mobile
 - [x] Exactly one responsive theme control is visible at every tested viewport, with a 44-pixel target and dynamic accessible action label
 - [x] Mouse, touch, Enter-key activation, cross-page persistence, and cross-tab storage synchronization are implemented
-- [x] Early head initialization restores the saved theme before page content renders and safely tolerates unavailable storage
+- [x] Early head initialization applies light by default or restores the saved theme before page content renders and safely tolerates unavailable storage
+- [x] Guide Library and In-Depth Guides hero text retains at least a 20-pixel inset from the rounded panel edge at every tested viewport
+- [x] No visible legacy content link retains the pale navy-theme link color in light mode; Start Here breadcrumbs and Recommended Path links are contrast-safe
 - [x] Shared modern and legacy page templates retain readable, consistent panels, tables, fields, cards, navigation, and footer styling in both themes
 - [x] Structural QA and valid HTML/JSON-LD pass across 55 HTML pages and 48 sitemap URLs
 - [x] Full-site browser QA passes 660 dark/light combinations at 320, 375, 390, 768, 1024, and 1440 pixels; representative interaction QA passes 132 combinations
 - [x] Axe/WCAG audit passes 220 dark/light combinations with zero violations
-- [x] Lighthouse remains 98–99 performance, 100 accessibility, 100 SEO, 2.10–2.40-second LCP, and zero CLS
+- [x] Start Here, Guide Library, and In-Depth Guides score 99 performance, 100 accessibility, 100 SEO, 1.65–2.10-second LCP, and zero CLS
 - [x] All 138 external URLs pass with no material failures
 
 ## Desktop navigation hierarchy refinement

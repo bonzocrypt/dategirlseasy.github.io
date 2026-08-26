@@ -4,7 +4,7 @@
   const themeButtons = Array.from(document.querySelectorAll("[data-theme-toggle]"));
 
   function activeTheme() {
-    return document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
   }
 
   function renderTheme(theme, persist) {
@@ -15,6 +15,8 @@
       button.setAttribute("aria-label", nextLabel);
       button.setAttribute("title", nextLabel);
     });
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    if (themeColor) themeColor.setAttribute("content", nextTheme === "light" ? "#ffffff" : "#08121d");
     if (persist) {
       try { localStorage.setItem(themeStorageKey, nextTheme); } catch (error) { /* The visual toggle still works. */ }
     }

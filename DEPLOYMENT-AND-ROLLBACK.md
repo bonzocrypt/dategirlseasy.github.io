@@ -25,6 +25,7 @@ Incremental enhancement rollback points:
 - Tawkify matchmaking alternative and Impact verification: rollback point `409dd0e2a08c5e823106872a6ffd754dc60d3165`, preserved as `backup/pre-tawkify-impact-2026-08-25`.
 - Desktop navigation hierarchy refinement: rollback point `a3c48f9dacf54ff2d2fef2e5272cd6d5511600a4`, preserved as `backup/pre-desktop-navigation-refinement-2026-08-26`.
 - Persistent light and dark themes: rollback point `ff30d15b757d1bdedbbe559c4ebd3dc12925b083`, preserved as `backup/pre-light-theme-2026-08-26`.
+- Light-default readability and guide-panel polish: rollback point `afb28c57b26353c0c36dcc3f9925acd2ac1dea0e`, preserved as `backup/pre-light-default-polish-2026-08-26`.
 
 ## Release
 

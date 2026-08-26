@@ -355,7 +355,7 @@ def main() -> int:
             errors.append(f"{rel}: shared publisher header is missing")
         else:
             header = header_match.group(0)
-            if header.count('aria-label="Switch to light theme"') != 2:
+            if header.count('aria-label="Switch to dark theme"') != 2:
                 errors.append(f"{rel}: theme controls lack their default accessible name")
             if "theme-toggle-desktop" not in header or "theme-toggle-mobile" not in header:
                 errors.append(f"{rel}: responsive theme controls are incomplete")
