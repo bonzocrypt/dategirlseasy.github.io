@@ -80,7 +80,7 @@ const expectedDatingAppLinks = [
   "/reviews/tawkify.html",
   ...appReviewLinks,
 ];
-const expectedGuideLinks = [
+const expectedGuideLibraryLinks = [
   "/guides/",
   "/ebooks/",
   "/ebooks/profile-and-photos/",
@@ -90,6 +90,15 @@ const expectedGuideLinks = [
   "/ebooks/body-language/",
   "/ebooks/kissing-and-intimacy/",
 ];
+const expectedInDepthGuideLinks = [
+  "/ebooks/profile-and-photos/internet-dating-guide-for-men.html",
+  "/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html",
+  "/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html",
+  "/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html",
+  "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+  "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
+];
+const expectedGuideLinks = [...expectedGuideLibraryLinks, ...expectedInDepthGuideLinks];
 const guideReaderPaths = [
   "/guides/dating-app-reset-checklist.html",
   "/ebooks/profile-and-photos/internet-dating-guide-for-men.html",
@@ -226,7 +235,21 @@ const guideReaderPaths = [
     errors.push(`Desktop Guide links are missing or out of order: ${JSON.stringify(desktopGuideLinks)}`);
   }
   if ((await desktopNavPage.locator("#nav-guides").innerText()).includes("All Dating Guides")) errors.push("Retired All Dating Guides label remains in desktop navigation");
+  const libraryGuidePanel = desktopNavPage.locator('[data-guide-menu-panel="library"]');
+  const inDepthGuidePanel = desktopNavPage.locator('[data-guide-menu-panel="in-depth"]');
+  const libraryGuidePath = desktopNavPage.locator('[data-guide-menu-view="library"]');
+  const inDepthGuidePath = desktopNavPage.locator('[data-guide-menu-view="in-depth"]');
+  if (!(await libraryGuidePanel.isVisible()) || !(await inDepthGuidePanel.isHidden())) errors.push("Desktop Guides menu does not begin with the Guide Library panel");
+  await inDepthGuidePath.hover();
+  if (!(await inDepthGuidePanel.isVisible()) || !(await libraryGuidePanel.isHidden())) errors.push("Hovering In-Depth Guides does not reveal its guide links");
+  const visibleInDepthLinks = await inDepthGuidePanel.locator("a:visible").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(visibleInDepthLinks) !== JSON.stringify(expectedInDepthGuideLinks)) errors.push("In-Depth Guides preview links are missing or out of order");
+  await libraryGuidePath.focus();
+  if (!(await libraryGuidePanel.isVisible()) || !(await inDepthGuidePanel.isHidden())) errors.push("Keyboard focus on Guide Library does not restore its goal links");
   await desktopNavPage.screenshot({ path: path.join(outputDirectory, "homepage-desktop-guides-menu.png"), fullPage: false });
+  await desktopNavPage.mouse.move(10, 400);
+  await inDepthGuidePath.hover();
+  await desktopNavPage.screenshot({ path: path.join(outputDirectory, "homepage-desktop-guides-in-depth-menu.png"), fullPage: false });
   await desktopNavPage.locator("main").click({ position: { x: 5, y: 5 } });
   if ((await guidesTriggerDesktop.getAttribute("aria-expanded")) !== "false") errors.push("Clicking outside does not close the desktop dropdown");
   await desktopNavContext.close();
@@ -328,11 +351,11 @@ const guideReaderPaths = [
   if ((await mobileGuidesTrigger.getAttribute("aria-expanded")) !== "true" || (await nestedMobilePage.locator("#nav-guides").getAttribute("data-open")) !== "true") {
     errors.push("Mobile Guides section does not expand on touch/click");
   }
-  const mobileGuideLinks = await nestedMobilePage.locator("#nav-guides a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-  if (JSON.stringify(mobileGuideLinks) !== JSON.stringify(expectedGuideLinks)) {
+  const mobileGuideLinks = await nestedMobilePage.locator("#nav-guides a:visible").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  if (JSON.stringify(mobileGuideLinks) !== JSON.stringify(expectedGuideLibraryLinks)) {
     errors.push(`Mobile Guide links are missing or out of order: ${JSON.stringify(mobileGuideLinks)}`);
   }
-  const lastMobileGuideLink = nestedMobilePage.locator("#nav-guides a").last();
+  const lastMobileGuideLink = nestedMobilePage.locator("#nav-guides a:visible").last();
   await lastMobileGuideLink.scrollIntoViewIfNeeded();
   if (!(await lastMobileGuideLink.isVisible())) errors.push("The final Guide topic is not reachable in the mobile menu");
   await nestedMobilePage.keyboard.press("Escape");
@@ -347,6 +370,7 @@ const guideReaderPaths = [
     const guidePage = await guideContext.newPage();
     await guidePage.goto(`${baseUrl}/guides/`, { waitUntil: "domcontentloaded" });
     const items = guidePage.locator("[data-guide-item]");
+    if ((await guidePage.locator(".adult-guide-grid > a").count()) !== 3) errors.push(`Guide Library lacks the relocated adult-only guide section at ${width}px`);
     if ((await items.count()) !== 21) errors.push(`Guide Library exposes ${(await items.count())} entries at ${width}px instead of 21`);
     await guidePage.locator('[data-guide-filter="topic"][data-guide-value="messaging"]').click();
     if ((await guidePage.locator("[data-guide-item]:visible").count()) !== 5) errors.push(`Messaging filter failed at ${width}px`);
@@ -472,7 +496,7 @@ const guideReaderPaths = [
       featuredLinks: document.querySelectorAll("[data-featured-link]").length,
       featuredHeading: document.querySelector("[data-featured-link]")?.closest("section")?.querySelector("h2")?.textContent || "",
     }));
-    if (homepageState.heroProof || homepageState.adultGuideLinks !== 3 || homepageState.featuredLinks !== 3 || !homepageState.featuredHeading.includes("Three useful moves")) {
+    if (homepageState.heroProof || homepageState.adultGuideLinks !== 0 || homepageState.featuredLinks !== 3 || !homepageState.featuredHeading.includes("Three useful moves")) {
       errors.push(`Homepage discovery contract failed at ${width}px: ${JSON.stringify(homepageState)}`);
     }
     await homepage.evaluate(() => document.querySelectorAll("[data-featured-link]").forEach((link) => link.addEventListener("click", (event) => event.preventDefault())));

@@ -114,6 +114,41 @@
       });
     });
 
+    const guideMenus = Array.from(document.querySelectorAll("[data-guide-menu]"));
+    guideMenus.forEach(function (guideMenu) {
+      const controls = Array.from(guideMenu.querySelectorAll("[data-guide-menu-view]"));
+      const panels = Array.from(guideMenu.querySelectorAll("[data-guide-menu-panel]"));
+      if (!controls.length || !panels.length) return;
+
+      function defaultGuideView() {
+        const current = controls.find(function (control) { return control.getAttribute("aria-current") === "page"; });
+        return current ? current.dataset.guideMenuView : "library";
+      }
+
+      function showGuideView(view) {
+        const nextView = panels.some(function (panel) { return panel.dataset.guideMenuPanel === view; }) ? view : "library";
+        guideMenu.dataset.guideView = nextView;
+        panels.forEach(function (panel) { panel.hidden = panel.dataset.guideMenuPanel !== nextView; });
+        controls.forEach(function (control) {
+          control.classList.toggle("nav-menu-path-primary", control.dataset.guideMenuView === nextView);
+        });
+      }
+
+      controls.forEach(function (control) {
+        control.addEventListener("pointerenter", function () {
+          if (window.innerWidth > 800) showGuideView(control.dataset.guideMenuView);
+        });
+        control.addEventListener("focus", function () {
+          if (window.innerWidth > 800) showGuideView(control.dataset.guideMenuView);
+        });
+      });
+
+      showGuideView(defaultGuideView());
+      window.addEventListener("resize", function () {
+        if (window.innerWidth <= 800) showGuideView(defaultGuideView());
+      });
+    });
+
     document.addEventListener("keydown", function (event) {
       if (event.key !== "Escape") return;
       const openGroup = navGroups.find(function (group) {

@@ -36,9 +36,9 @@
         <a class="publisher-brand" href="/" aria-label="Date Girls Easy home"><span class="brand-seal" aria-hidden="true">DGE</span><span class="brand-words"><strong>Date Girls Easy</strong><small>Adult dating intelligence for men</small></span></a>
         <div class="mobile-header-controls">
           <button class="theme-toggle theme-toggle-mobile" type="button" aria-label="Switch to dark theme" title="Switch to dark theme" data-theme-toggle>
-            <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-            <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
-          </button>
+          <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z"></path></svg>
+        </button>
           <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle><span class="menu-icon" aria-hidden="true"></span>Menu</button>
         </div>
         <nav class="primary-nav" id="primary-nav" aria-label="Primary" data-primary-nav data-open="false">
@@ -52,21 +52,62 @@
                   <a class="nav-menu-path nav-menu-path-primary" href="/comparisons/"><strong>Compare Dating Apps</strong><span>Narrow two or three options side by side</span></a>
                   <a class="nav-menu-path" href="/reviews/"><strong>Browse All Reviews</strong><span>Research each platform in depth</span></a>
                 </div>
-                <div class="nav-menu-beyond"><span class="nav-submenu-label">Beyond apps</span><a class="nav-menu-path nav-menu-matchmaking" href="/reviews/tawkify.html"><strong>Consider Matchmaking</strong><span>Explore a more personalized alternative</span></a></div>
+                <div class="nav-menu-beyond">
+                  <span class="nav-submenu-label">Beyond apps</span>
+                  <a class="nav-menu-path nav-menu-matchmaking" href="/reviews/tawkify.html"><strong>Consider Matchmaking</strong><span>Explore a more personalized alternative</span></a>
+                </div>
               </div>
               <div class="nav-submenu-section nav-menu-directory">
                 <span class="nav-submenu-label">Individual app reviews</span>
                 <div class="nav-app-links">
-                  <a href="/reviews/bumble.html">Bumble</a><a href="/reviews/coffee-meets-bagel.html">Coffee Meets Bagel</a><a href="/reviews/eharmony.html">eHarmony</a><a href="/reviews/facebook-dating.html">Facebook Dating</a><a href="/reviews/feeld.html">Feeld</a><a href="/reviews/hinge.html">Hinge</a><a href="/reviews/match.html">Match</a><a href="/reviews/okcupid.html">OkCupid</a><a href="/reviews/plenty-of-fish.html">Plenty of Fish</a><a href="/reviews/tinder.html">Tinder</a>
+                  <a href="/reviews/bumble.html">Bumble</a>
+                  <a href="/reviews/coffee-meets-bagel.html">Coffee Meets Bagel</a>
+                  <a href="/reviews/eharmony.html">eHarmony</a>
+                  <a href="/reviews/facebook-dating.html">Facebook Dating</a>
+                  <a href="/reviews/feeld.html">Feeld</a>
+                  <a href="/reviews/hinge.html">Hinge</a>
+                  <a href="/reviews/match.html">Match</a>
+                  <a href="/reviews/okcupid.html">OkCupid</a>
+                  <a href="/reviews/plenty-of-fish.html">Plenty of Fish</a>
+                  <a href="/reviews/tinder.html">Tinder</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger is-active" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
-            <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-open="false">
-              <div class="nav-menu-primary"><span class="nav-submenu-label">Start here</span><div class="nav-menu-paths"><a class="nav-menu-path nav-menu-path-primary" href="/guides/"><strong>Guide Library</strong><span>Find advice by goal, topic, or format</span></a><a class="nav-menu-path" href="/ebooks/"><strong>In-Depth Guides</strong><span>Read longer, chapter-based guides</span></a></div></div>
-              <div class="nav-submenu-section nav-menu-directory"><span class="nav-submenu-label">Browse by goal</span><div class="nav-guide-links"><a href="/ebooks/profile-and-photos/">Build a Better Profile</a><a href="/ebooks/messaging-and-openers/">Start Better Conversations</a><a href="/ebooks/dates-and-escalation/" aria-current="page">Get More Dates</a><a href="/ebooks/mindset-and-confidence/">Build Confidence</a><a href="/ebooks/body-language/">Read Interest &amp; Body Language</a><a href="/ebooks/kissing-and-intimacy/">Kissing &amp; Intimacy</a></div></div>
+            <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-guide-menu data-open="false">
+              <div class="nav-menu-primary">
+                <span class="nav-submenu-label">Start here</span>
+                <div class="nav-menu-paths">
+                  <a class="nav-menu-path nav-menu-path-primary" href="/guides/" data-guide-menu-view="library"><strong>Guide Library</strong><span>Find advice by goal, topic, or format</span></a>
+                  <a class="nav-menu-path" href="/ebooks/" data-guide-menu-view="in-depth"><strong>In-Depth Guides</strong><span>Read longer, chapter-based guides</span></a>
+                </div>
+              </div>
+              <div class="nav-submenu-section nav-menu-directory">
+                <div class="nav-guide-panel" data-guide-menu-panel="library">
+                  <span class="nav-submenu-label">Browse by goal</span>
+                  <div class="nav-guide-links">
+                    <a href="/ebooks/profile-and-photos/">Build a Better Profile</a>
+                    <a href="/ebooks/messaging-and-openers/">Start Better Conversations</a>
+                    <a href="/ebooks/dates-and-escalation/">Get More Dates</a>
+                    <a href="/ebooks/mindset-and-confidence/">Build Confidence</a>
+                    <a href="/ebooks/body-language/">Read Interest &amp; Body Language</a>
+                    <a href="/ebooks/kissing-and-intimacy/">Kissing &amp; Intimacy</a>
+                  </div>
+                </div>
+                <div class="nav-guide-panel" data-guide-menu-panel="in-depth" hidden>
+                  <span class="nav-submenu-label">Read complete guides</span>
+                  <div class="nav-guide-links nav-guide-links-in-depth">
+                    <a href="/ebooks/profile-and-photos/internet-dating-guide-for-men.html">Internet Dating Guide</a>
+                    <a href="/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html">Conversation &amp; Attraction</a>
+                    <a href="/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html">From Match to Date</a>
+                    <a href="/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html">Dating Confidence</a>
+                    <a href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html">Kissing With Confidence</a>
+                    <a href="/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html">How to Pleasure a Woman</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </nav>

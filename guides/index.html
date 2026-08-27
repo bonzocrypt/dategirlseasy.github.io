@@ -93,23 +93,36 @@
           </div>
           <div class="nav-group" data-nav-group>
             <button class="nav-trigger is-active" type="button" aria-expanded="false" aria-controls="nav-guides" data-nav-trigger>Guides<span class="nav-chevron" aria-hidden="true"></span></button>
-            <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-open="false">
+            <div class="nav-submenu nav-submenu-guides" id="nav-guides" data-nav-submenu data-guide-menu data-open="false">
               <div class="nav-menu-primary">
                 <span class="nav-submenu-label">Start here</span>
                 <div class="nav-menu-paths">
-                  <a class="nav-menu-path nav-menu-path-primary" href="/guides/" aria-current="page"><strong>Guide Library</strong><span>Find advice by goal, topic, or format</span></a>
-                  <a class="nav-menu-path" href="/ebooks/"><strong>In-Depth Guides</strong><span>Read longer, chapter-based guides</span></a>
+                  <a class="nav-menu-path nav-menu-path-primary" href="/guides/" data-guide-menu-view="library" aria-current="page"><strong>Guide Library</strong><span>Find advice by goal, topic, or format</span></a>
+                  <a class="nav-menu-path" href="/ebooks/" data-guide-menu-view="in-depth"><strong>In-Depth Guides</strong><span>Read longer, chapter-based guides</span></a>
                 </div>
               </div>
               <div class="nav-submenu-section nav-menu-directory">
-                <span class="nav-submenu-label">Browse by goal</span>
-                <div class="nav-guide-links">
-                  <a href="/ebooks/profile-and-photos/">Build a Better Profile</a>
-                  <a href="/ebooks/messaging-and-openers/">Start Better Conversations</a>
-                  <a href="/ebooks/dates-and-escalation/">Get More Dates</a>
-                  <a href="/ebooks/mindset-and-confidence/">Build Confidence</a>
-                  <a href="/ebooks/body-language/">Read Interest &amp; Body Language</a>
-                  <a href="/ebooks/kissing-and-intimacy/">Kissing &amp; Intimacy</a>
+                <div class="nav-guide-panel" data-guide-menu-panel="library">
+                  <span class="nav-submenu-label">Browse by goal</span>
+                  <div class="nav-guide-links">
+                    <a href="/ebooks/profile-and-photos/">Build a Better Profile</a>
+                    <a href="/ebooks/messaging-and-openers/">Start Better Conversations</a>
+                    <a href="/ebooks/dates-and-escalation/">Get More Dates</a>
+                    <a href="/ebooks/mindset-and-confidence/">Build Confidence</a>
+                    <a href="/ebooks/body-language/">Read Interest &amp; Body Language</a>
+                    <a href="/ebooks/kissing-and-intimacy/">Kissing &amp; Intimacy</a>
+                  </div>
+                </div>
+                <div class="nav-guide-panel" data-guide-menu-panel="in-depth" hidden>
+                  <span class="nav-submenu-label">Read complete guides</span>
+                  <div class="nav-guide-links nav-guide-links-in-depth">
+                    <a href="/ebooks/profile-and-photos/internet-dating-guide-for-men.html">Internet Dating Guide</a>
+                    <a href="/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html">Conversation &amp; Attraction</a>
+                    <a href="/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html">From Match to Date</a>
+                    <a href="/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html">Dating Confidence</a>
+                    <a href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html">Kissing With Confidence</a>
+                    <a href="/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html">How to Pleasure a Woman</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -125,6 +138,19 @@
     <main id="main-content" class="guide-library-main" data-guide-library>
       <section class="guide-library-hero">
         <div class="site-shell"><div class="hero-panel"><p class="eyebrow">Guide Library</p><h1>Find the dating guide that solves what is holding you back.</h1><p class="lede">Every quick guide, checklist, playbook, and in-depth guide now lives in one searchable library. Filter by the result you want, then choose the depth that fits your time.</p><div class="cta-row"><a class="button" href="#browse-guides">Browse all guides</a><a class="button secondary" href="/join.html">Help me choose where to start</a></div></div></div>
+      </section>
+      <section class="section-block adult-guide-section" aria-labelledby="adult-guide-title">
+        <div class="site-shell">
+          <div class="section-heading">
+            <div><p class="eyebrow warm">Adult-only</p><h2 class="section-title" id="adult-guide-title">Physical chemistry, made clearer.</h2></div>
+            <p>Direct guidance for adults on making the first move, kissing, and giving a woman more pleasure—without pressure, guessing, or fake guarantees.</p>
+          </div>
+          <div class="feature-grid adult-guide-grid">
+            <a class="editorial-card" href="/guides/when-to-make-the-first-move.html"><p class="eyebrow warm">Timing and attraction</p><h3 class="card-title">When to Make the First Move</h3><p>Know when the energy is mutual, express what you want, and handle hesitation or rejection confidently.</p><span class="card-link">Read the quick guide →</span></a>
+            <a class="editorial-card" href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html"><p class="eyebrow warm">Kissing and consent</p><h3 class="card-title">Kissing With Confidence</h3><p>Build the moment, ask attractively, approach slowly, and kiss responsively.</p><span class="card-link">Build better chemistry →</span></a>
+            <a class="editorial-card premium-guide-card" href="/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html"><p class="eyebrow warm">Premium adult guide · Free</p><h3 class="card-title">How to Pleasure a Woman</h3><p>Improve intimacy through communication, arousal, responsive technique, safer sex, and aftercare.</p><span class="card-link">Read the in-depth guide →</span></a>
+          </div>
+        </div>
       </section>
       <section class="site-shell" id="browse-guides" aria-labelledby="browse-guides-title">
         <div class="section-head"><p class="eyebrow page-kicker">Find your next move</p><h2 id="browse-guides-title">Search by problem, topic, or format</h2><p class="lede">Try “get replies,” “first date,” “confidence,” “kissing,” or any phrase that describes what you need.</p></div>

@@ -117,12 +117,29 @@ def guide_item(guide: Guide, *, heading: str = "h3", filterable: bool = False) -
             </li>'''
 
 
+def adult_chemistry_section() -> str:
+    return '''<section class="section-block adult-guide-section" aria-labelledby="adult-guide-title">
+        <div class="site-shell">
+          <div class="section-heading">
+            <div><p class="eyebrow warm">Adult-only</p><h2 class="section-title" id="adult-guide-title">Physical chemistry, made clearer.</h2></div>
+            <p>Direct guidance for adults on making the first move, kissing, and giving a woman more pleasure—without pressure, guessing, or fake guarantees.</p>
+          </div>
+          <div class="feature-grid adult-guide-grid">
+            <a class="editorial-card" href="/guides/when-to-make-the-first-move.html"><p class="eyebrow warm">Timing and attraction</p><h3 class="card-title">When to Make the First Move</h3><p>Know when the energy is mutual, express what you want, and handle hesitation or rejection confidently.</p><span class="card-link">Read the quick guide →</span></a>
+            <a class="editorial-card" href="/ebooks/kissing-and-intimacy/kissing-with-confidence.html"><p class="eyebrow warm">Kissing and consent</p><h3 class="card-title">Kissing With Confidence</h3><p>Build the moment, ask attractively, approach slowly, and kiss responsively.</p><span class="card-link">Build better chemistry →</span></a>
+            <a class="editorial-card premium-guide-card" href="/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html"><p class="eyebrow warm">Premium adult guide · Free</p><h3 class="card-title">How to Pleasure a Woman</h3><p>Improve intimacy through communication, arousal, responsive technique, safer sex, and aftercare.</p><span class="card-link">Read the in-depth guide →</span></a>
+          </div>
+        </div>
+      </section>'''
+
+
 def guide_hub() -> str:
     items = "\n            ".join(guide_item(guide, filterable=True) for guide in GUIDES)
     return f'''<main id="main-content" class="guide-library-main" data-guide-library>
       <section class="guide-library-hero">
         <div class="site-shell"><div class="hero-panel"><p class="eyebrow">Guide Library</p><h1>Find the dating guide that solves what is holding you back.</h1><p class="lede">Every quick guide, checklist, playbook, and in-depth guide now lives in one searchable library. Filter by the result you want, then choose the depth that fits your time.</p><div class="cta-row"><a class="button" href="#browse-guides">Browse all guides</a><a class="button secondary" href="/join.html">Help me choose where to start</a></div></div></div>
       </section>
+      {adult_chemistry_section()}
       <section class="site-shell" id="browse-guides" aria-labelledby="browse-guides-title">
         <div class="section-head"><p class="eyebrow page-kicker">Find your next move</p><h2 id="browse-guides-title">Search by problem, topic, or format</h2><p class="lede">Try “get replies,” “first date,” “confidence,” “kissing,” or any phrase that describes what you need.</p></div>
         <div class="guide-discovery">

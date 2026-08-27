@@ -58,6 +58,12 @@ NAV_GUIDE_LINKS = [
     ("/ebooks/mindset-and-confidence/", "Build Confidence"),
     ("/ebooks/body-language/", "Read Interest &amp; Body Language"),
     ("/ebooks/kissing-and-intimacy/", "Kissing &amp; Intimacy"),
+    ("/ebooks/profile-and-photos/internet-dating-guide-for-men.html", "Internet Dating Guide"),
+    ("/ebooks/messaging-and-openers/conversation-skills-that-build-attraction.html", "Conversation &amp; Attraction"),
+    ("/ebooks/dates-and-escalation/from-match-to-date-without-pressure.html", "From Match to Date"),
+    ("/ebooks/mindset-and-confidence/dating-confidence-for-shy-men.html", "Dating Confidence"),
+    ("/ebooks/kissing-and-intimacy/kissing-with-confidence.html", "Kissing With Confidence"),
+    ("/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html", "How to Pleasure a Woman"),
 ]
 
 GUIDE_READER_PAGES = [
@@ -432,6 +438,8 @@ def main() -> int:
                     errors.append(f"{rel}: retired All Dating Guides label remains in navigation")
                 if "Browse by goal" not in guide_menu:
                     errors.append(f"{rel}: Guides menu lacks goal-oriented hierarchy")
+                if guide_menu.count("data-guide-menu-view=") != 2 or guide_menu.count("data-guide-menu-panel=") != 2:
+                    errors.append(f"{rel}: Guides menu lacks the two-view desktop preview contract")
         if "fonts.googleapis.com" in raw or "fonts.gstatic.com" in raw or "Bricolage" in raw:
             errors.append(f"{rel}: external or retired typography dependency remains")
         if re.search(r'<(?:article|div|li)[^>]*class="[^"]*goal-card', raw, flags=re.IGNORECASE):
@@ -484,13 +492,6 @@ def main() -> int:
     homepage_raw = (ROOT / "index.html").read_text(encoding="utf-8")
     if "hero-proof" in homepage_raw:
         errors.append("index.html: noninteractive publishing-principle boxes remain in the hero")
-    for href in (
-        "/guides/when-to-make-the-first-move.html",
-        "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
-        "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
-    ):
-        if f'href="{href}"' not in homepage_raw:
-            errors.append(f"index.html: adult-only guide section lacks {href}")
     if homepage_raw.count("data-featured-link") != 3 or "Featured this month" not in homepage_raw:
         errors.append("index.html: expected three measurable Featured this month links")
     if "Popular now" in homepage_raw or "Tinder vs Bumble" in homepage_raw:
@@ -560,6 +561,17 @@ def main() -> int:
             errors.append(f"{rel}: missing contextual date-idea finder link")
 
     guide_hub_raw = (ROOT / "guides" / "index.html").read_text(encoding="utf-8")
+    if "Physical chemistry, made clearer." in homepage_raw:
+        errors.append("index.html: adult-only physical-chemistry section was not removed from the homepage")
+    if guide_hub_raw.count("Physical chemistry, made clearer.") != 1 or guide_hub_raw.count('class="editorial-card') < 3:
+        errors.append("guides/index.html: relocated adult-only physical-chemistry section is incomplete")
+    for href in (
+        "/guides/when-to-make-the-first-move.html",
+        "/ebooks/kissing-and-intimacy/kissing-with-confidence.html",
+        "/ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html",
+    ):
+        if f'href="{href}"' not in guide_hub_raw:
+            errors.append(f"guides/index.html: adult-only guide section lacks {href}")
     for contract in ("data-guide-library", "data-guide-search", "data-guide-filter", "data-guide-count", "data-guide-clear"):
         if contract not in guide_hub_raw:
             errors.append(f"guides/index.html: missing unified library contract {contract}")
