@@ -30,6 +30,7 @@ Incremental enhancement rollback points:
 - Sitewide privacy consent controls: rollback point `aafa64e62e3c006ba93a30a643e5dfe0062ff06c`; implementation commit `e707c02c1b56625d22fd421b2f877bfdc97f9e6a`.
 - Local date ideas guide and consent-gated Viator finder: rollback point `e0923ea08d99819192c8ee8e9e3c5cd360e88f30`; implementation commit `b3dfb77952869a12abfc73b3fcc133369415c3e0`.
 - Guide placement and desktop preview navigation: rollback point `dc013cc723dfca18b353c2b9b11e16e6619c4bee`; implementation commit `716b90a60cc505d0eb6d0a8d49fa27cc6dba4ea7`.
+- Fotor profile-photo recommendations: rollback point `8a940f3c1a25fa0324b25671dcd2009cfc493488`; implementation commit `2adffcfbd28b4970f4f59140cc81ee320caa5946`.
 
 ## Release
 

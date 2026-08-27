@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-08-27 — Fotor profile-photo recommendations
+
+- Added the owner-supplied Fotor affiliate destination to the Profile Photo Checklist and Dating App Reset Checklist, where photo editing is the reader’s immediate task. Each page explains useful honest corrections, rejects deceptive face/body/lifestyle alteration, and places a clear commission disclosure before the link.
+- Kept the integration as an ordinary reader-initiated link with the exact `?ref=dan` parameter, `sponsored`/`nofollow` markup, and no Fotor script or cookie on DGE. Necessary-only visitors retain the same link behavior; the privacy policy now explains the handoff and links to Fotor’s privacy policy.
+- Registered the active placements and operational restrictions centrally, scoped the new visual treatment to the two monetized pages, and added structural and browser regressions that prevent missing disclosures, changed tracking URLs, referral-hiding attributes, placement drift, misleading-editing advice, or mobile overflow.
+- Final QA passes across 56 HTML pages and 49 sitemap URLs, valid HTML/JSON-LD, 672 responsive/theme combinations, 224 axe/WCAG combinations with zero violations, complete consent checks, and 143 external URLs with no material failures. The affected pages score 97–99 performance, 100 accessibility, 96 best practices, and 100 SEO with 1.95–2.40-second LCP and zero CLS.
+- GitHub Pages built implementation commit `2adffcfbd28b4970f4f59140cc81ee320caa5946`. Production browser verification passed the exact link/disclosure contract, light/dark rendering at phone and desktop widths, privacy notice, and viewport containment without clicking the affiliate link. Rollback point: `8a940f3c1a25fa0324b25671dcd2009cfc493488`.
+
 ## 2026-08-26 — Guide placement and desktop preview navigation
 
 - Moved the **Adult-only / Physical chemistry, made clearer** section from the homepage into the unified Guide Library, keeping all three finished guide destinations and the premium-free treatment intact.
