@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-08-26 — Guide placement and desktop preview navigation
+
+- Moved the **Adult-only / Physical chemistry, made clearer** section from the homepage into the unified Guide Library, keeping all three finished guide destinations and the premium-free treatment intact.
+- Upgraded the desktop Guides dropdown into two clear previews: **Guide Library** shows goal-based shelves, while hovering or keyboard-focusing **In-Depth Guides** reveals six finished long-form guides as direct links. Mobile retains the compact tap-first menu.
+- Preserved all URLs, page metadata, guide content, analytics, consent controls, light/dark themes, and the shared generator source so future rebuilds retain the behavior.
+- Final QA passes across 56 HTML pages and 49 sitemap URLs, valid HTML/JSON-LD, 672 responsive/theme combinations, 224 axe/WCAG combinations with zero violations, and 141 external URLs with no material failures. The affected pages score 98–99 performance, 100 accessibility, 96 best practices, and 100 SEO with zero CLS; the deployed baseline scores 1.54-second homepage LCP through the production CDN.
+- GitHub Pages built implementation commit `716b90a60cc505d0eb6d0a8d49fa27cc6dba4ea7`. Production browser verification passed the adult-section move, desktop hover and keyboard panel switching, six in-depth destinations, mobile reachability, viewport containment, and HTTP 200 responses. Rollback point: `dc013cc723dfca18b353c2b9b11e16e6619c4bee`.
+
 ## 2026-08-26 — Local date ideas guide and Viator experience finder
 
 - Published **Find Date Ideas Near You** as a substantive original first-date planning guide with city or destination search, activity recommendations by stage and intent, budget guidance, invitation examples, safety guidance, and an accessible reading menu.
