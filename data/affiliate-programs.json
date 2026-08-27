@@ -83,6 +83,29 @@
       "disclosureRequirement": "Clear affiliate disclosure near monetized date recommendations."
     },
     {
+      "id": "fotor",
+      "name": "Fotor",
+      "status": "active-direct-link",
+      "officialDestination": "https://www.fotor.com/",
+      "affiliateUrl": "https://www.fotor.com/?ref=dan",
+      "trackingIdentifier": "dan",
+      "trackingMethod": "ordinary disclosed outbound link; no embedded Fotor script or cookie on DGE",
+      "allowedPlacements": [
+        "/guides/profile-photo-checklist.html",
+        "/guides/dating-app-reset-checklist.html"
+      ],
+      "verificationDate": "2026-08-27",
+      "operationalRules": [
+        "use the owner-supplied affiliate URL without modification",
+        "keep dategirlseasy.com listed in the Fotor affiliate profile",
+        "use only direct reader-initiated links; no forced clicks, pop-ups, cookie stuffing, or misleading offers",
+        "do not mask or redirect the referring URL",
+        "do not bid on Fotor trademarks or advertise unapproved coupon codes",
+        "keep a clear disclosure before the first Fotor link on every monetized page"
+      ],
+      "disclosureRequirement": "Use this line before the first Fotor link: Date Girls Easy may earn a commission if you use Fotor through links on this page, at no additional cost to you."
+    },
+    {
       "id": "amazon-associates",
       "name": "Amazon Associates",
       "status": "application-target",

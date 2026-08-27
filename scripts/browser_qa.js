@@ -28,6 +28,8 @@ const screenshotPages = [
   ["getting-dates-category-mobile.png", "/ebooks/dates-and-escalation/", 390, 844],
   ["bio-guide-reader-desktop.png", "/guides/bio-templates.html", 1440, 1000],
   ["bio-guide-reader-mobile.png", "/guides/bio-templates.html", 390, 844],
+  ["profile-photo-fotor-desktop.png", "/guides/profile-photo-checklist.html", 1440, 1000],
+  ["profile-photo-fotor-mobile.png", "/guides/profile-photo-checklist.html", 390, 844],
   ["body-language-reader-desktop.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 1440, 1000],
   ["body-language-reader-mobile.png", "/ebooks/body-language/body-language-clues-that-show-interest.html", 390, 844],
   ["first-move-guide-desktop.png", "/guides/when-to-make-the-first-move.html", 1440, 1000],
@@ -414,6 +416,38 @@ const guideReaderPaths = [
       }
     }
     await readerContext.close();
+  }
+
+  const fotorPaths = [
+    "/guides/profile-photo-checklist.html",
+    "/guides/dating-app-reset-checklist.html",
+  ];
+  for (const width of [390, 1440]) {
+    const fotorContext = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const fotorPage = await fotorContext.newPage();
+    for (const pathname of fotorPaths) {
+      await fotorPage.goto(`${baseUrl}${pathname}`, { waitUntil: "domcontentloaded" });
+      const link = fotorPage.locator('[data-affiliate-program="fotor"]');
+      const contract = await fotorPage.evaluate(() => {
+        const affiliateLink = document.querySelector('[data-affiliate-program="fotor"]');
+        const card = affiliateLink?.closest(".affiliate-tool-card");
+        const disclosure = card?.querySelector(".affiliate-disclosure");
+        return {
+          links: document.querySelectorAll('[data-affiliate-program="fotor"]').length,
+          href: affiliateLink?.getAttribute("href") || "",
+          target: affiliateLink?.getAttribute("target") || "",
+          rel: affiliateLink?.getAttribute("rel") || "",
+          disclosureBeforeLink: Boolean(disclosure && affiliateLink && (disclosure.compareDocumentPosition(affiliateLink) & Node.DOCUMENT_POSITION_FOLLOWING)),
+          cardVisible: Boolean(card && card.getBoundingClientRect().width > 0 && card.getBoundingClientRect().height > 0),
+          overflow: document.documentElement.scrollWidth > innerWidth + 1,
+        };
+      });
+      const relTokens = new Set(contract.rel.split(/\s+/));
+      if (contract.links !== 1 || contract.href !== "https://www.fotor.com/?ref=dan" || contract.target !== "_blank" || !["sponsored", "nofollow", "noopener"].every((token) => relTokens.has(token)) || relTokens.has("noreferrer") || !contract.disclosureBeforeLink || !contract.cardVisible || contract.overflow || !(await link.isVisible())) {
+        errors.push(`Fotor placement contract failed on ${pathname} at ${width}px: ${JSON.stringify(contract)}`);
+      }
+    }
+    await fotorContext.close();
   }
 
   for (const width of [390, 1440]) {

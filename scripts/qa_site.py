@@ -90,6 +90,11 @@ GUIDE_READER_PAGES = [
     Path("ebooks/kissing-and-intimacy/how-to-pleasure-a-woman.html"),
 ]
 
+FOTOR_PLACEMENTS = {
+    Path("guides/profile-photo-checklist.html"),
+    Path("guides/dating-app-reset-checklist.html"),
+}
+
 NOINDEX_SHELVES = {
     Path("ebooks/attraction/index.html"),
 }
@@ -295,6 +300,16 @@ def main() -> int:
             errors.append("data/affiliate-programs.json: Viator partner or widget identifier does not match the owner-supplied embed")
         if viator_program.get("consentCategory") != "affiliate":
             errors.append("data/affiliate-programs.json: Viator must use the affiliate consent category")
+    fotor_program = next((item for item in affiliate_registry.get("programs", []) if item.get("id") == "fotor"), None)
+    if not fotor_program:
+        errors.append("data/affiliate-programs.json: missing Fotor entry")
+    else:
+        if fotor_program.get("status") != "active-direct-link":
+            errors.append("data/affiliate-programs.json: Fotor is not registered as an active direct-link program")
+        if fotor_program.get("affiliateUrl") != "https://www.fotor.com/?ref=dan" or fotor_program.get("trackingIdentifier") != "dan":
+            errors.append("data/affiliate-programs.json: Fotor affiliate URL or identifier does not match the owner-supplied link")
+        if set(fotor_program.get("allowedPlacements", [])) != {"/" + path.as_posix() for path in FOTOR_PLACEMENTS}:
+            errors.append("data/affiliate-programs.json: Fotor placements do not match the approved photo-guide set")
 
     for page in sorted(ROOT.rglob("*.html")):
         if any(part.startswith(".") for part in page.relative_to(ROOT).parts):
@@ -347,6 +362,31 @@ def main() -> int:
             errors.append(f"{rel}: references nonexistent assets/og/default.jpg")
 
         raw = page.read_text(encoding="utf-8")
+        fotor_href = "https://www.fotor.com/?ref=dan"
+        fotor_disclosure = "Date Girls Easy may earn a commission if you use Fotor through links on this page, at no additional cost to you."
+        fotor_link_position = raw.find(f'href="{fotor_href}"')
+        if rel in FOTOR_PLACEMENTS:
+            if raw.count(f'href="{fotor_href}"') != 1:
+                errors.append(f"{rel}: expected exactly one owner-supplied Fotor affiliate link")
+            if raw.count(fotor_disclosure) != 1:
+                errors.append(f"{rel}: expected exactly one proximate Fotor disclosure")
+            disclosure_position = raw.find(fotor_disclosure)
+            if disclosure_position >= 0 and fotor_link_position >= 0 and disclosure_position > fotor_link_position:
+                errors.append(f"{rel}: Fotor disclosure must precede the affiliate link")
+            fotor_anchor = re.search(r'<a\b[^>]*href="https://www\.fotor\.com/\?ref=dan"[^>]*>', raw, flags=re.IGNORECASE)
+            if not fotor_anchor:
+                errors.append(f"{rel}: Fotor affiliate anchor is missing")
+            else:
+                anchor = fotor_anchor.group(0)
+                for token in ('data-affiliate-program="fotor"', 'target="_blank"', 'rel="sponsored nofollow noopener"'):
+                    if token not in anchor:
+                        errors.append(f"{rel}: Fotor affiliate anchor lacks {token}")
+                if "noreferrer" in anchor:
+                    errors.append(f"{rel}: Fotor affiliate link must preserve the referring URL")
+            if not re.search(r"reshap", raw, flags=re.IGNORECASE) or not re.search(r"filter", raw, flags=re.IGNORECASE):
+                errors.append(f"{rel}: Fotor placement lacks honest-editing safeguards")
+        elif fotor_link_position >= 0 or 'data-affiliate-program="fotor"' in raw:
+            errors.append(f"{rel}: Fotor affiliate link appears outside the approved photo-guide set")
         if raw.count('<script src="/assets/consent.js"></script>') != 1:
             errors.append(f"{rel}: consent bootstrap must appear exactly once")
         for bypass in (
@@ -520,6 +560,9 @@ def main() -> int:
         "Global Privacy Control",
         "Viator experience widget and affiliate attribution",
         "https://www.viator.com/support/privacyPolicy",
+        "Ordinary outbound affiliate links",
+        "https://www.fotor.com/privacypolicy",
+        "DGE does not receive the photos you upload to Fotor",
     )
     for required_text in privacy_contract:
         if required_text not in privacy_raw:

@@ -33,7 +33,7 @@ LEGACY_LAYOUTS = {
     ),
     "/guides/profile-photo-checklist.html": LegacyLayout(
         ("quick-answer", "photo-set", "avoid", "shooting-tips", "next-step", "disclosure"),
-        (("quick-answer", "Quick answer"), ("photo-set", "Photo set"), ("avoid", "What to avoid"), ("shooting-tips", "Shooting tips"), ("next-step", "Next steps")),
+        (("quick-answer", "Quick answer"), ("photo-set", "Photo set"), ("avoid", "What to avoid"), ("photo-editing", "Edit without looking fake"), ("shooting-tips", "Shooting tips"), ("next-step", "Next steps")),
     ),
     "/playbooks/first-date-playbook.html": LegacyLayout(
         ("quick-answer", "coffee-walk", "dessert", "casual-drinks", "what-works", "next-step", "disclosure"),
