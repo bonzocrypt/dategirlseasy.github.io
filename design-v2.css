@@ -593,7 +593,6 @@ body.design-v2::before {
 .nav-menu-primary,
 .nav-menu-directory,
 .nav-menu-paths,
-.nav-menu-beyond,
 .nav-app-links,
 .nav-guide-links {
   display: grid;
@@ -606,15 +605,8 @@ body.design-v2::before {
   border-right: 1px solid var(--line);
 }
 
-.nav-menu-paths,
-.nav-menu-beyond {
+.nav-menu-paths {
   margin-top: 3px;
-}
-
-.nav-menu-beyond {
-  margin-top: 14px;
-  padding-top: 13px;
-  border-top: 1px solid var(--line);
 }
 
 .nav-submenu .nav-menu-path {
@@ -631,10 +623,6 @@ body.design-v2::before {
   background: rgba(118, 87, 255, 0.15);
 }
 
-.nav-submenu .nav-menu-matchmaking {
-  min-height: 58px;
-  background: rgba(32, 211, 194, 0.07);
-}
 
 .nav-menu-path strong {
   color: var(--ink);
@@ -1594,35 +1582,6 @@ a.goal-card:hover {
   margin-bottom: 4px;
 }
 
-.matchmaking-alternative {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 0 28px;
-  padding: 22px 24px;
-  border: 1px solid rgba(246, 204, 120, 0.34);
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(246, 204, 120, 0.09), rgba(118, 87, 255, 0.08));
-}
-
-.matchmaking-alternative > div {
-  max-width: 760px;
-}
-
-.matchmaking-alternative h3 {
-  margin: 8px 0 6px;
-  font-size: clamp(1.3rem, 2vw, 1.75rem);
-}
-
-.matchmaking-alternative p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.matchmaking-alternative > .button {
-  flex: 0 0 auto;
-}
 
 .review-directory-note {
   margin-top: 24px;
@@ -3076,11 +3035,6 @@ a.goal-card:hover {
     border-top: 1px solid var(--line);
   }
 
-  .nav-menu-beyond {
-    margin-top: 8px;
-    padding-top: 9px;
-  }
-
   .nav-submenu .nav-menu-path {
     min-height: 54px;
   }
@@ -3213,15 +3167,6 @@ a.goal-card:hover {
 }
 
 @media (max-width: 720px) {
-  .matchmaking-alternative {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .matchmaking-alternative > .button {
-    width: 100%;
-  }
-
   .review-directory-head {
     display: grid;
     gap: 18px;

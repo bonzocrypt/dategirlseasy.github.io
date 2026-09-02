@@ -290,6 +290,10 @@ def main() -> int:
             errors.append("data/affiliate-programs.json: CJ promotional method must remain website/editorial content only")
         if len(cj_program.get("activationRequirements", [])) < 6:
             errors.append("data/affiliate-programs.json: CJ activation requirements are incomplete")
+    if any(item.get("id") == "tawkify" for item in affiliate_registry.get("programs", [])):
+        errors.append("data/affiliate-programs.json: rejected Tawkify program remains in the affiliate registry")
+    if (ROOT / "reviews" / "tawkify.html").exists():
+        errors.append("reviews/tawkify.html: retired review file still exists")
     viator_program = next((item for item in affiliate_registry.get("programs", []) if item.get("id") == "viator"), None)
     if not viator_program:
         errors.append("data/affiliate-programs.json: missing Viator entry")
@@ -405,18 +409,8 @@ def main() -> int:
         footer_match = re.search(r'<footer class="publisher-footer">.*?</footer>', raw, flags=re.DOTALL)
         if footer_match and "data-current-year" in footer_match.group(0):
             errors.append(f"{rel}: footer must use the approved fixed 2026 copyright line")
-        if rel == "reviews/tawkify.html":
-            tawkify_disclosure = "Date Girls Easy may earn a commission if you sign up through links on this page, at no additional cost to you."
-            disclosure_position = raw.find(tawkify_disclosure)
-            outbound_position = raw.find('id="tawkify-outbound-link"')
-            if disclosure_position < 0:
-                errors.append(f"{rel}: exact Tawkify affiliate disclosure is missing")
-            if outbound_position < 0:
-                errors.append(f"{rel}: Tawkify outbound CTA is missing")
-            if disclosure_position >= 0 and outbound_position >= 0 and disclosure_position > outbound_position:
-                errors.append(f"{rel}: Tawkify disclosure must precede the first commercial CTA")
-        if rel == "reviews/index.html" and 'href="/reviews/tawkify.html"' not in raw:
-            errors.append(f"{rel}: matchmaking alternative does not link to the Tawkify review")
+        if "tawkify" in raw.lower():
+            errors.append(f"{rel}: retired Tawkify content or link remains public")
         if rel == "index.html" and raw.count('<meta name="impact-site-verification" value="0109abc6-5f78-4a99-9a85-424e33181b44" />') != 1:
             errors.append(f"{rel}: Impact website-verification tag is missing or duplicated")
         if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
@@ -448,7 +442,6 @@ def main() -> int:
                 expected_links = [
                     ("/comparisons/", "Compare Dating Apps"),
                     ("/reviews/", "Browse All Reviews"),
-                    ("/reviews/tawkify.html", "Consider Matchmaking"),
                     *NAV_REVIEW_LINKS,
                 ]
                 actual_hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]+)"', app_menu)
@@ -460,7 +453,9 @@ def main() -> int:
                         errors.append(f"{rel}: Dating Apps menu lacks {label} ({href})")
                 if "Tinder vs Bumble" in app_menu:
                     errors.append(f"{rel}: contextual Tinder vs Bumble link remains in global navigation")
-                if "Beyond apps" not in app_menu or "Individual app reviews" not in app_menu:
+                if "Beyond apps" in app_menu or "Consider Matchmaking" in app_menu:
+                    errors.append(f"{rel}: retired matchmaking promotion remains in Dating Apps navigation")
+                if "Individual app reviews" not in app_menu:
                     errors.append(f"{rel}: Dating Apps menu hierarchy is incomplete")
             guide_start = guide_menu_start
             if guide_start < 0:

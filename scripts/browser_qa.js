@@ -58,8 +58,6 @@ const screenshotPages = [
   ["coffee-meets-bagel-review-mobile.png", "/reviews/coffee-meets-bagel.html", 390, 844],
   ["plenty-of-fish-review-desktop.png", "/reviews/plenty-of-fish.html", 1440, 1000],
   ["plenty-of-fish-review-mobile.png", "/reviews/plenty-of-fish.html", 390, 844],
-  ["tawkify-review-desktop.png", "/reviews/tawkify.html", 1440, 1000],
-  ["tawkify-review-mobile.png", "/reviews/tawkify.html", 390, 844],
 ];
 
 const representativePaths = [...new Set(screenshotPages.filter((item) => item[1] !== "/404.html").map((item) => item[1]))];
@@ -79,7 +77,6 @@ const appReviewLinks = [
 const expectedDatingAppLinks = [
   "/comparisons/",
   "/reviews/",
-  "/reviews/tawkify.html",
   ...appReviewLinks,
 ];
 const expectedGuideLibraryLinks = [
@@ -218,6 +215,9 @@ const guideReaderPaths = [
   }
   if ((await desktopNavPage.locator("#nav-dating-apps").innerText()).includes("Tinder vs Bumble")) {
     errors.push("Tinder vs Bumble remains in the global Dating Apps dropdown");
+  }
+  if (/Beyond apps|Consider Matchmaking|Tawkify/i.test(await desktopNavPage.locator("#nav-dating-apps").innerText())) {
+    errors.push("Retired matchmaking promotion remains in the desktop Dating Apps dropdown");
   }
   await desktopNavPage.screenshot({ path: path.join(outputDirectory, "homepage-desktop-dating-apps-menu.png"), fullPage: false });
   const firstAppLink = desktopNavPage.locator("#nav-dating-apps a").first();
@@ -459,10 +459,14 @@ const guideReaderPaths = [
       heroHasTinderPriority: document.querySelector(".review-hub-hero")?.textContent.includes("Tinder") || false,
       comparisonRoutes: document.querySelectorAll('main a[href="/comparisons/"]').length,
       directoryTarget: Boolean(document.getElementById("review-directory")),
+      retiredLinks: document.querySelectorAll('a[href*="tawkify" i]').length,
+      retiredPromotion: Boolean(document.querySelector(".matchmaking-alternative")),
     }));
     const expectedReviewHrefs = appReviewLinks;
     if (JSON.stringify(reviewState.reviewHrefs) !== JSON.stringify(expectedReviewHrefs)) errors.push(`Review hub cards are missing or out of order at ${width}px: ${JSON.stringify(reviewState.reviewHrefs)}`);
-    if (reviewState.heroHasTinderPriority || reviewState.comparisonRoutes < 2 || !reviewState.directoryTarget) errors.push(`Review hub decision hierarchy failed at ${width}px: ${JSON.stringify(reviewState)}`);
+    if (reviewState.heroHasTinderPriority || reviewState.comparisonRoutes < 2 || !reviewState.directoryTarget || reviewState.retiredLinks || reviewState.retiredPromotion) errors.push(`Review hub decision hierarchy failed at ${width}px: ${JSON.stringify(reviewState)}`);
+    const retiredResponse = await reviewPage.goto(`${baseUrl}/reviews/tawkify.html`, { waitUntil: "domcontentloaded" });
+    if (!retiredResponse || retiredResponse.status() !== 404) errors.push(`Retired Tawkify URL returned ${retiredResponse?.status()} locally at ${width}px instead of 404`);
     await reviewContext.close();
   }
 

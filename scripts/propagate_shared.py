@@ -51,7 +51,6 @@ def header_markup(relative: Path) -> str:
         "/reviews/match.html": "reviews/match.html",
         "/reviews/okcupid.html": "reviews/okcupid.html",
         "/reviews/plenty-of-fish.html": "reviews/plenty-of-fish.html",
-        "/reviews/tawkify.html": "reviews/tawkify.html",
         "/reviews/tinder.html": "reviews/tinder.html",
         "/guides/": "guides/index.html",
         "/ebooks/": "ebooks/index.html",
@@ -86,10 +85,6 @@ def header_markup(relative: Path) -> str:
                 <div class="nav-menu-paths">
                   <a class="nav-menu-path nav-menu-path-primary" href="/comparisons/"{current_for("/comparisons/")}><strong>Compare Dating Apps</strong><span>Narrow two or three options side by side</span></a>
                   <a class="nav-menu-path" href="/reviews/"{current_for("/reviews/")}><strong>Browse All Reviews</strong><span>Research each platform in depth</span></a>
-                </div>
-                <div class="nav-menu-beyond">
-                  <span class="nav-submenu-label">Beyond apps</span>
-                  <a class="nav-menu-path nav-menu-matchmaking" href="/reviews/tawkify.html"{current_for("/reviews/tawkify.html")}><strong>Consider Matchmaking</strong><span>Explore a more personalized alternative</span></a>
                 </div>
               </div>
               <div class="nav-submenu-section nav-menu-directory">

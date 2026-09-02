@@ -44,23 +44,6 @@
       "disclosureRequirement": "Use the sitewide disclosure and a short, conspicuous disclosure before or beside the first CJ affiliate link on every monetized page."
     },
     {
-      "id": "tawkify",
-      "name": "Tawkify",
-      "status": "owner-tracking-link-pending",
-      "affiliateNetwork": "Impact",
-      "officialDestination": "https://tawkify.com/",
-      "trackingIdentifier": null,
-      "allowedPlacements": ["final conversion section of the Tawkify review after the independent verdict and official sources"],
-      "verificationDate": "2026-08-25",
-      "activationRequirements": [
-        "owner-approved Tawkify advertiser relationship and tracking URL",
-        "current program terms reviewed",
-        "short conspicuous disclosure immediately before or beside the first tracked link",
-        "operational consent handling where required"
-      ],
-      "disclosureRequirement": "Use this exact line above or immediately beside the first affiliate link: Date Girls Easy may earn a commission if you sign up through links on this page, at no additional cost to you."
-    },
-    {
       "id": "eharmony",
       "name": "eHarmony",
       "status": "application-target",
