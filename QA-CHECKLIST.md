@@ -2,12 +2,12 @@
 
 ## Tawkify withdrawal
 
-- [ ] `reviews/tawkify.html` is deleted and returns the branded real 404 in production
+- [x] `reviews/tawkify.html` is deleted and returns the branded real 404 in production
 - [x] No public HTML, sitemap entry, shared template, navigation item, review-hub promotion, affiliate-registry entry, or public outbound link references Tawkify
 - [x] Dating Apps navigation contains Compare Dating Apps, Browse All Reviews, and the ten alphabetical app reviews with no empty Beyond Apps section
 - [x] Source propagation and regression tests preserve the withdrawal during future rebuilds
 - [x] Structural, HTML/schema, responsive, keyboard, accessibility, external-link, and no-regression performance checks pass locally
-- [ ] GitHub Pages deploys the withdrawal and live navigation, sitemap, review hub, and retired-URL behavior pass production verification
+- [x] GitHub Pages deploys the withdrawal and live navigation, sitemap, review hub, and retired-URL behavior pass production verification
 
 ## Sitewide light-theme reading contrast correction
 

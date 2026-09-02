@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-09-01 — Tawkify withdrawal
+
+- Removed the Tawkify review after the owner declined to continue promoting the rejected affiliate program. The public URL now returns the branded real 404 rather than advertising or redirecting to the service.
+- Removed Tawkify from the shared Dating Apps navigation, the review-hub matchmaking promotion, the sitemap, and the affiliate registry. The source generator and regression checks now prevent the page or the retired **Beyond apps / Consider Matchmaking** route from returning during future rebuilds.
+- Preserved the ten current app reviews in alphabetical order and kept Compare Dating Apps and Browse All Reviews as the menu's decision-first routes. Historical changelog and rollback records remain as project history only; they are not public site links or promotions.
+- Final QA passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 660 responsive/theme combinations, 132 representative browser combinations, 220 axe/WCAG combinations with zero violations, complete consent checks, and 136 external URLs with no material failures. Candidate-versus-baseline Lighthouse repeats show no performance regression; production representative pages remain under the 2.5-second LCP target with 100 accessibility and SEO and zero CLS.
+- GitHub Pages workflow run `33574721904` built implementation commit `39e8b595c97b540e656e96150547e78d748d1252`. Live verification passed the exact deployed commit, twelve-link app menu at 390, 1024, and 1440 pixels, ten-review directory, sitemap withdrawal, and branded HTTP 404. Rollback point: `73d4262bf6de71d388857c424281fcd9a99ad0f6`.
+
 ## 2026-08-27 — Fotor profile-photo recommendations
 
 - Added the owner-supplied Fotor affiliate destination to the Profile Photo Checklist and Dating App Reset Checklist, where photo editing is the reader’s immediate task. Each page explains useful honest corrections, rejects deceptive face/body/lifestyle alteration, and places a clear commission disclosure before the link.
