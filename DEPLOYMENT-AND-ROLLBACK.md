@@ -12,6 +12,7 @@ Pre-release backups:
 
 Incremental enhancement rollback points:
 
+- Impact affiliate-platform withdrawal: rollback point `455b22a52bad68a1240f3ba6e3c842493007cad0`; implementation commit `651bfe0c33259e03b6b28571a2c388923ee056b6`; Pages workflow run `33647003820`.
 - Tawkify withdrawal: rollback point `73d4262bf6de71d388857c424281fcd9a99ad0f6`; implementation commit `39e8b595c97b540e656e96150547e78d748d1252`; Pages workflow run `33574721904`.
 - Homepage hero balance and overlay correction: rollback point `4544875c9d0318d244c41b28425b46f518921cd3`.
 - First free ebook and confidence-shelf release: rollback point `9a8a0e1da1fb9af11b871f3060209038015510e5`.

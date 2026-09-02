@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-09-02 — Impact affiliate-platform withdrawal
+
+- Removed the `impact-site-verification` metadata and its owner-supplied UUID from the homepage after the owner ended use of the impact.com affiliate-marketing platform.
+- Confirmed that no public HTML, script, sitemap, affiliate registry, or rendered URL contains Impact metadata or an impact.com destination. Updated structural regression checks so the retired verification tag or an Impact URL cannot return unnoticed.
+- Preserved the existing consent-gated Microsoft Clarity and Google Analytics integrations, along with CJ, Fotor, and Viator configuration. No visible content, SEO metadata, navigation, styling, or layout changed.
+- Local verification passes across 55 HTML pages and 48 sitemap URLs, valid HTML/JSON-LD, 132 representative responsive measurements at six widths, and homepage WCAG checks in both themes at phone and desktop widths with zero violations or overflow. Lighthouse scores 98 performance, 100 accessibility, 100 SEO, 2.25-second LCP, and zero CLS.
+- GitHub Pages workflow run `33647003820` built implementation commit `651bfe0c33259e03b6b28571a2c388923ee056b6`. Live source verification confirms the tag, UUID, and impact.com URLs are absent while the consent bootstrap, Clarity, and Google Analytics remain present. Rollback point: `455b22a52bad68a1240f3ba6e3c842493007cad0`.
+
 ## 2026-09-01 — Tawkify withdrawal
 
 - Removed the Tawkify review after the owner declined to continue promoting the rejected affiliate program. The public URL now returns the branded real 404 rather than advertising or redirecting to the service.

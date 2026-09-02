@@ -6,7 +6,7 @@
 - [x] No public HTML contains Impact metadata, scripts, links, or network references
 - [x] Structural regression checks prevent retired Impact metadata or links from returning
 - [x] Responsive, accessibility, HTML/schema, link, and performance checks pass locally
-- [ ] GitHub Pages deploys the removal and live homepage source contains no Impact metadata or link
+- [x] GitHub Pages deploys the removal and live homepage source contains no Impact metadata or link
 
 ## Tawkify withdrawal
 
