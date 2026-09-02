@@ -411,8 +411,8 @@ def main() -> int:
             errors.append(f"{rel}: footer must use the approved fixed 2026 copyright line")
         if "tawkify" in raw.lower():
             errors.append(f"{rel}: retired Tawkify content or link remains public")
-        if rel == "index.html" and raw.count('<meta name="impact-site-verification" value="0109abc6-5f78-4a99-9a85-424e33181b44" />') != 1:
-            errors.append(f"{rel}: Impact website-verification tag is missing or duplicated")
+        if "impact-site-verification" in raw.lower() or "impact.com" in raw.lower():
+            errors.append(f"{rel}: retired Impact metadata or link remains public")
         if re.search(r'href=["\']\s*#["\']', raw, flags=re.IGNORECASE):
             errors.append(f"{rel}: contains a placeholder href")
         if raw.count("data-nav-trigger") != 2:

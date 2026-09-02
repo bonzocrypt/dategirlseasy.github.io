@@ -1,5 +1,13 @@
 # QA Checklist
 
+## Impact withdrawal
+
+- [x] Homepage Impact site-verification metadata is removed
+- [x] No public HTML contains Impact metadata, scripts, links, or network references
+- [x] Structural regression checks prevent retired Impact metadata or links from returning
+- [x] Responsive, accessibility, HTML/schema, link, and performance checks pass locally
+- [ ] GitHub Pages deploys the removal and live homepage source contains no Impact metadata or link
+
 ## Tawkify withdrawal
 
 - [x] `reviews/tawkify.html` is deleted and returns the branded real 404 in production
